@@ -1,0 +1,107 @@
+.selector .input-selector {
+    position: relative;
+    width: 100%;
+  }
+  .selector .input-selector svg {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    right: 10px;
+  }
+  .selector .select-box {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .selector .dropdown-list {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    background-color: #fff;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+    border: 1px solid var(--color_dark);
+    overflow-y: scroll;
+    margin-top: 10px;
+  }
+  .selector .dropdown-item {
+    color: var(--color_dark);
+    font-family: "Avenir Next";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21.86px;
+    padding: 10px 12px;
+    cursor: pointer;
+    -webkit-transition: var(--trans);
+    transition: var(--trans);
+    border-bottom: 1px solid var(--color_dark);
+  }
+  .selector .dropdown-item:hover {
+    background: var(--color_dark);
+    color: var(--color_lite);
+  }
+  .selector .select-wrapper.active .dropdown-list {
+    max-height: 200px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .selector .selected {
+    color: var(--color_dark);
+    font-family: "Avenir Next";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21.86px;
+    -webkit-transition: var(--trans);
+    transition: var(--trans);
+  }
+  
+  .input_default {
+    background-color: transparent;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100%;
+    outline: none;
+    color: #453526;
+    font-family: "Avenir Next";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21.86px;
+    -webkit-transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+  }
+  .input_default::-webkit-input-placeholder {
+    color: var(--color_lite);
+  }
+  .input_default::-moz-placeholder {
+    color: var(--color_lite);
+  }
+  .input_default:-ms-input-placeholder {
+    color: var(--color_lite);
+  }
+  .input_default::-ms-input-placeholder {
+    color: var(--color_lite);
+  }
+  .input_default::placeholder {
+    color: var(--color_lite);
+  }

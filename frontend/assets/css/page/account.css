@@ -1,0 +1,548 @@
+h2 {
+    margin-bottom: 4px;
+}
+
+.tabs input[type="radio"] {
+    display: none;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 2px solid var(--color_lite);
+    align-items: flex-end;
+    min-height: 76px;
+}
+
+.tab-label {
+    padding: 10.5px 12px;
+    border-top: 2px solid var(--color_dark);
+    text-align: center;
+    flex: 1;
+    color: var(--small_text);
+    height: 49px;
+}
+
+#tab1:checked + .tab-label,
+#tab2:checked + .tab-label,
+#tab3:checked + .tab-label,
+#tab4:checked + .tab-label,
+#tab5:checked + .tab-label,
+#tab6:checked + .tab-label {
+    padding-top: 23px;
+    padding-bottom: 23px;
+    height: 74px;
+    box-shadow: 0px 0px 14px 0px #54483D1A;
+}
+
+.tab-content {
+    display: none;
+}
+
+#home{
+    padding-top: 100px;
+}
+
+.tabs:has(#tab2:checked) ~ #content2,
+.tabs:has(#tab3:checked) ~ #content3,
+.tabs:has(#tab4:checked) ~ #content4,
+.tabs:has(#tab5:checked) ~ #content5,
+.tabs:has(#tab6:checked) ~ #content6 {
+    display: block;
+}
+
+.tabs:has(#tab1:checked) ~ #content1 {
+    display: flex;
+}
+
+.line {
+    border: none;
+    height: 2px;
+    background-color: var(--color_dark);
+    margin-bottom: 50px;
+}
+
+@media (max-width: 1019px) {
+    h2 {
+        margin-bottom: 33px;
+        width: 100%;
+    }
+
+    .tabs {
+        flex-direction: column;
+        border-bottom: 2px solid var(--color_dark);
+        align-items: stretch;
+    }
+
+    #tab1:checked + .tab-label,
+    #tab2:checked + .tab-label,
+    #tab3:checked + .tab-label,
+    #tab4:checked + .tab-label,
+    #tab5:checked + .tab-label,
+    #tab6:checked + .tab-label {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        height: 68px;
+    }
+
+    .line {
+        display: none;
+    }
+}
+
+.info {
+    gap: 24px;
+    margin-bottom: 138px;
+    margin-top: 33px;
+}
+
+.info form {
+    width: 457px;
+}
+
+.info fieldset {
+    margin-top: 0;
+}
+
+.info legend {
+    font-family: "Nyght Serif";
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+}
+
+.info .input {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.info .checkbox {
+    margin-top: 7px;
+}
+
+.info .lite_btn {
+    justify-self: flex-end;
+    width: 216px;
+    padding: 0;
+}
+
+@media (max-width: 1019px) {
+    .info {
+        flex-direction: column;
+        gap: 50px;
+        margin-bottom: 50px;
+    }
+
+    .info form {
+        width: 100%;
+    }
+
+    .info .checkbox {
+        margin-top: 0;
+    }
+
+    .info .lite_btn {
+        margin-top: 10px;
+        justify-self: center;
+    }
+}
+
+.orders-box {
+    margin-top: 27px;
+    margin-bottom: 106px;
+}
+
+.orders {
+    width: 100%;
+    margin: auto;
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    font-family: "Nyght Serif";
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    color: var(--color_dark);
+    padding-bottom: 20px;
+}
+
+td, .actions button, td span {
+    font-family: "Avenir Next";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: var(--small_text);
+}
+
+.order-all, .order-num {
+    width: 20%;
+}
+
+.action-btns {
+    display: flex;
+    gap: 34px;
+}
+.flex-container{
+    display: flex;
+}
+.actions button {
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    transition: var(--trans);
+}
+
+.actions button:hover {
+    color: var(--color_lite);
+}
+
+@media (max-width: 1019px) {
+    .orders-box {
+        margin-top: 2px;
+        margin-bottom: 40px;
+    }
+
+    table {
+        border: none;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    tr {
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        padding: 20px 0;
+        position: relative; 
+        border-bottom: 2px solid var(--color_lite);
+        gap: 10px;
+    }
+
+    tr:last-of-type {
+        border-bottom-color: var(--color_dark);
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        border: none;
+        width: 70%;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-family: "Avenir Next";
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 100%;
+        color: var(--color_lite);
+    }
+
+    .order-date {
+        width: fit-content;
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        color: var(--color_lite);
+    }
+
+    .action-btns {
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+
+    td span, .actions button {
+        width: 130px;
+        text-align: left;
+    }
+
+    .order-all, .order-num {
+        width: 70%;
+    }
+
+    .order-all span {
+        font-family: "Avenir Next";
+    }
+}
+
+.addresses {
+    margin-top: 27px;
+    margin-bottom: 50px;
+}
+
+.flex-container {
+    gap: 189px;
+}
+
+h4 {
+    font-family: "Nyght Serif";
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    color: var(--color_dark);
+    margin-bottom: 27px;
+}
+
+.delivery-option {
+    display: flex;
+    flex-direction: row-reverse; 
+    gap: 237px;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: var(--trans);
+    margin-bottom: 33px;
+}
+
+.delivery-option input {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+}
+
+.delivery-option input:checked::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    background: black; 
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+}
+
+.option-content {
+    min-width: 362px;
+}
+
+.option-content .name {
+    margin-bottom: 13px;
+    font-family: "Avenir Next";
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    color: var(--small_text);
+}
+
+.street, .address, .phone {
+    font-family: "Avenir Next";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: var(--small_text);
+    margin-bottom: 5px;
+}
+
+.redo {
+    font-family: "Avenir Next";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: var(--color_lite);
+    margin-top: 5px;
+    background: transparent;
+    transition: var(--trans);
+}
+
+.redo:hover {
+    color: var(--small_text);
+}
+
+.addresses .input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.addresses .inputs {
+    margin-bottom: 5px;
+}
+
+.addresses .inputs .input {
+    flex: 0 1 calc(33.33% - 8px);
+    min-width: 137px;
+}
+
+@media (max-width: 1019px) {
+    .addresses {
+        margin-top: 31px;
+        margin-bottom: 40px;
+    }
+
+    .flex-container {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .delivery-option {
+        gap: 0;
+        justify-content: space-between;
+    }
+
+    .option-content {
+        min-width: 230px;
+        max-width: 255px;
+    }
+
+    .inputs {
+        flex-wrap: wrap;
+        gap: 0 69px;
+        flex-direction: row;
+    }
+
+    .addresses .inputs .input {
+        width: 41%;
+        min-width: 137px;
+    }
+}
+
+.wishlist {
+    margin-top: 61px;
+    margin-bottom: 55px;
+}
+
+.wishlist-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 78px 22px;
+    justify-content: center;
+}
+
+.item {
+    width: 405px;
+    text-align: center;
+    position: relative;
+}
+
+.item img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+}
+
+.item-desc {
+    font-family: "Avenir Next";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    margin-top: 23px;
+    color: var(--small_text);
+}
+
+.item-price {
+    font-family: "Avenir Next";
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    margin-top: 8px;
+    color: var(--small_text);
+}
+
+.remove-btn {
+    position: absolute;
+    transform: rotate(-45deg);
+    font-family: "Nyght Serif";
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 37px;
+    color: var(--color_lite);
+    right: 14px;
+    top: 2px;
+    background-color: transparent;
+}
+
+.item {
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.item.removing {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+
+@media (max-width: 1019px) {
+    .wishlist {
+        margin-top: 40px;
+        margin-bottom: 52px;
+    }
+    
+    .wishlist-box {
+        gap: 26px;
+    }
+}
+
+@media (max-width: 969px) {
+    .item {
+        width: 100%;
+    }
+}
+
+.delete, .exit {
+    margin-top: 40px;
+    margin-bottom: 72px;
+}
+
+.delete h3, .exit h3 {
+    margin-bottom: 63px;
+    font-family: "Nyght Serif";
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 100%;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    gap: 206px;
+    justify-content: center;
+}
+
+.buttons button {
+    width: 216px;
+}
+
+@media (max-width: 1019px) {
+    .delete, .exit {
+        padding-bottom: 65px;
+        border-bottom: 2px solid var(--color_dark);
+        margin-bottom: 40px;
+    }
+
+    .delete h3, .exit h3 {
+        margin-bottom: 40px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 36px;
+        align-items: center;
+    }
+}
+@media (max-width:900px) {
+    .item img{
+        height: 380px;
+    }
+}
