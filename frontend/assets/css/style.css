@@ -12,7 +12,7 @@ header {
           box-shadow: 0px 0px 14px 0px rgba(84, 72, 61, 0.1);
   -webkit-backdrop-filter: blur(17px);
           backdrop-filter: blur(17px);
-  background-color: rgba(236, 229, 219, 0.4509803922);
+  background-color: #28315c73;
   width: 100%;
   padding-block: 10px;
   position: fixed;
@@ -64,8 +64,16 @@ header {
   gap: 40px;
 }
 
+header .logo {
+  height: 39px;
+}
+
+header .logo img {
+  height: 39px;
+}
+
 .header__link {
-  color: #453526;
+  color: #ffffff;
   font-family: "Avenir Next";
   font-size: 16px;
   font-style: normal;
@@ -113,9 +121,9 @@ header {
 .h__right .search input {
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid #453526;
+  border-bottom: 1px solid #ffffff;
   padding-bottom: 1px;
-  color: var(--color_dark);
+  color: #ffffff;
   font-family: "Avenir Next";
   font-size: 14px;
   font-style: normal;
@@ -127,7 +135,7 @@ header {
   outline: none;
 }
 .h__right .search input::-webkit-input-placeholder {
-  color: #453526;
+  color: #ffffff;
   font-family: "Avenir Next";
   font-size: 14px;
   font-style: normal;
@@ -135,7 +143,7 @@ header {
   line-height: normal;
 }
 .h__right .search input::-moz-placeholder {
-  color: #453526;
+  color: #ffffff;
   font-family: "Avenir Next";
   font-size: 14px;
   font-style: normal;
@@ -143,7 +151,7 @@ header {
   line-height: normal;
 }
 .h__right .search input:-ms-input-placeholder {
-  color: #453526;
+  color: #ffffff;
   font-family: "Avenir Next";
   font-size: 14px;
   font-style: normal;
@@ -151,7 +159,7 @@ header {
   line-height: normal;
 }
 .h__right .search input::-ms-input-placeholder {
-  color: #453526;
+  color: #ffffff;
   font-family: "Avenir Next";
   font-size: 14px;
   font-style: normal;
@@ -159,7 +167,7 @@ header {
   line-height: normal;
 }
 .h__right .search input::placeholder {
-  color: #453526;
+  color: #ffffff;
   font-family: "Avenir Next";
   font-size: 14px;
   font-style: normal;
@@ -167,7 +175,7 @@ header {
   line-height: normal;
 }
 .h__right .search input:focus {
-  border-bottom-color: #453526;
+  border-bottom-color: #ffffff;
 }
 .h__right .search svg {
   position: absolute;
@@ -182,10 +190,10 @@ header {
   transition: var(--trans);
 }
 .h__right .search input:focus + svg path {
-  stroke: var(--color_dark);
+  stroke: #ffffff;
 }
 .h__right .search input:focus + svg circle {
-  stroke: var(--color_dark);
+  stroke: #ffffff;
 }
 
 .backet {
