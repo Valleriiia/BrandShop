@@ -2,7 +2,7 @@
 @import url(../css/base.css);
 @import url(../css/fonts.css);
 :root {
-  --trans: all 0.35s ease-in-out;
+  --trans: all 0.35s ease-out;
   --color_dark: #453526;
   --color_lite: #ece5db;
 }
@@ -30,6 +30,7 @@ header {
       -ms-flex-pack: justify;
           justify-content: space-between;
   position: relative;
+  gap: 24px;
 }
 
 .h__left {
@@ -68,13 +69,23 @@ header .logo {
   height: 39px;
 }
 
+header .logo img:hover {
+  filter: invert(1);
+}
+
 header .logo img {
   height: 39px;
+  transition: var(--trans);
+}
+
+.h__right form {
+  flex: 1;
+  max-width: 340px;
 }
 
 .header__link {
   color: #ffffff;
-  font-family: "Avenir Next";
+  font-family: 'Exo 2';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -84,7 +95,7 @@ header .logo img {
   position: relative;
 }
 .header__link:hover {
-  color: #453526;
+  color: #000000;
 }
 
 .header__link:not(.no_active)::before {
@@ -94,7 +105,7 @@ header .logo img {
   bottom: -2px;
   width: 0;
   height: 1px;
-  background-color: #453526;
+  background-color: #000000;
   -webkit-transition: width 0.35s;
   transition: width 0.35s;
 }
@@ -110,21 +121,25 @@ header .logo img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 12px;
+  gap: 18px;
+  flex: 1;
+  justify-content: flex-end;
 }
 .h__right .search {
   width: 100%;
-  max-width: 140px;
+  border: 1px solid #DFE1E6;
+  border-radius: 22px;
+  padding: 8px 12px;
   position: relative;
   margin-right: 4px;
+  transition: var(--trans);
 }
 .h__right .search input {
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid #ffffff;
   padding-bottom: 1px;
   color: #ffffff;
-  font-family: "Avenir Next";
+  font-family: 'Exo 2';
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -135,54 +150,54 @@ header .logo img {
   outline: none;
 }
 .h__right .search input::-webkit-input-placeholder {
-  color: #ffffff;
-  font-family: "Avenir Next";
+  color: #DFE1E6;
+  font-family: 'Exo 2';
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
 .h__right .search input::-moz-placeholder {
-  color: #ffffff;
-  font-family: "Avenir Next";
+  color: #DFE1E6;
+  font-family: 'Exo 2';
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
 .h__right .search input:-ms-input-placeholder {
-  color: #ffffff;
-  font-family: "Avenir Next";
+  color: #DFE1E6;
+  font-family: 'Exo 2';
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
 .h__right .search input::-ms-input-placeholder {
-  color: #ffffff;
-  font-family: "Avenir Next";
+  color: #DFE1E6;
+  font-family: 'Exo 2';
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
 .h__right .search input::placeholder {
-  color: #ffffff;
-  font-family: "Avenir Next";
+  color: #DFE1E6;
+  font-family: 'Exo 2';
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
-.h__right .search input:focus {
-  border-bottom-color: #ffffff;
+.h__right .search:has(input:focus), .h__right .search:has(input:hover) {
+  border-color: #ffffff;
 }
 .h__right .search svg {
   position: absolute;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   top: 50%;
-  right: 0px;
+  right: 12px;
 }
 .h__right .search svg path,
 .h__right .search svg circle {
@@ -229,13 +244,13 @@ header .logo img {
 }
 .h__right a:hover svg path,
 .backet:hover svg path {
-  fill: #d1c1a8;
-  stroke: #d1c1a8;
+  fill: #000000;
+  stroke: #000000;
 }
 .h__right a:hover svg circle,
 .backet:hover svg circle {
-  fill: #d1c1a8;
-  stroke: #d1c1a8;
+  fill: #000000;
+  stroke: #000000;
 }
 
 .burger {

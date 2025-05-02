@@ -105,3 +105,25 @@
     font-weight: 800;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Kyiv Type Serif';
+    src: url('../fonts/KyivTypeSerif/KyivTypeSerif-VarGX.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('../fonts/Exo2/Exo2-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Exo 2';
+    src: url('../fonts/Exo2/Exo2-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+  }
