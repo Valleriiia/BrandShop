@@ -118,3 +118,45 @@ exports.getRandomProducts = (req, res) => {
     res.json(results);
   });
 };
+
+exports.searchProducts = (req, res) => {
+  const query = req.query.query;
+
+  if (!query || query.trim() === '') {
+    return res.status(400).json({ error: 'Порожній пошуковий запит' });
+  }
+
+  const searchTerm = `%${query}%`;
+
+  const sql = `
+    SELECT DISTINCT p.*
+    FROM product p
+    LEFT JOIN categories c ON p.category_id = c.id
+    LEFT JOIN academic_department d ON p.department_id = d.id
+    LEFT JOIN attributes_product ap ON ap.product_id = p.id
+    LEFT JOIN color col ON ap.color_id = col.id
+    LEFT JOIN composition comp ON ap.composition_id = comp.id
+    LEFT JOIN country_of_manufacture country ON ap.country_id = country.id
+    WHERE p.is_active = 1 AND (
+      p.name LIKE ? OR
+      c.name LIKE ? OR
+      d.name LIKE ? OR
+      col.color LIKE ? OR
+      comp.composition LIKE ? OR
+      country.country LIKE ?
+    )
+  `;
+
+  const params = Array(6).fill(searchTerm); // передаємо одне і те саме значення 6 разів
+
+    db.query(sql, params, (err, results) => {
+    if (err) {
+      console.error('❌ SQL ПОМИЛКА:', err.sqlMessage);
+      console.error('🔍 SQL:', sql);
+      return res.status(500).json({ error: 'Помилка при пошуку товарів', detail: err.sqlMessage });
+    }
+
+
+    res.json(results);
+  });
+};
