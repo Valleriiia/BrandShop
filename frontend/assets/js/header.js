@@ -50,7 +50,7 @@
                 </div>
                 <div class="h__left">
                     <a class="logo" href="/">
-                        <img src="./assets/img/iate-logo.svg" alt="logo"/>   
+                        <img src="/frontend/assets/img/iate-logo.svg" alt="logo"/>   
                     </a>
                     <nav class="h__center">
                         <ul class="header__list">
