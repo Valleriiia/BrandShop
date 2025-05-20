@@ -23,3 +23,6 @@ app.use('/api/user', userActionsRoutes);
 
 const reviewRoutes = require('./routes/reviews');
 app.use('/api/reviews', reviewRoutes);
+
+const departmentRoutes = require('./routes/departments');
+app.use('/api/departments', departmentRoutes);
