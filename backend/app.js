@@ -17,3 +17,6 @@ app.listen(PORT, () => {
 
 const filterRoutes = require('./routes/filters');
 app.use('/api/filters', filterRoutes);
+
+const userActionsRoutes = require('./routes/userActions');
+app.use('/api/user', userActionsRoutes);
