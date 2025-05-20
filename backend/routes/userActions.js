@@ -10,6 +10,7 @@ router.get('/favorites/:userId', userActions.getFavorites);
 // Кошик
 router.post('/cart', userActions.addToCart);
 router.delete('/cart', userActions.removeFromCart);
+router.patch('/cart', userActions.updateCartItem);
 router.get('/cart/:userId', userActions.getCart);
 
 module.exports = router;

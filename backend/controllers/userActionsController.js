@@ -37,15 +37,25 @@ exports.getFavorites = (req, res) => {
 // ==== CART ====
 
 exports.addToCart = (req, res) => {
-  const { user_id, product_id, quantity } = req.body;
+  const { user_id, product_id, attribute_id, quantity } = req.body;
+
+  if (!user_id || !product_id || !attribute_id) {
+    return res.status(400).json({ error: 'Необхідні поля відсутні' });
+  }
+
   const sql = `
-    INSERT INTO shopping_cart (user_id, product_id, quantity)
-    VALUES (?, ?, ?)
+    INSERT INTO shopping_cart (user_id, product_id, attribute_id, quantity)
+    VALUES (?, ?, ?, ?)
     ON DUPLICATE KEY UPDATE quantity = quantity + ?
   `;
-  db.query(sql, [user_id, product_id, quantity || 1, quantity || 1], (err) => {
-    if (err) return res.status(500).json({ error: 'Помилка при додаванні до кошика' });
-    res.json({ message: 'Додано до кошика' });
+
+  db.query(sql, [user_id, product_id, attribute_id, quantity || 1, quantity || 1], (err) => {
+    if (err) {
+      console.error("❌ Помилка при додаванні до кошика:", err);
+      return res.status(500).json({ error: 'Не вдалося додати товар до кошика' });
+    }
+
+    res.json({ message: 'Товар додано до кошика' });
   });
 };
 
@@ -60,14 +70,56 @@ exports.removeFromCart = (req, res) => {
 
 exports.getCart = (req, res) => {
   const user_id = req.params.userId;
+
   const sql = `
-    SELECT p.*, c.quantity
-    FROM product p
-    JOIN shopping_cart c ON c.product_id = p.id
+    SELECT 
+      c.id AS cart_id,
+      p.*,
+      c.quantity,
+      col.color,
+      sz.size,
+      comp.composition,
+      country.country
+    FROM shopping_cart c
+    JOIN product p ON c.product_id = p.id
+    JOIN attributes_product ap ON c.attribute_id = ap.id
+    LEFT JOIN color col ON ap.color_id = col.id
+    LEFT JOIN size sz ON ap.size_id = sz.id
+    LEFT JOIN composition comp ON ap.composition_id = comp.id
+    LEFT JOIN country_of_manufacture country ON ap.country_id = country.id
     WHERE c.user_id = ?
   `;
+
   db.query(sql, [user_id], (err, results) => {
-    if (err) return res.status(500).json({ error: 'Помилка при отриманні кошика' });
+    if (err) {
+      console.error("❌ Помилка при отриманні кошика:", err);
+      return res.status(500).json({ error: 'Не вдалося отримати кошик' });
+    }
+
     res.json(results);
+  });
+};
+
+
+exports.updateCartItem = (req, res) => {
+  const { user_id, product_id, attribute_id, quantity } = req.body;
+
+  if (!user_id || !product_id || !attribute_id || !quantity) {
+    return res.status(400).json({ error: 'Усі поля обов’язкові' });
+  }
+
+  const sql = `
+    UPDATE cart
+    SET quantity = ?
+    WHERE user_id = ? AND product_id = ? AND attribute_id = ?
+  `;
+
+  db.query(sql, [quantity, user_id, product_id, attribute_id], (err, result) => {
+    if (err) {
+      console.error("❌ Помилка при оновленні кількості:", err);
+      return res.status(500).json({ error: 'Не вдалося оновити кількість' });
+    }
+
+    res.json({ message: 'Кількість оновлено' });
   });
 };
