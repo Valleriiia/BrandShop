@@ -64,19 +64,16 @@ exports.getProductById = (req, res) => {
       p.*,
       c.name AS category_name,
       d.name AS department_name,
-      col.color,
-      sz.size,
       comp.composition,
       country.country
     FROM product p
     LEFT JOIN categories c ON p.category_id = c.id
     LEFT JOIN academic_department d ON p.department_id = d.id
     LEFT JOIN attributes_product ap ON ap.product_id = p.id
-    LEFT JOIN color col ON ap.color_id = col.id
-    LEFT JOIN size sz ON ap.size_id = sz.id
     LEFT JOIN composition comp ON ap.composition_id = comp.id
     LEFT JOIN country_of_manufacture country ON ap.country_id = country.id
     WHERE p.id = ? AND p.is_active = 1
+    LIMIT 1
   `;
 
   db.query(productQuery, [productId], (err, productResults) => {
@@ -91,26 +88,47 @@ exports.getProductById = (req, res) => {
 
     const product = productResults[0];
 
-    // Отримати схожі товари
-    const similarQuery = `
-      SELECT *
-      FROM product
-      WHERE id != ? AND is_active = 1 AND (
-        department_id = ? OR category_id = ?
-      )
-      ORDER BY RAND()
-      LIMIT 5
+    // Витяг атрибутів (всі унікальні комбінації розмір+колір)
+    const attrQuery = `
+      SELECT
+        col.id AS color_id,
+        col.color,
+        sz.id AS size_id,
+        sz.size
+      FROM attributes_product ap
+      LEFT JOIN color col ON ap.color_id = col.id
+      LEFT JOIN size sz ON ap.size_id = sz.id
+      WHERE ap.product_id = ?
     `;
 
-    db.query(similarQuery, [productId, product.department_id, product.category_id], (err, similarResults) => {
+    db.query(attrQuery, [productId], (err, attrResults) => {
       if (err) {
-        console.error("❌ Помилка при запиті схожих товарів:", err);
-        return res.status(500).json({ error: 'Помилка при отриманні схожих товарів' });
+        console.error("❌ Помилка при отриманні атрибутів:", err);
+        return res.status(500).json({ error: 'Помилка при отриманні атрибутів товару' });
       }
 
-      res.json({
-        product,
-        similar: similarResults
+      // Схожі товари
+      const similarQuery = `
+        SELECT *
+        FROM product
+        WHERE id != ? AND is_active = 1 AND (
+          department_id = ? OR category_id = ?
+        )
+        ORDER BY RAND()
+        LIMIT 5
+      `;
+
+      db.query(similarQuery, [productId, product.department_id, product.category_id], (err, similarResults) => {
+        if (err) {
+          console.error("❌ Помилка при запиті схожих товарів:", err);
+          return res.status(500).json({ error: 'Помилка при отриманні схожих товарів' });
+        }
+
+        res.json({
+          product,
+          attributes: attrResults,
+          similar: similarResults
+        });
       });
     });
   });
