@@ -8,20 +8,48 @@ exports.addReview = (req, res) => {
     return res.status(400).json({ error: 'Необхідні поля відсутні' });
   }
 
-  const sql = `
-    INSERT INTO rating (user_id, product_id, rating, comment)
+  const insertSql = `
+    INSERT INTO product_reviews (user_id, product_id, rating, comment)
     VALUES (?, ?, ?, ?)
   `;
 
-  db.query(sql, [user_id, product_id, rating, comment || null], (err) => {
+  db.query(insertSql, [user_id, product_id, rating, comment || null], (err) => {
     if (err) {
       console.error('❌ Помилка при додаванні відгуку:', err);
       return res.status(500).json({ error: 'Не вдалося додати відгук' });
     }
 
-    res.json({ message: 'Відгук додано' });
+    // Після вставки — перерахунок середнього рейтингу
+    const avgSql = `
+      SELECT ROUND(AVG(rating), 0) AS avg_rating
+      FROM product_reviews
+      WHERE product_id = ?
+    `;
+
+    db.query(avgSql, [product_id], (err, result) => {
+      if (err) {
+        console.error('❌ Помилка при обчисленні середнього рейтингу:', err);
+        return res.status(500).json({ error: 'Відгук додано, але не оновлено рейтинг' });
+      }
+
+      const avgRating = result[0].avg_rating || 0;
+
+      const updateSql = `
+        UPDATE product SET rating = ? WHERE id = ?
+      `;
+
+      db.query(updateSql, [avgRating, product_id], (err) => {
+        if (err) {
+          console.error('❌ Помилка при оновленні рейтингу товару:', err);
+          return res.status(500).json({ error: 'Відгук додано, рейтинг не оновлено' });
+        }
+
+        res.json({ message: 'Відгук додано та рейтинг оновлено', avg_rating: avgRating });
+      });
+    });
   });
 };
+
 
 // GET /api/reviews/:product_id
 exports.getReviewsByProduct = (req, res) => {
