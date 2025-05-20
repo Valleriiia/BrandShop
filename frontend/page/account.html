@@ -5,21 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- css -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/page/account.css">
-    <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap" rel="stylesheet">
-    <!-- fav-icon -->
     <link rel="icon" href="/assets/img/fav.svg" type="image/x-icon">
-    <title>Шоколадний бутік</title>
+    <title>Шоколадний бутік - Електронний кабінет</title>
 </head>
 
 <body>
     <div class="header_component"></div>
-    
+
     <main id="home">
         <div class="container">
             <a href="/" class="breadcrmb">
@@ -37,9 +34,11 @@
                 <input type="radio" name="tab" id="tab3">
                 <label for="tab3" class="tab-label">Адресна книга</label>
                 <input type="radio" name="tab" id="tab4">
-                <label for="tab4" class="tab-label">Видалити акаунт</label>
+                <label for="tab4" class="tab-label">Список бажань</label>
                 <input type="radio" name="tab" id="tab5">
-                <label for="tab5" class="tab-label">Вийти</label>
+                <label for="tab5" class="tab-label">Видалити акаунт</label>
+                <input type="radio" name="tab" id="tab6">
+                <label for="tab6" class="tab-label" id="logout-tab">Вийти</label>
             </div>
             <div class="tab-content info" id="content1">
                 <form>
@@ -47,27 +46,27 @@
                         <legend>Про мене</legend>
                         <div class="input">
                             <label for="name">Ім'я</label>
-                            <input type="text" id="name" name="name" placeholder="Ім'я">
+                            <input type="text" id="name" name="name" placeholder="Ім'я" readonly>
                         </div>
                         <div class="input">
                             <label for="surname">Прізвище</label>
-                            <input type="text" id="surname" name="surname" placeholder="Прізвище">
+                            <input type="text" id="surname" name="surname" placeholder="Прізвище" readonly>
                         </div>
                         <div class="input">
                             <label for="email">Емейл</label>
-                            <input type="email" id="email" name="email" placeholder="Емейл">
+                            <input type="email" id="email" name="email" placeholder="Емейл" readonly>
                         </div>
                         <div class="input">
                             <label for="phone">Номер телефону</label>
-                            <input type="tel" id="phone" name="phone" placeholder="Номер телефону"></div>
+                            <input type="tel" id="phone" name="phone" placeholder="Номер телефону" readonly>
+                        </div>
                         <div class="input">
                             <label for="birthday">Дата народження</label>
-                            <input type="date" id="birthday" name="birthday" placeholder="DD-MM-YYYY">
+                            <input type="date" id="birthday" name="birthday" placeholder="DD-MM-YYYY" readonly>
                         </div>
                         <div class="input">
                             <label class="checkbox">
-                                <input type="checkbox" name="news" id="news">
-                                <span class="checkmark">
+                                <input type="checkbox" name="news" id="news" disabled> <span class="checkmark">
                                     <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1 6.75L3 8.75L10.5 0.750001" stroke="#54483D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -105,138 +104,24 @@
                                 <th class="order-num">Замовлення</th>
                                 <th>Дата</th>
                                 <th>Статус</th>
-                                <th  class="order-all">Всього</th>
+                                <th class="order-all">Всього</th>
                                 <th>Дії</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>Виконано</span></td>
-                                <td data-label="Всього" class="order-all"><span>123₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>Скасовано</span></td>
-                                <td data-label="Всього" class="order-all"><span>0₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                    <button class="pay">Оплатити</button>
-                                    <button class="cancel">Скасувати</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>В обробці</span></td>
-                                <td data-label="Всього" class="order-all"><span>123₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>Утримується</span></td>
-                                <td data-label="Всього" class="order-all"><span>123₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                    <button class="cancel">Скасувати</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>Виконано</span></td>
-                                <td data-label="Всього" class="order-all"><span>123₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>Скасовано</span></td>
-                                <td data-label="Всього" class="order-all"><span>0₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                    <button class="pay">Оплатити</button>
-                                    <button class="cancel">Скасувати</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>В обробці</span></td>
-                                <td data-label="Всього" class="order-all"><span>123₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>Утримується</span></td>
-                                <td data-label="Всього" class="order-all"><span>123₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                    <button class="cancel">Скасувати</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
                         </tbody>
                     </table>
                 </div>
-                
             </div>
             <div class="tab-content addresses" id="content3">
                 <div class="flex-container">
                     <div class="delivery-options">
                         <h4>Адреса</h4>
-                        <label class="delivery-option">
-                            <input type="radio" name="delivery" value="address1" checked>
-                            <div class="option-content">
-                                <p class="name">Андрій Чубенко</p>
-                                <p class="street">вул. Шевченка, 4</p>
-                                <p class="address">12345, Львів, Львівська обл., Львівський район</p>
-                                <p class="phone">тел. (066) 123 45 56</p>
-                                <button class="redo">редагувати</button>
-                            </div>
-                        </label>
-                    
-                        <label class="delivery-option">
-                            <input type="radio" name="delivery" value="address2">
-                            <div class="option-content">
-                                <p class="name">Андрій Чубенко</p>
-                                <p class="street">вул. Шевченка, 4</p>
-                                <p class="address">12345, Львів, Львівська обл., Львівський район</p>
-                                <p class="phone">тел. (066) 123 45 56</p>
-                                <button class="redo">редагувати</button>
-                            </div>
-                        </label>
+                        <div class="add-address-placeholder">
+                            <button class="lite_btn add-new-address-btn">Додати нову адресу</button>
+                        </div>
                     </div>
-                    <div class="add-address">
+                    <div class="add-address" style="display: none;">
                         <form>
                             <h4>Додати нову адресу</h4>
                             <div class="input">
@@ -270,22 +155,39 @@
                                 </div>
                             </div>
                             <button class="lite_btn" type="submit">Зберегти</button>
+                            <button class="lite_btn cancel-add-address-btn" type="button">Скасувати</button>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="tab-content delete" id="content4">
+            <div class="tab-content wishlist" id="content4">
+                <div class="wishlist-box">
+                    <div class="item">
+                        <img src="/assets/img/candy/img1.png" alt="Шоколадні цукерки">
+                        <p class="item-desc">Шоколадні цукерки "Молочне серце”</p>
+                        <p class="item-price">45 ₴</p>
+                        <button class="remove-btn">+</button>
+                    </div>
+                </div>
+
+                <div class="no-items" style="display: none;">
+                    <h3>У вас поки немає вподобаних товарів</h3>
+                    <a href="/page/catalog.html" class="lite_btn">До каталогу</a>
+                </div>
+
+            </div>
+            <div class="tab-content delete" id="content5">
                 <h3>Видалити акаунт?</h3>
                 <div class="buttons">
-                    <button class="lite_btn">Ні</button>
-                    <button class="lite_btn">Так</button>
+                    <button class="lite_btn" id="cancel-delete-btn">Ні</button>
+                    <button class="lite_btn" id="confirm-delete-btn">Так</button>
                 </div>
             </div>
-            <div class="tab-content exit" id="content5">
+            <div class="tab-content exit" id="content6">
                 <h3>Вийти з акаунту?</h3>
                 <div class="buttons">
-                    <button class="lite_btn">Ні</button>
-                    <button class="lite_btn">Так</button>
+                    <button class="lite_btn" id="cancel-logout-btn">Ні</button>
+                    <button class="lite_btn" id="confirm-logout-btn">Так</button>
                 </div>
             </div>
             <hr class="line">
@@ -296,7 +198,9 @@
 
     <script src="/assets/js/header.js"></script>
     <script src="/assets/js/footer.js"></script>
-    <script defer src="/assets/js/script.js"></script>
+    <script defer src="/assets/js/auth.js" type="module"></script>
+    <script defer src="/assets/js/script.js" type="module"></script>
+    <script defer src="/assets/js/account.js" type="module"></script> 
     <script defer src="/assets/js/components/like.js"></script>
     <script defer src="/assets/js/components/quantity.js"></script>
     <script defer src="/assets/js/components/remove-btn.js"></script>
