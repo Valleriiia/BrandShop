@@ -20,3 +20,6 @@ app.use('/api/filters', filterRoutes);
 
 const userActionsRoutes = require('./routes/userActions');
 app.use('/api/user', userActionsRoutes);
+
+const reviewRoutes = require('./routes/reviews');
+app.use('/api/reviews', reviewRoutes);
