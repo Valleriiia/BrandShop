@@ -1,5 +1,3 @@
-// assets/js/account.js (ОНОВЛЕНО)
-
 document.addEventListener('DOMContentLoaded', () => {
     const changePasswordForm = document.querySelector('.tab-content.info form:last-of-type');
 
@@ -25,10 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const token = localStorage.getItem('token'); // <--- Отримуємо токен!
+            const token = localStorage.getItem('token'); 
             if (!token) {
                 alert('Ви не авторизовані. Будь ласка, увійдіть.');
-                window.location.href = '/login.html'; // Перенаправити на сторінку входу
+                window.location.href = '/login.html'; 
                 return;
             }
 
@@ -37,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}` // <--- ДОДАЄМО ЗАГОЛОВОК АВТЕНТИФІКАЦІЇ
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({
                         old_pass: oldPass,
@@ -54,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById('new-pass').value = '';
                     document.getElementById('confirm-pass').value = '';
                 } else {
-                    // Якщо токен прострочений або недійсний, можемо перенаправити на вхід
                     if (response.status === 401 || response.status === 403) {
                          alert('Сесія закінчилася або недійсна. Будь ласка, увійдіть знову.');
                          localStorage.removeItem('token');
