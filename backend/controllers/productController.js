@@ -196,3 +196,25 @@ exports.searchProducts = (req, res) => {
     res.json(results);
   });
 };
+
+
+exports.getDiscountedProducts = (req, res) => {
+  const limit = parseInt(req.query.limit) || 10;
+
+  const sql = `
+    SELECT *
+    FROM product
+    WHERE is_active = 1 AND discount > 0
+    ORDER BY discount DESC
+    LIMIT ?
+  `;
+
+  db.query(sql, [limit], (err, results) => {
+    if (err) {
+      console.error('❌ Помилка при отриманні товарів зі знижкою:', err);
+      return res.status(500).json({ error: 'Не вдалося отримати товари зі знижкою' });
+    }
+
+    res.json(results);
+  });
+};
