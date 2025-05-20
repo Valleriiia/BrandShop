@@ -59,11 +59,29 @@ exports.getAllProducts = (req, res) => {
 exports.getProductById = (req, res) => {
   const productId = req.params.id;
 
-  const productQuery = `SELECT * FROM product WHERE id = ? AND is_active = 1`;
+  const productQuery = `
+    SELECT 
+      p.*,
+      c.name AS category_name,
+      d.name AS department_name,
+      col.color,
+      sz.size,
+      comp.composition,
+      country.country
+    FROM product p
+    LEFT JOIN categories c ON p.category_id = c.id
+    LEFT JOIN academic_department d ON p.department_id = d.id
+    LEFT JOIN attributes_product ap ON ap.product_id = p.id
+    LEFT JOIN color col ON ap.color_id = col.id
+    LEFT JOIN size sz ON ap.size_id = sz.id
+    LEFT JOIN composition comp ON ap.composition_id = comp.id
+    LEFT JOIN country_of_manufacture country ON ap.country_id = country.id
+    WHERE p.id = ? AND p.is_active = 1
+  `;
 
   db.query(productQuery, [productId], (err, productResults) => {
     if (err) {
-      console.error("Помилка при запиті товару:", err);
+      console.error("❌ Помилка при запиті товару:", err);
       return res.status(500).json({ error: 'Помилка при отриманні товару' });
     }
 
@@ -73,7 +91,7 @@ exports.getProductById = (req, res) => {
 
     const product = productResults[0];
 
-    // Отримати схожі товари за тією ж кафедрою або категорією
+    // Отримати схожі товари
     const similarQuery = `
       SELECT *
       FROM product
@@ -86,7 +104,7 @@ exports.getProductById = (req, res) => {
 
     db.query(similarQuery, [productId, product.department_id, product.category_id], (err, similarResults) => {
       if (err) {
-        console.error("Помилка при запиті схожих товарів:", err);
+        console.error("❌ Помилка при запиті схожих товарів:", err);
         return res.status(500).json({ error: 'Помилка при отриманні схожих товарів' });
       }
 
