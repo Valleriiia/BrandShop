@@ -1,39 +1,28 @@
-.breadcrambs {
-    display: flex; 
-    gap: 9px;
-    align-items: center;
-    margin-bottom: 17px;
-}
-
-.breadcrambs a {
-    font-family: "Avenir Next";
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 100%;
-    color: #ababab;
-    transition: var(--trans);
-}
-
-.breadcrambs a:hover {
-    color: var(--color_dark) !important;
-}
-
-.breadcrambs a:last-of-type {
-    color: var(--color_dark);
-}
-
-.breadcrambs svg {
-    width: 7px;
-    height: 14px;
-    transform: rotate(180deg);
-}
-
 h1 {
-    font-family: "Nyght Serif";
+    font-family: 'Kyiv Type Serif';
     font-weight: 400;
     font-size: 60px;
-    margin-bottom: 29px;
-    color: var(--color_dark);
+    margin-bottom: 10px;
+    color: #6F0E19;
+}
+
+#dept-desc {
+    margin-bottom: 30px;
+    font-family: 'Exo2';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    color: #000;
+}
+
+.mascot {
+    position: absolute;
+    height: 600px;
+    width: auto;
+    right: 100px;
+    top: 370px;
+    z-index: -1;
+    opacity: 0.8;
 }
 
 .filter-sidebar.open {
@@ -74,7 +63,7 @@ h1 {
 }
 
 .filter-header .close-filter-btn {
-    font-family: "Nyght Serif";
+    font-family: 'Kyiv Type Serif';
     font-weight: 400;
     font-size: 32px;
     color: #D0C5B5;
@@ -92,8 +81,8 @@ h1 {
 }
 
 .filters {
-    border-top: 2px solid var(--color_dark);
-    border-bottom: 2px solid var(--color_dark);
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
     padding-top: 16px;
     padding-bottom: 9px;
     margin-bottom: 28px;
@@ -102,12 +91,12 @@ h1 {
 }
 
 .filters h3 {
-    font-family: "Nyght Serif";
+    font-family: 'Kyiv Nype Serif';
     font-weight: 400;
     font-size: 32px;
     line-height: 100%;
     text-align: center;
-    color: var(--color_dark);
+    color: #28315C;
     margin-bottom: 20px;
 }
 
@@ -116,6 +105,7 @@ h1 {
     gap: 48px;
     margin-bottom: 2px;
     transition: max-height 0.4s ease, opacity 0.2s ease 0.2s;
+    justify-content: space-evenly;
 }
 
 #filters-content {
@@ -130,15 +120,15 @@ h1 {
 }
 
 .filters-content legend {
-    font-family: "Avenir Next";
-    font-weight: 600;
+    font-family: 'Exo2';
+    font-weight: 500;
     font-size: 20px;
     line-height: 100%;
     color: #000;
 }
 
 .filters-content label.checkbox {
-    color: var(--small-text);
+    color: #000;
     cursor: pointer;
 }
 
@@ -146,6 +136,7 @@ h1 {
     max-width: 219px;
     margin: auto;
     margin-top: 14px;
+    margin-bottom: 30px;
 }
 
 .range-slider {
@@ -164,19 +155,20 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-thumb {
     pointer-events: all;
     -webkit-appearance: none;
-    height: 12px;
-    width: 12px;
-    background: var(--color_dark);
+    height: 16px;
+    width: 16px;
+    background: #28315C;
     transform: rotate(45deg);
     border: none;
-    margin-top: -4px;
+    border-radius: 50%;
+    margin-top: -6px;
     cursor: pointer;
 }
 
 input[type="range"]::-moz-range-thumb {
     height: 12px;
     width: 12px;
-    background: var(--color_dark);
+    background: #28315C;
     transform: rotate(45deg);
     border: none;
     cursor: pointer;
@@ -185,7 +177,7 @@ input[type="range"]::-moz-range-thumb {
 .slider-track {
     position: absolute;
     height: 3px;
-    background: var(--color_dark);
+    background: #28315C;
     border-radius: 3px;
     z-index: -1;
 }
@@ -193,7 +185,7 @@ input[type="range"]::-moz-range-thumb {
 .slider-background {
     position: absolute;
     height: 3px;
-    background: var(--color_lite); 
+    background: #DFE1E6; 
     width: 100%;
     z-index: -2;
 }
@@ -212,12 +204,13 @@ input[type="range"]::-moz-range-thumb {
 
 .input input {
     padding-bottom: 0;
+    background: transparent;
 }
 
 .dash {
     width: 19px;
     height: 2px;
-    background-color: var(--color_lite);
+    background-color: #DFE1E6;
 }
 
 #max-input, #max-input-side {
@@ -227,13 +220,14 @@ input[type="range"]::-moz-range-thumb {
 fieldset:has(.submit-filters) {
     display: flex;
     flex-direction: column;
+    max-width: 250px;
 }
 
 .submit-filters {
     align-self: flex-end;
     justify-self: flex-end;
     padding: 8px 11px;
-    width: 216px !important;
+    width: 238px !important;
 }
 
 .filters-btn-container {
@@ -248,7 +242,7 @@ label.btn-for-filters {
 }
 
 .btn-for-filters span {
-    font-family: "Nyght Serif";
+    font-family: 'Kyiv Type Serif';
     font-weight: 400;
     font-size: 32px;
     line-height: 100%;
@@ -290,11 +284,11 @@ label.btn-for-filters {
 }
 
 .sort-by h4 {
-    font-family: "Avenir Next";
+    font-family: 'Exo2';
     font-weight: 600;
     font-size: 20px;
     line-height: 100%;
-    color: var(--small-text);
+    color: black;
     margin-bottom: 15px;
 }
 
@@ -305,9 +299,9 @@ label.btn-for-filters {
 
 .sort-by-items label, .sort-by-options label {
     padding: 10px 18px;
-    background-color: var(--color_lite);
-    color: var(--color_dark);
-    font-family: "Nyght Serif";
+    background-color: #DFE1E6;
+    color: #6F0E19;
+    font-family: 'Kyiv Type Serif';
     font-weight: 400;
     font-size: 20px;
     line-height: 100%;
@@ -318,8 +312,8 @@ label.btn-for-filters {
 
 .sort-by-items label:has(input[type="radio"]:checked),
 .sort-by-items label:hover {
-    background-color: var(--color_dark);
-    color: var(--color_lite);
+    background-color: #6F0E19;
+    color: #DFE1E6;
 }
 
 .filter-and-sort {
@@ -342,7 +336,7 @@ label.btn-for-filters {
     position: relative;
 }
   
-.product-card.large {
+/* .product-card.large {
     grid-column: span 2;
     grid-row: span 2;
     background: none;
@@ -359,7 +353,7 @@ label.btn-for-filters {
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
   main {
     padding-top: 100px;
   }
@@ -391,72 +385,12 @@ label.btn-for-filters {
     margin-top: 23px;
 }
 
-.gallery-pagination {
-    margin: 0 auto;
-    max-width: 250px;
-    margin-bottom: 25px;
-}
-
-.pagination-buttons {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 14px;
-}
-
-.pagination-buttons button {
-    background-color: transparent;
-}
-
-.page-number, .dots {
-    padding: 0 2px;
-    font-family: "Avenir Next";
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 24px;
-    color: var(--color_dark);
-    transition: var(--trans);
-}
-
-.page-number.active, .page-number:hover {
-    color: var(--color_lite);
-}
-
-.page-arrow, .page-arrow svg {
-    width: 7px;
-    height: 14px;
-}
-
-.page-arrow svg path {
-    transition: var(--trans);
-}
-
-.page-arrow:hover svg path {
-    fill: var(--color_dark);
-}
-
-.page-arrow-prev {
-    transform: rotate(180deg);
-}
-
-.gallery-pagination p {
-    font-family: "Avenir Next";
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-    text-align: center;
-    color: #201D1F;
-    max-width: 194px;
-    margin: 0 auto;
-}
-
-.you-have-seen {
+.recomend {
     margin-bottom: 50px;
     position: relative;
 }
 
-.you-have-seen::before {
+.recomend::before {
     position: absolute;
     left: 0px;
     top: 0px;
@@ -469,7 +403,7 @@ label.btn-for-filters {
     z-index: 2;
 }
 
-.you-have-seen::after {
+.recomend::after {
     position: absolute;
     right: 0px;
     top: 0px;
@@ -482,36 +416,37 @@ label.btn-for-filters {
     z-index: 2;
 }
 
-.you-have-seen-header {
+.recomend-header {
     margin-bottom: 80px;
     position: relative;
     z-index: 3;
-    font-family: "Nyght Serif";
+    font-family: 'Kyiv Type Serif';
     font-weight: 400;
     font-size: 32px;
     line-height: 100%;
+    color: #28315C;
 }
   
 span.like.active svg path,
 span.shop.active svg path {
-  fill: #e8e0d3 !important;
+  fill: #DFE1E6 !important;
   transition: fill 0.3s ease;
 }
   
-.you-have-seen #swiper2 {
+.recomend #swiper2 {
   height: 450px;
   z-index: unset;
   transform: translateY(0px) !important;
 }
-.you-have-seen #swiper2 .slide_link {
+.recomend #swiper2 .slide_link {
   height: 100%;
   display: block;
 }
-.you-have-seen #swiper2 .slide_link:hover .btn,
+.recomend #swiper2 .product-content:hover .btn,
 .product-gallery .product-content:hover .btn {
   opacity: 1;
 }
-.you-have-seen #swiper2 .slide_img {
+.recomend #swiper2 .slide_img {
   background-color: #000;
   position: relative;
   height: 277px;
@@ -521,12 +456,12 @@ span.shop.active svg path {
     white-space: nowrap;
 }
 
-.you-have-seen #swiper2 .swiper-wrapper {
+.recomend #swiper2 .swiper-wrapper {
   width: 100%;
   height: 100%;
 }
 
-.you-have-seen #swiper2 .btn,
+.recomend #swiper2 .btn,
 .product-gallery .btn {
   position: absolute;
   z-index: 3;
@@ -541,7 +476,7 @@ span.shop.active svg path {
   transition: var(--trans);
 }
 
-.you-have-seen #swiper2 .btn span,
+.recomend #swiper2 .btn span,
 .product-gallery .btn span {
   width: 32px;
   height: 30px;
@@ -553,17 +488,17 @@ span.shop.active svg path {
   cursor: pointer;
 }
 
-.you-have-seen #swiper2 .btn span svg path,
+.recomend #swiper2 .btn span svg path,
 .product-gallery .btn span svg path {
   transition: var(--trans);
 }
 
-.you-have-seen #swiper2 .btn span:hover,
+.recomend #swiper2 .btn span:hover,
 .product-gallery .btn span:hover {
-  background-color: rgba(232, 224, 211, 0.3);
+  background-color: #DFE1E64d;
 }
 
-.you-have-seen #swiper2 .swiper-slide {
+.recomend #swiper2 .swiper-slide {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -571,7 +506,7 @@ span.shop.active svg path {
   height: 385px !important;
 }
 
-.you-have-seen #swiper2 .swiper-slide img {
+.recomend #swiper2 .swiper-slide img {
   width: 100%;
   height: 250px;
   object-fit: cover;
@@ -579,7 +514,7 @@ span.shop.active svg path {
   margin-left: auto;
 }
 
-.you-have-seen #swiper2 .swiper-slide .slide_info {
+.recomend #swiper2 .swiper-slide .product-info {
   width: 100%;
   position: absolute;
   display: flex;
@@ -590,46 +525,46 @@ span.shop.active svg path {
   padding: 17px;
 }
 
-.you-have-seen #swiper2 .swiper-slide .slide_info h3,
+.recomend #swiper2 .swiper-slide .product-info h3,
 .product-gallery .product-card .product-info h3 {
-  color: var(--small-text, #2b221b);
+  color: black;
   text-align: center;
-  font-family: "Avenir Next";
+  font-family: 'Exo2';
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
 
-.you-have-seen #swiper2 .swiper-slide .slide_info h4,
+.recomend #swiper2 .swiper-slide .product-info h4,
 .product-gallery .product-card .product-info h4 {
   margin-top: 8px;
-  color: var(--small-text, #2b221b);
-  font-family: "Avenir Next";
+  color: black;
+  font-family: 'Exo2';
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
 
-.you-have-seen #swiper2 .swiper-slide .slide_info h4 span,
+.recomend #swiper2 .swiper-slide .product-info h4 span,
 .product-gallery .product-card .product-info h4 span {
   text-decoration-line: line-through;
 }
 
-.you-have-seen #swiper2 .slide_link {
+.recomend #swiper2 .product-content {
   width: 100%;
 }
 
-.you-have-seen #swiper2 span.like.active svg path,
-.you-have-seen #swiper2 span.shop.active svg path,
+.recomend #swiper2 span.like.active svg path,
+.recomend #swiper2 span.shop.active svg path,
 .product-gallery span.like.active svg path,
 .product-gallery span.shop.active svg path {
-  fill: #e8e0d3 !important;
+  fill: #DFE1E6 !important;
   transition: fill 0.3s ease;
 }
-.you-have-seen #swiper2 span.like svg path,
-.you-have-seen #swiper2 span.shop svg path,
+.recomend #swiper2 span.like svg path,
+.recomend #swiper2 span.shop svg path,
 .product-gallery span.like svg path,
 .product-gallery span.shop svg path {
   transition: fill 0.3s ease;
@@ -688,7 +623,7 @@ span.shop.active svg path {
     }
 
     .toggle-icon {
-        font-family: "Nyght Serif";
+        font-family: 'Kyiv Type Serif';
         font-weight: 400;
         font-size: 32px;
         line-height: 100%;
@@ -722,7 +657,7 @@ span.shop.active svg path {
         background-color: var(--color_lite);
         padding: 10px 18px;
         color: var(--color_dark);
-        font-family: "Nyght Serif";
+        font-family: 'Kyiv Type Serif';
         font-weight: 400;
         font-size: 20px;
         line-height: 100%;
@@ -792,20 +727,20 @@ span.shop.active svg path {
         margin-bottom: 30px;
     }
 
-    .you-have-seen {
+    .recomend {
         margin-bottom: 0;
     }
 
-    .you-have-seen::before, .you-have-seen::after {
+    .recomend::before, .recomend::after {
         display: none;
     }
 
-    .you-have-seen-header {
+    .recomend-header {
         margin-bottom: 30px;
     }
 
-    .you-have-seen #swiper2 .swiper-button-prev, 
-    .you-have-seen #swiper2 .swiper-button-next {
+    .recomend #swiper2 .swiper-button-prev, 
+    .recomend #swiper2 .swiper-button-next {
         display: none;
     }
 }

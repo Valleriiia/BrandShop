@@ -564,12 +564,12 @@ fieldset {
 }
 
 legend {
-  font-family: "Avenir Next";
+  font-family: 'Exo2';
   font-weight: 500;
   font-size: 20px;
   line-height: 27.32px;
   margin-bottom: 10px;
-  color: var(--color_dark);
+  color: black;
 }
 
 .input {
@@ -577,56 +577,56 @@ legend {
 }
 
 .input label {
-  font-family: "Avenir Next";
+  font-family: 'Exo2';
   font-weight: 500;
   font-size: 14px;
   line-height: 13.66px;
-  color: var(--color_lite);
+  color: black;
 }
 
 .input input {
   width: 100%;
   border: none;
-  font-family: "Avenir Next";
+  font-family: 'Exo2';
   font-weight: 500;
   font-size: 16px;
   line-height: 21.86px;
-  color: var(--color_dark);
-  border-bottom: 2px solid var(--color_lite);
+  color: #000;
+  border-bottom: 2px solid #DFE1E6;
   padding-bottom: 10px;
   -webkit-transition: var(--trans);
   transition: var(--trans);
 }
 
 .selector {
-  border-bottom: 2px solid var(--color_lite);
+  border-bottom: 2px solid #DFE1E6;
   padding-bottom: 10px;
   -webkit-transition: var(--trans);
   transition: var(--trans);
 }
 
 .input input::-webkit-input-placeholder {
-  color: var(--color_dark);
+  color: black;
 }
 
 .input input::-moz-placeholder {
-  color: var(--color_dark);
+  color: black;
 }
 
 .input input:-ms-input-placeholder {
-  color: var(--color_dark);
+  color: black;
 }
 
 .input input::-ms-input-placeholder {
-  color: var(--color_dark);
+  color: black;
 }
 
 .input input::placeholder {
-  color: var(--color_dark);
+  color: black;
 }
 
 .input:hover input, .input:focus-within input, .input:hover .selector, .input:focus-within .selector {
-  border-bottom: 2px solid var(--color_dark);
+  border-bottom: 2px solid black;
 }
 
 input:focus-visible {
@@ -641,18 +641,18 @@ label.checkbox {
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 8px;
-  font-family: "Avenir Next";
+  font-family: 'Exo2';
   font-weight: 500;
   font-size: 16px;
   line-height: 21.86px;
-  color: var(--color_dark);
+  color: black;
   -webkit-transition: var(--trans);
   transition: var(--trans);
   gap: 8px;
 }
 
 .checkbox:hover {
-  color: var(--color_lite);
+  color: #DFE1E6;
 }
 
 .checkbox input {
@@ -662,7 +662,7 @@ label.checkbox {
 .checkbox .checkmark {
   width: 20px;
   height: 20px;
-  border: 2px solid var(--color_dark);
+  border: 2px solid #28315C;
   border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -680,11 +680,16 @@ label.checkbox {
 }
 
 .checkbox:hover .checkmark {
-  border-color: var(--color_lite);
+  border-color: #DFE1E6;
 }
 
 .checkmark svg {
   opacity: 0;
+
+}
+
+.checkmark path {
+    stroke: #28315C;
 }
 
 .checkbox input:checked + .checkmark svg {

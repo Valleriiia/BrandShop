@@ -72,8 +72,8 @@ function loadDepartment() {
       loadProducts(false);
       document.getElementById('dept-title').textContent = dept.name || '';
       document.getElementById('dept-desc').textContent = dept.description || '';
-      if (dept.photo) {
-        document.getElementById('dept-img').src = dept.photo;
+      if (dept.mascot_photo) {
+        document.getElementById('dept-img').src = '/assets/img/' + dept.mascot_photo;
         document.getElementById('dept-img').alt = dept.name;
       }
  // тепер тільки після отримання deptId

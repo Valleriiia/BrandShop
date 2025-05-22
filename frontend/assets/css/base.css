@@ -38,16 +38,16 @@ img {
 }
 
 .dark_btn {
-  color: var(--second, #ece5db);
+  color: #DFE1E6;
   text-align: center;
   -webkit-text-stroke-width: 0.1599999964;
-  -webkit-text-stroke-color: var(--second, #ece5db);
-  font-family: "Nyght Serif";
+  -webkit-text-stroke-color: #DFE1E6;
+  font-family: 'Kyiv Type Serif';
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  background: var(--main, #453526);
+  background: #6F0E19;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -66,8 +66,8 @@ img {
   height: 44px;
 }
 .dark_btn:hover {
-  background-color: #ece5db;
-  color: #453526;
+  background-color: #DFE1E6;
+  color: #6F0E19;
 }
 .dark_btn svg path,
 .dark_btn svg circle {
@@ -75,24 +75,24 @@ img {
   transition: var(--trans);
 }
 .dark_btn:hover svg path {
-  fill: #453526;
-  stroke: #453526;
+  fill: #6F0E19;
+  stroke: #6F0E19;
 }
 .dark_btn:hover svg circle {
-  fill: #453526;
+  fill: #6F0E19;
 }
 
 .lite_btn {
-  color: #453526;
+  color: #6F0E19;
   text-align: center;
   -webkit-text-stroke-width: 0.1599999964;
-  -webkit-text-stroke-color: var(--second, #ece5db);
-  font-family: "Nyght Serif";
+  -webkit-text-stroke-color: #6F0E19;
+  font-family: 'Kyiv Type Serif';
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  background-color: #ece5db;
+  background-color: #DFE1E6;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -111,8 +111,8 @@ img {
   height: 44px;
 }
 .lite_btn:hover {
-  background: var(--main, #453526);
-  color: var(--second, #ece5db);
+  background: #6F0E19;
+  color: #DFE1E6;
 }
 .lite_btn svg path,
 .lite_btn svg circle {
@@ -120,11 +120,11 @@ img {
   transition: var(--trans);
 }
 .lite_btn:hover svg path {
-  fill: #ece5db;
-  stroke: #ece5db;
+  fill: #DFE1E6;
+  stroke: #DFE1E6;
 }
 .lite_btn:hover svg circle {
-  fill: #ece5db;
+  fill: #DFE1E6;
 }
 
 body .no_stroke {
@@ -137,16 +137,16 @@ body .no_stroke {
 }
 
 ::-webkit-scrollbar-track {
-  background: #ece5db;
+  background: #DFE1E6;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4d3e31;
+  background: #28315C;
   border-radius: 6px;
   -webkit-transition: all 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #453526;
+  background: 313A65;
 }

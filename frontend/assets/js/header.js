@@ -16,28 +16,22 @@
                                     <a href="/" class="header__link">Головна</a>
                                 </li>
                                 <li class="header__item">
-                                    <a href="/page/catalog.html" class="header__link">Товари</a>
+                                    <a href="/catalog/ipze" class="header__link">ІПЗЕ</a>
                                 </li>
                                 <li class="header__item">
-                                    <a href="/page/about.html" class="header__link">Про нас</a>
+                                    <a href="/catalog/" class="header__link">ЦТЕ</a>
                                 </li>
                                 <li class="header__item">
-                                    <a href="/page/blog.html" class="header__link">Новини</a>
+                                    <a href="/catalog/" class="header__link">ТАЕ</a>
                                 </li>
                                 <li class="header__item">
-                                    <a href="/page/sign-in.html" class="header__link">Мій акаунт</a>
+                                    <a href="/catalog/" class="header__link">АЕП</a>
                                 </li>
                                 <li class="header__item">
-                                    <a href="/page/blog.html" class="header__link">Улюблені</a>
+                                    <a href="/catalog/" class="header__link">АЕ</a>
                                 </li>
                                 <li class="header__item">
-                                    <a href="/page/corporate.html" class="header__link">Корпоративні замовлення</a>
-                                </li>
-                                <li class="header__item">
-                                    <a href="/page/franchise.html" class="header__link">Франшиза</a>
-                                </li>
-                                <li class="header__item">
-                                    <a href="/page/box.html" class="header__link">Конструктор боксів</a>
+                                    <a href="/catalog/" class="header__link">СР</a>
                                 </li>
                             </ul>
                             <div class="footer__l">
@@ -50,7 +44,7 @@
                 </div>
                 <div class="h__left">
                     <a class="logo" href="/">
-                        <img src="/frontend/assets/img/iate-logo.svg" alt="logo"/>   
+                        <img src="/assets/img/iate-logo.svg" alt="logo"/>   
                     </a>
                     <nav class="h__center">
                         <ul class="header__list">
@@ -58,22 +52,22 @@
                                 <a href="/" class="header__link">Головна</a>
                             </li>
                             <li class="header__item">
-                                <a href="/page/catalog.html" class="header__link">ІПЗЕ</a>
+                                <a href="/catalog/ipze" class="header__link">ІПЗЕ</a>
                             </li>
                             <li class="header__item">
-                                <a href="/page/about.html" class="header__link">ЦТЕ</a>
+                                <a href="/catalog/" class="header__link">ЦТЕ</a>
                             </li>
                             <li class="header__item">
-                                <a href="/page/blog.html" class="header__link">ТАЕ</a>
+                                <a href="/catalog/" class="header__link">ТАЕ</a>
                             </li>
                             <li class="header__item">
-                                <a href="/page/corporate.html" class="header__link">АЕП</a>
+                                <a href="/catalog/" class="header__link">АЕП</a>
                             </li>
                             <li class="header__item">
-                                <a href="/page/franchise.html" class="header__link">АЕ</a>
+                                <a href="/catalog/" class="header__link">АЕ</a>
                             </li>
                             <li class="header__item">
-                                <a href="/page/franchise.html" class="header__link">СР</a>
+                                <a href="/catalog/" class="header__link">СР</a>
                             </li>
     
                         </ul>
