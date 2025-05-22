@@ -38,3 +38,26 @@ exports.getDepartmentById = (req, res) => {
     res.json(results[0]);
   });
 };
+
+exports.getDepartmentBySlug = (req, res) => {
+  const slug = req.params.slug;
+
+  const sql = `
+    SELECT id, name, description, mascot_photo
+    FROM academic_department
+    WHERE slug = ?
+  `;
+
+  db.query(sql, [slug], (err, results) => {
+    if (err) {
+      console.error('❌ Помилка при отриманні кафедри по slug:', err);
+      return res.status(500).json({ error: 'Помилка при завантаженні кафедри' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'Кафедра не знайдена' });
+    }
+
+    res.json(results[0]);
+  });
+};

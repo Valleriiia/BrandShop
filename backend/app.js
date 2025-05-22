@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -11,9 +12,6 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/products', productRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Сервер запущено на http://localhost:${PORT}`);
-});
 
 const filterRoutes = require('./routes/filters');
 app.use('/api/filters', filterRoutes);
@@ -26,3 +24,13 @@ app.use('/api/reviews', reviewRoutes);
 
 const departmentRoutes = require('./routes/departments');
 app.use('/api/departments', departmentRoutes);
+
+app.use(express.static(path.join(__dirname, '../frontend')));
+
+app.get('/catalog/:slug', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/page/catalog.html'));
+});
+
+app.listen(PORT, () => {
+  console.log(`Сервер запущено на http://localhost:${PORT}`);
+});

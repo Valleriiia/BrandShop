@@ -14,10 +14,13 @@ exports.getAllProducts = (req, res) => {
   } = req.query;
 
   let sql = `
-    SELECT p.*
-    FROM product p
-    LEFT JOIN attributes_product ap ON ap.product_id = p.id
-    WHERE p.is_active = 1
+    SELECT *
+FROM product p
+WHERE is_active = 1 AND id IN (
+    SELECT product_id
+    FROM attributes_product
+    GROUP BY product_id
+)
   `;
 
   const conditions = [];
@@ -36,9 +39,9 @@ exports.getAllProducts = (req, res) => {
   }
 
   // Сортування
-  if (sort === 'price_asc') {
+  if (sort === 'cheap') {
     sql += ' ORDER BY p.current_price ASC';
-  } else if (sort === 'price_desc') {
+  } else if (sort === 'expencive') {
     sql += ' ORDER BY p.current_price DESC';
   } else if (sort === 'popular') {
     sql += ' ORDER BY p.views DESC';
