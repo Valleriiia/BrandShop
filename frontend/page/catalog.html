@@ -26,7 +26,7 @@
             <h3>Фільтри</h3>
             <button class="close-filter-btn">+</button>
         </div>        
-        <form class="filters-content">
+        <form id="filters-mobile" class="filters-content">
             <fieldset>
                 <legend>Категорія</legend>
                 <label class="checkbox" for="t-shirts-side">
@@ -184,7 +184,9 @@
                 </svg>
                 <a href="#">Товари</a>
             </div>
-            <h1>ІПЗЕ</h1>
+            <h1 id="dept-title">ІПЗЕ</h1>
+            <p id="dept-desc"></p>
+            <img id="dept-img" src="" alt="mascot" />
             <div class="filters">
                 <h3>Фільтрувати</h3>
                 <div class="filters-btn-container">
@@ -345,21 +347,21 @@
             </div>
             <div class="sort-by">
                 <h4>Сортувати за</h4>
-                <div class="sort-by-items">
+                <div class="sort-by-items" id="sort-desktop">
                     <label class="checkbox" for="popular">
-                        <input type="radio" name="sort-item" id="popular">
+                        <input type="radio" name="sort-item" id="popular" value="popular">
                         Популярні
                     </label>
                     <label class="checkbox" for="expencive">
-                        <input type="radio" name="sort-item" id="expencive">
+                        <input type="radio" name="sort-item" id="expencive" value="expencive">
                         Найдорожчі
                     </label>
                     <label class="checkbox" for="cheap">
-                        <input type="radio" name="sort-item" id="cheap" checked>
+                        <input type="radio" name="sort-item" id="cheap" value="cheap">
                         Найдешевші
                     </label>
                     <label class="checkbox" for="new">
-                        <input type="radio" name="sort-item" id="new"> 
+                        <input type="radio" name="sort-item" id="new" value="new"> 
                         Нові
                     </label>
                 </div>
@@ -368,7 +370,7 @@
                 <button class="open-filter dark_btn">Фільтрувати</button>
                 <div class="sort-by-dropdown">
                     <button class="lite_btn sort-by-toggle">Популярні <span class="toggle-icon">+</span></button>
-                    <ul class="sort-by-options">
+                    <ul class="sort-by-options" id="sort-mobile">
                         <li><label for="popular-mini"><input type="radio" name="sort-item" id="popular-mini"> Популярні</label></li>
                         <li><label for="expencive-mini"><input type="radio" name="sort-item" id="expencive-mini"> Найдорожчі</label></li>
                         <li><label for="cheap-mini"><input type="radio" name="sort-item" id="cheap-mini"> Найдешевші</label></li>
@@ -376,60 +378,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="product-gallery">
-                <div class="product-card">
-                    <a href="/page/product.html" class="product-content">
-                        <div class="product-img">
-                            <img loading="lazy" src="/assets/img/ipze/img1.png" alt="photo">
-                            <div class="btn">
-                                <span class="like">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M3.66275 13.2136L9.82377 19.7066C11.0068 20.9533 12.9932 20.9534 14.1762 19.7066L20.3372 13.2136C22.5542 10.8771 22.5543 7.08895 20.3373 4.75248C18.1203 2.416 14.5258 2.416 12.3088 4.75248V4.75248C12.1409 4.92938 11.8591 4.92938 11.6912 4.75248V4.75248C9.47421 2.416 5.87975 2.416 3.66275 4.75248C1.44575 7.08895 1.44575 10.8771 3.66275 13.2136Z" stroke="#E8E0D3" stroke-width="1.5"/>
-                                    </svg>
-                                </span>
-                                <span class="shop">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
-                                        <path d="M1 1L2.04936 1.20987C2.91136 1.38227 3.55973 2.09732 3.6472 2.97203L3.8 4.5M3.8 4.5L4.7886 12.7383C4.90922 13.7435 5.76195 14.5 6.77435 14.5H15.7673C17.3733 14.5 18.7733 13.407 19.1628 11.8489L20.2855 7.35783C20.6485 5.90619 19.5505 4.5 18.0542 4.5H3.8Z" stroke="#E8E0D3" stroke-width="1.5" stroke-linecap="round"/>
-                                        <path d="M12 11.5H8" stroke="#E8E0D3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <circle cx="7.5" cy="18" r="1.5" fill="#E8E0D3"/>
-                                        <circle cx="16.5" cy="18" r="1.5" fill="#E8E0D3"/>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3>Футболка з емблемою кафедри ІПЗЕ</h3>
-                            <h4>45₴</h4>
-                        </div>
-                    </a>
-                </div>
-                <div class="product-card">
-                    <a href="/page/product.html" class="product-content">
-                        <div class="product-img">
-                            <img loading="lazy" src="/assets/img/ipze/img1.png" alt="photo">
-                            <div class="btn">
-                                <span class="like">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M3.66275 13.2136L9.82377 19.7066C11.0068 20.9533 12.9932 20.9534 14.1762 19.7066L20.3372 13.2136C22.5542 10.8771 22.5543 7.08895 20.3373 4.75248C18.1203 2.416 14.5258 2.416 12.3088 4.75248V4.75248C12.1409 4.92938 11.8591 4.92938 11.6912 4.75248V4.75248C9.47421 2.416 5.87975 2.416 3.66275 4.75248C1.44575 7.08895 1.44575 10.8771 3.66275 13.2136Z" stroke="#E8E0D3" stroke-width="1.5"/>
-                                    </svg>
-                                </span>
-                                <span class="shop">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
-                                        <path d="M1 1L2.04936 1.20987C2.91136 1.38227 3.55973 2.09732 3.6472 2.97203L3.8 4.5M3.8 4.5L4.7886 12.7383C4.90922 13.7435 5.76195 14.5 6.77435 14.5H15.7673C17.3733 14.5 18.7733 13.407 19.1628 11.8489L20.2855 7.35783C20.6485 5.90619 19.5505 4.5 18.0542 4.5H3.8Z" stroke="#E8E0D3" stroke-width="1.5" stroke-linecap="round"/>
-                                        <path d="M12 11.5H8" stroke="#E8E0D3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <circle cx="7.5" cy="18" r="1.5" fill="#E8E0D3"/>
-                                        <circle cx="16.5" cy="18" r="1.5" fill="#E8E0D3"/>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3>Футболка з емблемою кафедри ІПЗЕ</h3>
-                            <h4>45₴</h4>
-                        </div>
-                    </a>
-                </div>
-                <!-- ... -->
+            <div class="product-gallery" id="product-list">
+                
             </div>
             <div class="gallery-pagination">
                 <div class="pagination-buttons">
@@ -460,7 +410,7 @@
             </div>
                 
             <div class="swiper" id="swiper2">
-                <div class="swiper-wrapper">
+                <div class="swiper-wrapper" id="random-slider">
                     <div class="swiper-slide">
                         <a href="/page/product.html" class="slide_link">
                             <div class="slide_img">
@@ -490,35 +440,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="swiper-slide">
-                        <a href="/page/product.html" class="slide_link">
-                            <div class="slide_img">
-                                <img loading="lazy" src="/assets/img/ipze/img2.png" alt="photo">
-                                <div class="btn">
-                                    <span class="like">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M3.66275 13.2136L9.82377 19.7066C11.0068 20.9533 12.9932 20.9534 14.1762 19.7066L20.3372 13.2136C22.5542 10.8771 22.5543 7.08895 20.3373 4.75248C18.1203 2.416 14.5258 2.416 12.3088 4.75248V4.75248C12.1409 4.92938 11.8591 4.92938 11.6912 4.75248V4.75248C9.47421 2.416 5.87975 2.416 3.66275 4.75248C1.44575 7.08895 1.44575 10.8771 3.66275 13.2136Z" stroke="#E8E0D3" stroke-width="1.5"/>
-                                        </svg>
-                                    </span>
-                                    <span class="shop">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
-                                            <path d="M1 1L2.04936 1.20987C2.91136 1.38227 3.55973 2.09732 3.6472 2.97203L3.8 4.5M3.8 4.5L4.7886 12.7383C4.90922 13.7435 5.76195 14.5 6.77435 14.5H15.7673C17.3733 14.5 18.7733 13.407 19.1628 11.8489L20.2855 7.35783C20.6485 5.90619 19.5505 4.5 18.0542 4.5H3.8Z" stroke="#E8E0D3" stroke-width="1.5" stroke-linecap="round"/>
-                                            <path d="M12 11.5H8" stroke="#E8E0D3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <circle cx="7.5" cy="18" r="1.5" fill="#E8E0D3"/>
-                                            <circle cx="16.5" cy="18" r="1.5" fill="#E8E0D3"/>
-                                        </svg>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="slide_info">
-                                <h3>Худі з емблемою ІПЗЕ</h3>
-                                <h4>
-                                    <span>45 ₴</span>
-                                    45₴
-                                </h4>
-                            </div>
-                        </a>
-                    </div>
+                    
                     <!-- ... -->
                 </div>
             <div class="container">
@@ -540,6 +462,43 @@
 
     <div class="footer_component"></div>
 
+    <script id="product-template" type="x-tmpl-mustache">
+    <div class="product-card">
+        <a href="/page/product.html?id={{id}}" class="product-content">
+            <div class="product-img">
+                <img loading="lazy" src="{{image}}" alt="{{name}}">
+                <div class="btn">
+                    <span class="like" data-id="{{id}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M3.66275 13.2136L9.82377 19.7066C11.0068 20.9533 12.9932 20.9534 14.1762 19.7066L20.3372 13.2136C22.5542 10.8771 22.5543 7.08895 20.3373 4.75248C18.1203 2.416 14.5258 2.416 12.3088 4.75248V4.75248C12.1409 4.92938 11.8591 4.92938 11.6912 4.75248V4.75248C9.47421 2.416 5.87975 2.416 3.66275 4.75248C1.44575 7.08895 1.44575 10.8771 3.66275 13.2136Z" stroke="#E8E0D3" stroke-width="1.5"/>
+                                        </svg>
+                    </span>
+                    <span class="shop" data-id="{{id}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
+                                            <path d="M1 1L2.04936 1.20987C2.91136 1.38227 3.55973 2.09732 3.6472 2.97203L3.8 4.5M3.8 4.5L4.7886 12.7383C4.90922 13.7435 5.76195 14.5 6.77435 14.5H15.7673C17.3733 14.5 18.7733 13.407 19.1628 11.8489L20.2855 7.35783C20.6485 5.90619 19.5505 4.5 18.0542 4.5H3.8Z" stroke="#E8E0D3" stroke-width="1.5" stroke-linecap="round"/>
+                                            <path d="M12 11.5H8" stroke="#E8E0D3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <circle cx="7.5" cy="18" r="1.5" fill="#E8E0D3"/>
+                                            <circle cx="16.5" cy="18" r="1.5" fill="#E8E0D3"/>
+                                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="product-info">
+                <h3>{{name}}</h3>
+                <h4>
+                    {{#discount}}
+                        <span>{{price}} ₴</span> {{current_price}} ₴
+                    {{/discount}}
+                    {{^discount}}
+                        {{price}} ₴
+                    {{/discount}}
+                </h4>
+            </div>
+        </a>
+    </div>
+</script>
+
+
     <script src="../assets/js/header.js"></script>
     <script src="../assets/js/footer.js"></script>
     <script defer src="../assets/js/script.js"></script>
@@ -549,84 +508,8 @@
     <script defer src="../assets/js/components/double-range-input.js"></script>
     <script defer src="../assets/js/components/swiper2.js"></script>
     <script defer src="../assets/js/components/filter-sort.js"></script>
-    <script id="product-template" type="x-tmpl-mustache">
-        <div class="product-card">
-          <a href="/page/product.html?id={{id}}" class="product-content">
-            <div class="product-img">
-              <img loading="lazy" src="{{image}}" alt="{{title}}">
-              <div class="btn">
-                <span class="like">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M3.66275 13.2136L9.82377 19.7066C11.0068 20.9533 12.9932 20.9534 14.1762 19.7066L20.3372 13.2136C22.5542 10.8771 22.5543 7.08895 20.3373 4.75248C18.1203 2.416 14.5258 2.416 12.3088 4.75248V4.75248C12.1409 4.92938 11.8591 4.92938 11.6912 4.75248V4.75248C9.47421 2.416 5.87975 2.416 3.66275 4.75248C1.44575 7.08895 1.44575 10.8771 3.66275 13.2136Z" stroke="#E8E0D3" stroke-width="1.5"/>
-                    </svg>
-                </span>
-                <span class="shop">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
-                        <path d="M1 1L2.04936 1.20987C2.91136 1.38227 3.55973 2.09732 3.6472 2.97203L3.8 4.5M3.8 4.5L4.7886 12.7383C4.90922 13.7435 5.76195 14.5 6.77435 14.5H15.7673C17.3733 14.5 18.7733 13.407 19.1628 11.8489L20.2855 7.35783C20.6485 5.90619 19.5505 4.5 18.0542 4.5H3.8Z" stroke="#E8E0D3" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M12 11.5H8" stroke="#E8E0D3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="7.5" cy="18" r="1.5" fill="#E8E0D3"/>
-                        <circle cx="16.5" cy="18" r="1.5" fill="#E8E0D3"/>
-                    </svg>
-                </span>
-            </div>
-            </div>
-            <div class="product-details">
-              <h3>{{title}}</h3>
-              <p class="price">{{price}} грн</p>
-            </div>
-          </a>
-        </div>
-        </script>
-        <script src="https://unpkg.com/mustache@latest/mustache.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const gallery = document.querySelector('.product-gallery');
-  const template = document.getElementById('product-template').innerHTML;
-
-  const fetchAndRender = () => {
-    const filters = collectFilters();
-    fetch('/dashboard/brand_shop/backend/api/products/index.php?' + new URLSearchParams(filters))
-      .then(res => res.json())
-      .then(data => {
-        gallery.innerHTML = '';
-        if (data.length === 0) {
-          gallery.innerHTML = '<p>Немає товарів за цими фільтрами.</p>';
-        } else {
-          data.forEach(product => {
-            const rendered = Mustache.render(template, product);
-            gallery.insertAdjacentHTML('beforeend', rendered);
-          });
-        }
-      });
-  };
-
-  const collectFilters = () => {
-    const getChecked = name => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(i => i.id.replace('-side', '').replace(/^.*?-/, ''));
-    const getRadioValue = name => document.querySelector(`input[name="${name}"]:checked`)?.id?.replace('-mini', '') || '';
-
-    return {
-      category: getChecked('category').join(','),
-      country: getChecked('country').join(','),
-      color: getChecked('color').join(','),
-      composition: getChecked('composition').join(','),
-      price_min: parseInt(document.getElementById('min-input')?.value) || '',
-      price_max: parseInt(document.getElementById('max-input')?.value) || '',
-      sort: getRadioValue('sort-item')
-    };
-  };
-
-  // Перезапуск при сабміті фільтрів
-  document.querySelectorAll('.filters-content').forEach(form => {
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      fetchAndRender();
-    });
-  });
-
-  // Автоматичне завантаження при першому запуску
-  fetchAndRender();
-});
-</script>
+    <script src="https://unpkg.com/mustache@latest/mustache.min.js"></script>
+    <script src="../assets/js/api/catalog.js"></script>
         
 </body>
 

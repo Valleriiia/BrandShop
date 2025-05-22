@@ -316,7 +316,7 @@ label.btn-for-filters {
     cursor: pointer;
 }
 
-.sort-by-items label:has(input[type="checkbox"]:checked),
+.sort-by-items label:has(input[type="radio"]:checked),
 .sort-by-items label:hover {
     background-color: var(--color_dark);
     color: var(--color_lite);
