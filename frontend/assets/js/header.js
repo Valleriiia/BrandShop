@@ -80,9 +80,9 @@
                     </nav>
                 </div>
                 <div class="h__right">
-                    <form action="">
+                    <form id="search-form">
                         <div class="search">
-                            <input type="text" placeholder="Пошук">
+                            <input id="search-input" type="text" placeholder="Пошук">
                             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
                                 <circle cx="5" cy="5" r="4" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M7.75 7.97849L10.25 10.4785" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

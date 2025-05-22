@@ -2,10 +2,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const tmpl = document.getElementById('product-template').innerHTML;
   const productList = document.getElementById('product-list');
   const randomSlider = document.getElementById('random-slider');
-  let deptId = null;
+  const urlParams = new URLSearchParams(window.location.search);
 
-  // Вкрай: нічого не фільтруємо
+let deptId = null;
+let searchQuery = null;
+
+if (window.location.pathname.startsWith('/catalog/search')) {
+  searchQuery = urlParams.get('q');
+  document.getElementById('dept-title').textContent = `Результати пошуку: «${searchQuery}»`;
+  document.getElementById('dept-desc').style.display = 'none';
+  loadProducts(false);
+} else {
   loadDepartment();
+}
   loadRandom();
   loadFiltersFromBackend();
 
@@ -122,10 +131,16 @@ function insertFilterOptions(items, name, labelText) {
 }
 
   function loadProducts(apply) {
-    const url = new URL('http://localhost:3000/api/products', location.origin);
+    const url = searchQuery 
+  ? new URL('/api/products/search', window.location.origin)
+  : new URL('/api/products', window.location.origin);
     const params = {};
 
-    if (deptId) params.department_id = deptId;
+    if (searchQuery) {
+    params.search = searchQuery;
+  } else if (deptId) {
+    params.department_id = deptId;
+  }
 
     if (apply) {
       // категорія

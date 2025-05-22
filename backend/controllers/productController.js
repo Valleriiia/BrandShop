@@ -159,7 +159,7 @@ exports.getRandomProducts = (req, res) => {
 };
 
 exports.searchProducts = (req, res) => {
-  const query = req.query.query;
+  const query = req.query.search;
 
   if (!query || query.trim() === '') {
     return res.status(400).json({ error: 'Порожній пошуковий запит' });
