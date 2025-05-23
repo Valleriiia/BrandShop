@@ -193,17 +193,13 @@
   margin-left: auto;
 }
   
-.quantity-controls {
-  border-top: 1px solid var(--color_dark);
-  border-bottom: 1px solid var(--color_dark);
-  padding: 5px 29px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
- margin-right: 0px;
- margin-left: auto;
- width: 100%;
- max-width: 475px;
+.cart-item .quantity-controls {
+    border-top: 1px solid var(--color_dark);
+    border-bottom: 1px solid var(--color_dark);
+    padding: 5px 29px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
 }
   
 .quantity, .quantity-controls button {

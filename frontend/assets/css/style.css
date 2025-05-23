@@ -2798,6 +2798,147 @@ footer .footer_bot .grid5 a {
   opacity: 0;
 }
 
+#card-form {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    max-width: 400px; 
+    margin: 0 auto; 
+    padding: 20px; 
+}
+
+.orders-title {
+    font-family: 'Nyght Serif', cursive;
+    font-size: 3em;
+    color: #ECE5DB;
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    letter-spacing: 0.05em;
+}
+
+.orders-table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.orders-table th,
+.orders-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #54483D;
+    color: #ECE5DB;
+}
+
+.orders-table th {
+    background-color: #54483D;
+    font-weight: bold;
+    color: #F8F4EA;
+}
+
+.orders-table tbody tr:nth-child(even) {
+    background-color: #3e3730;
+}
+
+.orders-table tbody tr:hover {
+    background-color: #6a5c51;
+}
+
+.orders-table .status-pending {
+    color: #FFA500;
+}
+
+.orders-table .status-completed {
+    color: #00FF00;
+}
+
+.orders-table .status-cancelled {
+    color: #FF0000;
+}
+
+.orders-table .action-button {
+    background-color: #a0845a;
+    color: #F8F4EA;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.orders-table .action-button:hover {
+    background-color: #886e49;
+}
+
+.loading-message {
+    text-align: center;
+    padding: 20px;
+    color: #ECE5DB;
+    font-size: 1.1em;
+}
+
+.no-orders-text {
+    font-family: 'Nyght Serif', cursive;
+    font-size: 1.8em;
+    color: #ECE5DB;
+    text-align: center;
+    padding: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+#card-form .input {
+    width: 100%; 
+    margin-bottom: 15px; 
+}
+
+#card-form .input label {
+    display: block; 
+    margin-bottom: 5px;
+    text-align: left; 
+}
+
+#card-form .input input {
+    width: calc(100% - 20px); 
+    padding: 10px;
+    box-sizing: border-box; 
+}
+
+.cart-items p {
+    font-family: 'Nyght Serif', cursive; 
+    font-size: 1.5em; 
+    color: #0e0801; 
+    text-align: center; 
+    padding: 30px 0; 
+}
+
+#card-form button#card-submit-button {
+    width: 100%; 
+    padding: 12px;
+    margin-top: 10px; 
+}
+
+#card-form fieldset legend {
+    text-align: center;
+    width: 100%;
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+.tab-content.info .input {
+    width: auto; 
+}
+
+
 @media (max-width: 1930px) {
   #swiper2 .swiper-button-next {
     right: 200px;
@@ -3139,4 +3280,5 @@ footer .footer_bot .grid5 a {
   .btn {
     opacity: 1 !important;
   }
+  
 }
