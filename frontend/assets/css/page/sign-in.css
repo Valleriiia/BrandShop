@@ -1,0 +1,135 @@
+.container-title {
+    text-align: center;
+}
+
+.sign-up {
+    padding-top: 35px;
+}
+#home{
+    padding-top: 100px;
+}
+.sign-up .input:has(.checkbox) {
+    border: none;
+    padding-bottom: 0;
+    padding-top: 11.5px;
+}
+
+.sign-up .checkbox {
+    color: var(--color_dark);
+    font-family: "Avenir Next";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21.86px;
+    margin-bottom: 0;
+}
+
+.sign-up .checkbox:hover {
+    color: var(--color_lite);
+}
+
+.sign-up button, .log-in button {
+    margin: 0 auto;
+    margin-top: 43px;
+    width: 216px;
+    margin-bottom: 14px;
+}
+
+.log-in .inputs {
+    min-height: 228.6px;
+    margin-bottom: 0;
+}
+
+.log-in {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.log-in .inputs {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.forgot-pass {
+    color: var(--color_lite);
+}
+
+.forgot-pass::after  {
+    background-color: var(--color_lite);
+}
+
+.forgot-pass:hover {
+    color: var(--color_dark);
+}
+
+.forgot-pass:hover::after {
+    background-color: var(--color_dark);
+}
+
+.for-checkbox {
+    display: none;
+}
+.flex-container {
+    display: flex
+;
+    justify-content: space-evenly;
+}
+.left, .right {
+    width: 48%;
+}
+@media (max-width: 1019px) {
+    .left, .right {
+        width: 100%;
+    }
+    h2 {
+        margin-bottom: 18px;
+       
+    }
+    h2 {
+        font-size: 32px !important;
+        line-height: 44.8px;
+        margin-bottom: 37px;
+        text-align: center;
+    }
+    .flex-container {
+        flex-direction: column;
+    }
+
+    .inputs {
+        margin-bottom: 20px;
+        gap: 20px;
+        flex-direction: column;
+        width: 100%;
+    }
+.input {
+    width: 100%;
+}
+    .inputs-container {
+        position: relative;
+    }
+
+    .for-checkbox {
+        display: block;
+        border: 1px solid transparent;
+        margin-top: 41px;
+    }
+
+    .input:has(.checkbox) {
+        position: absolute;
+        bottom: 0;
+    }
+
+    .sign-up {
+        margin-bottom: 48px;
+        padding-top: 38px;
+    }
+
+    .log-in {
+        padding-top: 38px;
+        margin-bottom: 40px;
+    }
+
+    .log-in .inputs {
+        min-height: 0;
+    }
+}

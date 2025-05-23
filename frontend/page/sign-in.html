@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/page/sign-in.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/img/fav.svg" type="image/x-icon">
+    <title>Шоколадний бутік</title>
+</head>
+
+<body class="small_page">
+    <div class="header_component"></div>
+
+    <main id="home">
+        <div class="container">
+            <a href="/" class="breadcrmb">
+                <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 -3.11854e-07L12 0L12 10L12 20L8 20L-9.90966e-07 10L8 -3.11854e-07Z" fill="#ECE5DB"/>
+                </svg>
+                <p>Продовжити покупки</p>
+            </a>
+            <h2>Відомості акаунту</h2>
+            <div class="flex-container">
+                <div class="left">
+                    <h3 class="container-title">Зареєструватись</h3>
+                    <form class="sign-up">
+                        <div class="inputs-container">
+                            <div class="inputs">
+                                <div class="input">
+                                    <input type="text" name="first_name" id="name" placeholder="Ім’я*">
+                                </div>
+                                <div class="input">
+                                    <input type="text" name="last_name" id="surname" placeholder="Прізвище*">
+                                </div>
+                            </div>
+                            <div class="inputs">
+                                <div class="input">
+                                    <input type="tel" name="phone" id="phone" placeholder="Номер телефону" onfocus="(this.type='number')" onblur="(this.type='text')">
+                                </div>
+                                <div class="input">
+                                    <input type="date" name="birthday" id="birthday" placeholder="Дата народження" onfocus="(this.type='date')" onblur="(this.type='text')">
+                                </div>
+                            </div>
+                            <div class="inputs">
+                                <div class="input">
+                                    <input type="email" name="email" id="email" placeholder="Email*">
+                                </div>
+                                <div class="input">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="news_subscription" id="news"> <span class="checkmark">
+                                            <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 6.75L3 8.75L10.5 0.750001" stroke="#54483D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
+                                        Отримувати новини
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="inputs">
+                                <div class="input">
+                                    <input type="password" name="password" id="password" placeholder="Пароль*">
+                                </div>
+                                <div class="input">
+                                    <input type="password" name="repeatPassword" id="repeat-password" placeholder="Повторити пароль*"> </div>
+                            </div>
+                            </div>
+                        <button type="submit" class="lite_btn">Зареєструватись</button>
+                    </form>
+                </div>
+                <div class="right">
+                    <h3 class="container-title">Увійти</h3>
+                    <form class="log-in">
+                        <div class="inputs">
+                            <div class="input">
+                                <input type="email" name="email" id="client-name" placeholder="Email*">
+                            </div>
+                            <div class="input">
+                                <input type="password" name="password" id="client-password" placeholder="Пароль*">
+                            </div>
+                        </div>
+                        <button type="submit" class="lite_btn">Увійти</button>
+                        <a href="/page/account.html" class="forgot-pass">Забули пароль?</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="/assets/js/header.js"></script>
+    <script defer src="/assets/js/auth.js" type="module"></script>
+    <script defer src="/assets/js/script.js" type="module"></script>
+    <script defer src="/assets/js/components/like.js"></script>
+    <script defer src="/assets/js/components/quantity.js"></script>
+    <script defer src="/assets/js/components/remove-btn.js"></script>
+    <script defer src="/assets/js/components/selector.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,134 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "AvenirNext", sans-serif;
+  text-decoration: none;
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 1530px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 1050px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+// @media (max-width: 1750px) {
+//   body {
+//     zoom: 1;
+//   }
+// }
+// @media (max-width: 1400px) {
+//   body {
+//     zoom: 0.8;
+//   }
+// }
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: #fff;
+}
+
+img {
+  width: 100%;
+  display: block;
+  user-select: none;
+
+}
+.dark_btn {
+  color: var(--second, #ece5db);
+  text-align: center;
+  -webkit-text-stroke-width: 0.1599999964237213;
+  -webkit-text-stroke-color: var(--second, #ece5db);
+  font-family: "Nyght Serif";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background: var(--main, #453526);
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 25px;
+  transition: var(--trans);
+  height: 44px;
+  &:hover {
+    background-color: #ece5db;
+    color: #453526;
+  }
+  svg path,
+  svg circle {
+    transition: var(--trans);
+  }
+  &:hover svg path {
+    fill: #453526;
+    stroke: #453526;
+  }
+  &:hover svg circle {
+    fill: #453526;
+  }
+}
+.lite_btn {
+  color: #453526;
+  text-align: center;
+  -webkit-text-stroke-width: 0.1599999964237213;
+  -webkit-text-stroke-color: var(--second, #ece5db);
+  font-family: "Nyght Serif";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background-color: #ece5db;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 25px;
+  transition: var(--trans);
+  height: 44px;
+  &:hover {
+    background: var(--main, #453526);
+    color: var(--second, #ece5db);
+  }
+  svg path,
+  svg circle {
+    transition: var(--trans);
+  }
+  &:hover svg path {
+    fill: #ece5db;
+    stroke: #ece5db;
+  }
+  &:hover svg circle {
+    fill: #ece5db;
+  }
+}
+body .no_stroke {
+  stroke: none !important;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ece5db;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4d3e31;
+  border-radius: 6px;
+  transition: all 0.35s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #453526;
+}

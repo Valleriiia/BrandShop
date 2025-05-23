@@ -1,0 +1,353 @@
+#home{
+  padding-top: 100px;
+}
+.flex-container{
+  display: flex;
+  justify-content: space-evenly;
+}
+.left, .right {
+  width: 48%;
+}
+.login-form {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.tabs {
+  margin-bottom: 46px;
+}
+
+.tabs input[type="radio"] {
+  display: none;
+}
+
+.tab-label {
+  color: var(--color_lite);
+  padding-top: 1px;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-label:hover {
+  color: var(--color_dark);
+}
+  
+#tab1:checked + .tab-label,
+#tab2:checked + .tab-label {
+  color: var(--small-text);
+  border-bottom: 2px solid var(--small-text);
+}
+  
+.tab-label:first-of-type {
+  margin-right: 66px;
+}
+  
+.tab-content {
+  display: none;
+}
+  
+.tabs:has(#tab1:checked) ~ #content1,
+.tabs:has(#tab2:checked) ~ #content2 {
+  display: block;
+}
+
+.description {
+  margin-bottom: 10px;
+  max-width: 563px;
+}
+  
+.description p {
+  font-family: "Avenir Next";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21.86px;
+  color: var(--small-text);
+}
+
+.cupon-container {
+  margin-top: 14px;
+}
+ 
+#cupon-check {
+  display: none;
+}
+ 
+.cupon-container {
+  margin-bottom: 33px;
+}
+
+.cupon-label {
+  font-family: "Avenir Next";
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27.32px;
+  color: var(--color_dark);
+  transition: var(--trans);
+  cursor: pointer;
+}
+  
+.cupon-label:hover {
+  color: var(--color_lite);
+}
+  
+.cupon {
+  margin-top: 10px;
+  display: none;
+  transition: var(--trans);
+}
+  
+.cupon p {
+  font-family: "Avenir Next";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21.86px;
+  color: var(--color_dark);
+  margin-bottom: 12px;
+  max-width: 420px;
+}
+  
+.cupon .input {
+  display: flex;
+  align-items: flex-end;
+  width: 43%;
+}
+  
+#cupon-input::placeholder {
+  color: var(--color_lite);
+}
+  
+.cupon-label:has(#cupon-check:checked) ~ #cupon {
+  display: block;
+}
+
+.container-title {
+    padding: 20px 32px;
+}
+
+.cart-items {
+  max-height: calc(2 * 245px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+  
+.cart-item {
+  padding: 19px 30px 24px 32px;
+  border-bottom: 2px solid var(--color_lite);
+}
+  
+.cart-item:last-child {
+  border-bottom: 2px solid var(--color_dark);
+}
+  
+.cart-item img {
+  width: 107px;
+  align-self: flex-start;
+  margin-top: 5px;
+}
+  
+.item-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+  
+.item-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 39px;
+  gap: 15px;
+}
+  
+.item-title {
+  font-family: "Avenir Next";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21.86px;
+  color: var(--small-text);
+}
+  
+.item-desc {
+  font-family: "Avenir Next";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21.86px;
+  color: #E4DFD5;
+  max-width: 332px;
+}
+  
+.item-price {
+  font-family: "Avenir Next";
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27.32px;
+  color: var(--small-text);
+  white-space: nowrap;
+}
+  
+.remove-btn {
+  font-family: "Nyght Serif";
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 37px;
+  transform: rotate(-45deg);
+  background-color: transparent;
+  margin-left: auto;
+}
+  
+.cart-item .quantity-controls {
+    border-top: 1px solid var(--color_dark);
+    border-bottom: 1px solid var(--color_dark);
+    padding: 5px 29px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+}
+  
+.quantity, .quantity-controls button {
+  font-family: "Nyght Serif";
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  text-align: center
+}
+  
+.quantity-controls button {
+  background-color: transparent;
+}
+  
+.cart-summary {
+  padding-top: 19px;
+  padding-bottom: 13px;
+  border-bottom: 2px solid var(--color_dark);
+  margin-bottom: 16px;
+}
+
+.summary-text  {
+  font-family: "Avenir Next";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21.86px;
+  margin-bottom: 5px;
+  color: var(--small-text);
+}
+  
+.cart-total {
+  font-family: "Nyght Serif";
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 44.8px;
+  margin-bottom: 0;
+  color: var(--color_dark);
+}
+  
+.cart-total-price {
+  font-family: "Nyght Serif";
+}
+  
+.cart-summary span {
+  float: right;
+}
+  
+.order {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+.item {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.item.removing {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+@media (max-width: 1019px) {  
+  .flex-container{
+    flex-direction: column-reverse;
+  }
+  .left, .right {
+    width: 100%;
+  }
+    h2 {
+      margin-bottom: 37px;
+      
+    }
+.inputs{
+  flex-direction: column;
+  width: 100%;
+}
+.input{
+  width: 100%;
+}
+  .container-title {
+    border: none;
+    padding: 0;
+  }
+
+  .tabs {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .cart-items {
+    max-height: calc(2 * 164px);
+    padding-right: 5px;
+  }
+  
+  .cart-item {
+    padding: 20px 0 0;
+    border: none !important;
+  }
+ 
+  .cart-item img {
+    width: 89.35px;
+  }
+  
+  .item-text {
+    flex-direction: row;
+    align-items: center;
+    margin-right: 14px;
+  }
+ 
+  .item-title {
+    font-size: 14px;
+    line-height: 19.12px;
+  }
+
+  .item-desc {
+    display: none;
+  }
+
+  .remove-btn {
+    padding-top: 3px;
+  }
+
+  .quantity-controls {
+    padding: 5px;
+    margin: 0;
+  }
+
+  .cart-summary {
+    border: none;
+    margin-bottom: 7px;
+    padding-top: 13px;
+    padding-bottom: 0;
+  }
+
+  .order {
+    margin-bottom: 37px;
+    width: 98%;
+  }
+
+  .tabs {
+    width: 100%;
+  }
+
+  .left {
+    margin: 0;
+  }
+
+  .tab-label:first-of-type {
+    margin-right: 8px;
+  }
+}
