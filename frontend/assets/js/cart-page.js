@@ -1,5 +1,3 @@
-// FRONTEND/assets/js/cart-page.js
-
 function getToken() {
     return localStorage.getItem('token');
 }
@@ -73,7 +71,6 @@ function attachRemoveButtonListeners() {
     });
 }
 
-// ==== ЦЯ ФУНКЦІЯ ЗАВАНТАЖУЄ ДАНІ ПРОФІЛЮ ====
 async function loadUserProfile() {
     const token = getToken();
     if (!token) {
@@ -111,7 +108,6 @@ async function loadUserProfile() {
     }
 }
 
-// ==== НОВА ФУНКЦІЯ: ЗАВАНТАЖЕННЯ ДАНИХ КАРТКИ ====
 async function loadCardDetails() {
     const token = getToken();
     if (!token) {
@@ -141,7 +137,6 @@ async function loadCardDetails() {
         const cardNumberDisplayField = document.getElementById('cardNumberDisplay');
 
         if (data.card && data.card.last4) {
-            // Відображаємо тільки останні 4 цифри, заповнюючи решту зірочками/кресленнями
             cardNumberDisplayField.value = `**** **** **** ${data.card.last4}`;
         } else {
             cardNumberDisplayField.value = 'Дані картки відсутні';
@@ -232,8 +227,8 @@ async function removeItem(productId) {
         alert(data.message);
 
         await loadCartItems();
-        await loadUserProfile(); // Оновлюємо дані профілю, якщо щось змінилося (хоча тут не має)
-        await loadCardDetails(); // Оновлюємо дані картки
+        await loadUserProfile();
+        await loadCardDetails();
         attachRemoveButtonListeners();
 
     } catch (error) {
@@ -272,8 +267,8 @@ async function placeOrder() {
         alert(data.message);
 
         await loadCartItems();
-        await loadUserProfile(); // Оновлюємо дані профілю
-        await loadCardDetails(); // Оновлюємо дані картки
+        await loadUserProfile();
+        await loadCardDetails(); 
         attachRemoveButtonListeners();
 
     } catch (error) {
@@ -283,20 +278,10 @@ async function placeOrder() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // 1. Завантажуємо товари кошика.
     await loadCartItems();
-
-    // 2. Завантажуємо дані профілю користувача та заповнюємо форму.
     await loadUserProfile();
-
-    // 3. Завантажуємо та відображаємо дані картки.
     await loadCardDetails();
-
-    // 4. Після того, як кнопки "хрестика" (remove-btn) були створені та додані в DOM,
-    // ми прикріплюємо до них слухачів подій.
     attachRemoveButtonListeners();
-
-    // Додаємо слухача для кнопки "Замовити"
     const orderButton = document.querySelector('.order');
     if (orderButton) {
         orderButton.addEventListener('click', placeOrder);
