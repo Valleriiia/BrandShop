@@ -205,12 +205,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const ordersListBody = document.getElementById('ordersListBody');
     const noOrdersMessage = document.getElementById('noOrdersMessage');
 
-    // Очистити попередні замовлення та приховати повідомлення "немає замовлень"
     ordersListBody.innerHTML = '';
-    noOrdersMessage.classList.add('hidden'); // Приховуємо повідомлення "немає замовлень"
+    noOrdersMessage.classList.add('hidden'); 
 
     try {
-        const token = localStorage.getItem('token'); // Отримуємо токен з localStorage
+        const token = localStorage.getItem('token'); 
 
         if (!token) {
             console.error('Токен авторизації відсутній.');
@@ -223,17 +222,15 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // Додаємо токен
+                'Authorization': `Bearer ${token}` 
             }
         });
 
         if (!response.ok) {
             if (response.status === 401 || response.status === 403) {
-                // Токен недійсний або прострочений
                 console.error('Помилка авторизації при завантаженні замовлень.');
                 noOrdersMessage.textContent = 'Сесія закінчилася або токен недійсний. Будь ласка, увійдіть знову.';
                 noOrdersMessage.classList.remove('hidden');
-                // Можливо, тут варто перенаправити на сторінку входу: window.location.href = '/login.html';
             } else {
                 console.error('Помилка при завантаженні замовлень:', response.statusText);
                 noOrdersMessage.textContent = 'Не вдалося завантажити замовлення. Спробуйте пізніше.';
@@ -245,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const orders = await response.json();
 
         if (orders.length === 0) {
-            noOrdersMessage.classList.remove('hidden'); // Показуємо повідомлення "немає замовлень"
+            noOrdersMessage.classList.remove('hidden'); 
         } else {
             orders.forEach(order => {
                 const row = document.createElement('tr');
