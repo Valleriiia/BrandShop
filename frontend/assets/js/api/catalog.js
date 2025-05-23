@@ -11,6 +11,7 @@ if (window.location.pathname.startsWith('/catalog/search')) {
   searchQuery = urlParams.get('q');
   document.getElementById('dept-title').textContent = `Результати пошуку: «${searchQuery}»`;
   document.getElementById('dept-desc').style.display = 'none';
+  document.getElementById('dept-img').style.display = 'none';
   loadProducts(false);
 } else {
   loadDepartment();

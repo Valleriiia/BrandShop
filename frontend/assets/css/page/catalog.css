@@ -7,7 +7,6 @@ h1 {
 }
 
 #dept-desc {
-    margin-bottom: 30px;
     font-family: 'Exo2';
     font-weight: 500;
     font-size: 20px;
@@ -88,6 +87,7 @@ h1 {
     margin-bottom: 28px;
     display: flex;
     flex-direction: column;
+    margin-top: 30px;
 }
 
 .filters h3 {
