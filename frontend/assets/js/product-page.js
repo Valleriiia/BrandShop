@@ -1,11 +1,6 @@
-// FRONTEND/assets/js/product-page.js
-
-document.addEventListener('DOMContentLoaded', async () => { // Зробили головну функцію async
-    // ----------------------------------------------------
-    // Логіка для кнопок кількості (+/-)
-    // ----------------------------------------------------
+document.addEventListener('DOMContentLoaded', async () => { 
     const quantityControls = document.querySelector('.quantity-controls');
-    let currentQuantity = 1; // Дефолтна кількість
+    let currentQuantity = 1; 
 
     if (quantityControls) {
         const minusButton = quantityControls.querySelector('.minus');
@@ -26,18 +21,11 @@ document.addEventListener('DOMContentLoaded', async () => { // Зробили г
             quantitySpan.textContent = currentQuantity;
         });
     }
-
-    // ----------------------------------------------------
-    // Отримання ID продукту з URL або data-атрибута
-    // ----------------------------------------------------
     let productId = null;
-    const productInfoContainer = document.querySelector('.product-info'); // Це ваш div.product-info
-
-    // Спочатку спробуємо отримати ID з data-product-id (якщо він є)
+    const productInfoContainer = document.querySelector('.product-info');
     if (productInfoContainer && productInfoContainer.dataset.productId) {
         productId = productInfoContainer.dataset.productId;
     } else {
-        // Якщо data-product-id немає, спробуємо витягти з URL
         const pathSegments = window.location.pathname.split('/');
         const potentialProductId = pathSegments[pathSegments.length - 1];
         if (!isNaN(potentialProductId) && parseInt(potentialProductId) > 0) {
@@ -48,29 +36,20 @@ document.addEventListener('DOMContentLoaded', async () => { // Зробили г
     if (!productId) {
         console.error('Не вдалося визначити product ID. Перевірте HTML або URL.');
         alert('Помилка: ID продукту не визначено. Неможливо завантажити дані.');
-        return; // Зупиняємо виконання, якщо ID немає
+        return; 
     }
-
-    // ----------------------------------------------------
-    // ЗАВАНТАЖЕННЯ ДЕТАЛЕЙ ПРОДУКТУ З БЕКЕНДУ
-    // ----------------------------------------------------
     let productDetails = null;
     try {
-        const response = await fetch(`/api/products/${productId}`); // Запит на новий ендпоінт
+        const response = await fetch(`/api/products/${productId}`);
         const data = await response.json();
 
         if (response.ok && data.status === 'success') {
             productDetails = data.product;
             console.log('Дані про продукт завантажені:', productDetails);
-
-            // Оновити ціну на сторінці, якщо потрібно (наприклад, якщо у вас ціна завантажується JS)
             const priceElement = document.querySelector('.product-price');
             if (priceElement && productDetails.price) {
-                priceElement.textContent = `${productDetails.price} ₴`; // Оновлюємо ціну
+                priceElement.textContent = `${productDetails.price} ₴`; 
             }
-            // Ви також можете оновити назву, опис, зображення тощо з productDetails
-            // const nameElement = document.querySelector('.product-info h3');
-            // if (nameElement) nameElement.textContent = productDetails.name;
         } else {
             console.error('Помилка при завантаженні даних про продукт:', data.message);
             alert(data.message || 'Не вдалося завантажити інформацію про продукт.');
@@ -81,10 +60,6 @@ document.addEventListener('DOMContentLoaded', async () => { // Зробили г
         alert('Помилка з\'єднання при завантаженні інформації про продукт.');
         return;
     }
-
-    // ----------------------------------------------------
-    // Логіка для кнопки "Придбати" (Add to Cart)
-    // ----------------------------------------------------
     const addToCartButton = document.querySelector('.buy-like .lite_btn');
 
     if (addToCartButton) {
@@ -96,10 +71,8 @@ document.addEventListener('DOMContentLoaded', async () => { // Зробили г
                 window.location.href = '/login';
                 return;
             }
-
-            // Використовуємо дані, ЗАВАНТАЖЕНІ З БАЗИ ДАНИХ
             const finalProductId = productDetails.id;
-            const finalProductPrice = productDetails.price; // Ціна береться з БД
+            const finalProductPrice = productDetails.price;
             const quantity = parseInt(document.querySelector('.quantity-controls .quantity').textContent);
 
             if (!finalProductId || isNaN(finalProductPrice) || isNaN(quantity) || quantity <= 0) {
@@ -115,7 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => { // Зробили г
             const productData = {
                 productId: finalProductId,
                 quantity: quantity,
-                price: finalProductPrice // Передаємо ціну з БД
+                price: finalProductPrice
             };
 
             console.log('Дані для відправки в кошик на бекенд:', productData);
