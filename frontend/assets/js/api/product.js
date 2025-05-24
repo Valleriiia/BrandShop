@@ -116,6 +116,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       recomendWrapper.insertAdjacentHTML('beforeend', Mustache.render(productTmpl, p));
     });
 
+     const userId = getUserId();
+if (userId) {
+  markLikedProducts(userId);
+}
+
     // 8. Відгуки
     const { reviews, average } = await fetch(`/api/reviews/${productId}`).then(r => r.json());
 
@@ -184,4 +189,25 @@ function setupVariantDependency(variants) {
 async function loadTemplate(url) {
   const res = await fetch(url);
   return await res.text();
+}
+
+async function markLikedProducts(userId) {
+  try {
+    const res = await fetch(`/api/user/favorites/${userId}`);
+    const favorites = await res.json(); // масив продуктів
+
+    const likedIds = new Set(favorites.map(p => String(p.id)));
+    document.querySelectorAll('.like[data-id]').forEach(btn => {
+      if (likedIds.has(btn.dataset.id)) {
+        btn.classList.add('liked');
+      }
+    });
+  } catch (err) {
+    console.error('❌ Не вдалося позначити улюблені:', err);
+  }
+}
+
+function getUserId() {
+  // Поверни ID користувача — з localStorage, cookie або глобальної змінної
+  return localStorage.getItem('user_id');
 }

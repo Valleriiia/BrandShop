@@ -4,7 +4,7 @@ const userActions = require('../controllers/userActionsController');
 
 // Улюблені
 router.post('/favorites', userActions.addToFavorites);
-router.delete('/favorites', userActions.removeFromFavorites);
+router.delete('/favorites/remove', userActions.removeFromFavorites);
 router.get('/favorites/:userId', userActions.getFavorites);
 
 // Кошик

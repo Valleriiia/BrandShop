@@ -39,6 +39,10 @@ app.get('/product/:id', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/page/product.html'));
 });
 
+app.get('/love', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/page/love.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Сервер запущено на http://localhost:${PORT}`);
 });

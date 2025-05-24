@@ -1,13 +1,12 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const productList = document.getElementById('product-list');
   const randomSlider = document.getElementById('random-slider');
   const urlParams = new URLSearchParams(window.location.search);
 
 let deptId = null;
 let searchQuery = null;
-let tmpl = null;
+let tmpl = await loadTemplate('/assets/js/templates/product-template.mustache');;
 
-  loadTemplate('/assets/js/templates/product-template.mustache');
 if (window.location.pathname.startsWith('/catalog/search')) {
   searchQuery = urlParams.get('q');
   document.getElementById('dept-title').textContent = `Результати пошуку: «${searchQuery}»`;
@@ -19,6 +18,10 @@ if (window.location.pathname.startsWith('/catalog/search')) {
 }
   loadRandom();
   loadFiltersFromBackend();
+  const userId = getUserId();
+if (userId) {
+  markLikedProducts(userId);
+}
 
   // Підписуємося на десктопну та мобільну форму
   document.getElementById('filters-content')?.addEventListener('submit', e => {
@@ -192,14 +195,30 @@ function insertFilterOptions(items, name, labelText) {
       })
       .catch(console.error);
   }
-
-  function loadTemplate(url) {
-  fetch(url)
-    .then(res => res.text())
-    .then(template => {
-      tmpl = template;
-      return template;
-    });
-}
 });
 
+async function loadTemplate(url) {
+  const res = await fetch(url);
+  return await res.text();
+}
+
+async function markLikedProducts(userId) {
+  try {
+    const res = await fetch(`/api/user/favorites/${userId}`);
+    const favorites = await res.json(); // масив продуктів
+
+    const likedIds = new Set(favorites.map(p => String(p.id)));
+    document.querySelectorAll('.like[data-id]').forEach(btn => {
+      if (likedIds.has(btn.dataset.id)) {
+        btn.classList.add('liked');
+      }
+    });
+  } catch (err) {
+    console.error('❌ Не вдалося позначити улюблені:', err);
+  }
+}
+
+function getUserId() {
+  // Поверни ID користувача — з localStorage, cookie або глобальної змінної
+  return localStorage.getItem('user_id');
+}
