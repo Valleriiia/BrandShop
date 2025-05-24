@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const cross = document.querySelector('.product-price .cross');
   const currentPrice = document.querySelector('.product-price .current-price');
   const discountEl = document.querySelector('.product-price .discount');
-  const desc = document.querySelector('.product-info p');
+  const desc = document.querySelector('.product-info .description');
   const colorsContainer = document.querySelector('.colers-container');
   const sizesContainer = document.querySelector('.sizes-container');
   const charContainer = document.querySelector('.product-charact');
@@ -123,6 +123,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 if (reviews.length === 0) {
   noReviewsEl.style.display = 'block';
   reviewsList.innerHTML = '';
+  reviewCountEl.textContent = `Відгуки (0)`
 } else {
   noReviewsEl.style.display = 'none';
   starsContainer.innerHTML = '';

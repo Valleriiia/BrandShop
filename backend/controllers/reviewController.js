@@ -56,11 +56,11 @@ exports.getReviewsByProduct = (req, res) => {
   const product_id = req.params.product_id;
 
   const sqlReviews = `
-    SELECT r.*, u.name AS user_name
+    SELECT r.*, CONCAT(u.first_name, ' ', u.last_name) AS user_name 
     FROM rating r
     JOIN user u ON r.user_id = u.id
     WHERE r.product_id = ?
-    ORDER BY r.created_at DESC
+    ORDER BY r.date DESC
   `;
 
   const sqlAverage = `SELECT rating FROM product WHERE id = ?`;

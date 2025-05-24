@@ -67,6 +67,7 @@ exports.getProductById = (req, res) => {
       p.*,
       c.name AS category_name,
       d.name AS department_name,
+      d.slug AS department_slug,
       comp.composition,
       country.country
     FROM product p

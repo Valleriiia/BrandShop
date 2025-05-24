@@ -8,4 +8,21 @@ document.querySelectorAll('.enter-star').forEach(star => {
       if (s.dataset.value <= value) s.classList.add('selected');
     });
   });
+  star.addEventListener('mouseover', () => {
+    const value = star.dataset.value;
+    document.getElementById('enter-rating').value = value;
+
+    document.querySelectorAll('.enter-star').forEach(s => {
+      s.classList.remove('hover');
+      if (s.dataset.value <= value) s.classList.add('hover');
+    });
+  });
+  star.addEventListener('mouseout', () => {
+    const value = star.dataset.value;
+    document.getElementById('enter-rating').value = value;
+
+    document.querySelectorAll('.enter-star').forEach(s => {
+      s.classList.remove('hover');
+    });
+  });
 });
