@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const tmpl = document.getElementById('product-template').innerHTML;
   const productList = document.getElementById('product-list');
   const randomSlider = document.getElementById('random-slider');
   const urlParams = new URLSearchParams(window.location.search);
 
 let deptId = null;
 let searchQuery = null;
+let tmpl = null;
 
+  loadTemplate('/assets/js/templates/product-template.mustache');
 if (window.location.pathname.startsWith('/catalog/search')) {
   searchQuery = urlParams.get('q');
   document.getElementById('dept-title').textContent = `Результати пошуку: «${searchQuery}»`;
@@ -191,5 +192,14 @@ function insertFilterOptions(items, name, labelText) {
       })
       .catch(console.error);
   }
+
+  function loadTemplate(url) {
+  fetch(url)
+    .then(res => res.text())
+    .then(template => {
+      tmpl = template;
+      return template;
+    });
+}
 });
 
