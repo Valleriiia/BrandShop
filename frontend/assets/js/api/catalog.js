@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 let deptId = null;
 let searchQuery = null;
-let tmpl = await loadTemplate('/assets/js/templates/product-template.mustache');;
+let tmpl = await loadTemplate('/assets/js/templates/product-template.mustache');
 
 if (window.location.pathname.startsWith('/catalog/search')) {
   searchQuery = urlParams.get('q');

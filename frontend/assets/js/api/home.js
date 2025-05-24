@@ -1,0 +1,79 @@
+document.addEventListener('DOMContentLoaded', async () => {
+  const deptContainer = document.querySelector('.departments-lis');
+  const discountSwiper = document.querySelector('.discount-swiper .swiper-wrapper');
+
+  const deptTemplate = await loadTemplate('/assets/js/templates/department-template.mustache');
+  const discountTemplate = await loadTemplate('/assets/js/templates/discount-template.mustache');
+  const productTemplate = await loadTemplate('/assets/js/templates/product-template.mustache');;
+
+  try {
+    // Завантаження кафедр
+    const departments = await fetch('/api/departments').then(r => r.json());
+
+    deptContainer.innerHTML = '';
+    departments.forEach(d => {
+      const html = Mustache.render(deptTemplate, d);
+      deptContainer.insertAdjacentHTML('beforeend', html);
+    });
+
+    // Завантаження товарів зі знижкою
+    const discounts = await fetch('/api/products/discounts').then(r => r.json());
+
+    for (const p of discounts) {
+      const photoFolder = p.name_of_product_photo;
+      const images = await fetch(`/api/photos/${photoFolder}`).then(r => r.json());
+      const image = images[0] || 'default.png';
+      const html = Mustache.render(discountTemplate, { ...p, image });
+      discountSwiper.insertAdjacentHTML('beforeend', html);
+    }
+    loadRandom();
+    const userId = getUserId();
+if (userId) {
+  markLikedProducts(userId);
+}
+  } catch (err) {
+    console.error('❌ ПОМИЛКА:', err);
+  }
+
+  function loadRandom() {
+    fetch('http://localhost:3000/api/products/random?limit=6')
+      .then(r => r.json())
+      .then(arr => {
+        randomSlider.innerHTML = '';
+        arr.forEach(p => {
+          const html = Mustache.render(productTemplate, p);
+          const slide = document.createElement('div');
+          slide.className = 'swiper-slide';          
+          slide.innerHTML = html; // Вставляємо HTML в div
+        randomSlider.appendChild(slide);
+        });
+      })
+      .catch(console.error);
+  }
+});
+
+async function loadTemplate(url) {
+  const res = await fetch(url);
+  return await res.text();
+}
+
+async function markLikedProducts(userId) {
+  try {
+    const res = await fetch(`/api/user/favorites/${userId}`);
+    const favorites = await res.json(); // масив продуктів
+
+    const likedIds = new Set(favorites.map(p => String(p.id)));
+    document.querySelectorAll('.like[data-id]').forEach(btn => {
+      if (likedIds.has(btn.dataset.id)) {
+        btn.classList.add('liked');
+      }
+    });
+  } catch (err) {
+    console.error('❌ Не вдалося позначити улюблені:', err);
+  }
+}
+
+function getUserId() {
+  // Поверни ID користувача — з localStorage, cookie або глобальної змінної
+  return localStorage.getItem('user_id');
+}
