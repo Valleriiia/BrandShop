@@ -25,10 +25,18 @@ app.use('/api/reviews', reviewRoutes);
 const departmentRoutes = require('./routes/departments');
 app.use('/api/departments', departmentRoutes);
 
+const photoRoutes = require('./routes/photos');
+app.use('/api/photos', photoRoutes);
+
 app.use(express.static(path.join(__dirname, '../frontend')));
+app.use('/templates', express.static(path.join(__dirname, 'templates')));
 
 app.get('/catalog/:slug', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/page/catalog.html'));
+});
+
+app.get('/product/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/page/product.html'));
 });
 
 app.listen(PORT, () => {

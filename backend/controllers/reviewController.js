@@ -55,7 +55,7 @@ exports.addReview = (req, res) => {
 exports.getReviewsByProduct = (req, res) => {
   const product_id = req.params.product_id;
 
-  const sql = `
+  const sqlReviews = `
     SELECT r.*, u.name AS user_name
     FROM rating r
     JOIN user u ON r.user_id = u.id
@@ -63,12 +63,41 @@ exports.getReviewsByProduct = (req, res) => {
     ORDER BY r.created_at DESC
   `;
 
-  db.query(sql, [product_id], (err, results) => {
+  const sqlAverage = `SELECT rating FROM product WHERE id = ?`;
+
+  db.query(sqlReviews, [product_id], (err, reviewResults) => {
     if (err) {
       console.error('❌ Помилка при отриманні відгуків:', err);
       return res.status(500).json({ error: 'Не вдалося отримати відгуки' });
     }
 
-    res.json(results);
+    // додаємо поле stars
+    const reviewsWithStars = reviewResults.map(r => {
+      const stars = [];
+      for (let i = 1; i <= 5; i++) {
+        stars.push(i <= r.rating ? '#407948' : '#ADB9AE');
+      }
+      return {
+        user: r.user_name,
+        rating: r.rating,
+        comment: r.comment,
+        stars
+      };
+    });
+
+    // отримаємо середній рейтинг
+    db.query(sqlAverage, [product_id], (err, avgResult) => {
+      if (err) {
+        console.error('❌ Помилка при отриманні рейтингу товару:', err);
+        return res.status(500).json({ error: 'Не вдалося отримати рейтинг' });
+      }
+
+      const average = avgResult[0].avg_rating || 0;
+
+      res.json({
+        reviews: reviewsWithStars,
+        average
+      });
+    });
   });
 };
