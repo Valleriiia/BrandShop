@@ -2110,6 +2110,9 @@ footer .top .col2 a {
   line-height: normal;
 }
 
+footer .top .col2 a:hover {
+  color: black;
+}
 
 footer .top .col3 .row {
   display: flex;
@@ -2126,6 +2129,11 @@ footer .col3 a {
   font-size: 20px;
   font-weight: 500;
   line-height: 24px;
+  transition: var(--trans);
+}
+
+footer .col3 a:hover {
+  color: black;
 }
 
 footer .col3 img {
