@@ -2132,7 +2132,7 @@ footer .col3 a {
   transition: var(--trans);
 }
 
-footer .col3 a:hover {
+footer .top .col3 .row:hover a {
   color: black;
 }
 
@@ -2142,7 +2142,7 @@ footer .col3 img {
   transition: var(--trans);
 }
 
-footer .col3 img:hover {
+footer .top .col3 .row:hover img {
   filter: invert(0);
 }
 
