@@ -58,7 +58,7 @@ if (userId) {
           const html = Mustache.render(tmpl, p);
           const slide = document.createElement('div');
           slide.className = 'swiper-slide';          
-          slide.innerHTML = html; // Вставляємо HTML в div
+          slide.innerHTML = html; 
         randomSlider.appendChild(slide);
         });
       })

@@ -1,11 +1,11 @@
 <li class="review-container">
-    <img src="/assets/img/users/default.png" alt="profile_photo">
     <div class="review">
       <p class="user-name">{{user}}</p>
       <div class="rating">
         {{#stars}}
           <div class="star" style="background: {{.}};"></div>
         {{/stars}}
+        <p class="review-date">{{date}}</p>
       </div>
       <p class="review-text">{{comment}}</p>
     </div>

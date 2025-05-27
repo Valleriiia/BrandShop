@@ -56,11 +56,15 @@ exports.getReviewsByProduct = (req, res) => {
   const product_id = req.params.product_id;
 
   const sqlReviews = `
-    SELECT r.*, CONCAT(u.first_name, ' ', u.last_name) AS user_name 
-    FROM rating r
-    JOIN user u ON r.user_id = u.id
-    WHERE r.product_id = ?
-    ORDER BY r.date DESC
+    SELECT 
+  r.rating, 
+  r.comment, 
+  DATE_FORMAT(r.date, '%Y/%m/%d') AS date, 
+  CONCAT(u.first_name, ' ', u.last_name) AS user_name 
+FROM rating r
+JOIN user u ON r.user_id = u.id
+WHERE r.product_id = ?
+ORDER BY r.date DESC
   `;
 
   const sqlAverage = `SELECT rating FROM product WHERE id = ?`;
@@ -75,12 +79,13 @@ exports.getReviewsByProduct = (req, res) => {
     const reviewsWithStars = reviewResults.map(r => {
       const stars = [];
       for (let i = 1; i <= 5; i++) {
-        stars.push(i <= r.rating ? '#407948' : '#ADB9AE');
+        stars.push(i <= r.rating ? '#fbd300' : '#DFE1E6');
       }
       return {
         user: r.user_name,
         rating: r.rating,
         comment: r.comment,
+        date: r.date,
         stars
       };
     });
@@ -91,8 +96,7 @@ exports.getReviewsByProduct = (req, res) => {
         console.error('❌ Помилка при отриманні рейтингу товару:', err);
         return res.status(500).json({ error: 'Не вдалося отримати рейтинг' });
       }
-
-      const average = avgResult[0].avg_rating || 0;
+      const average = avgResult[0].rating || 0;
 
       res.json({
         reviews: reviewsWithStars,

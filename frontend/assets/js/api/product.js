@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const cross = document.querySelector('.product-price .cross');
   const currentPrice = document.querySelector('.product-price .current-price');
   const discountEl = document.querySelector('.product-price .discount');
-  const desc = document.querySelector('.product-info .description');
-  const colorsContainer = document.querySelector('.colers-container');
+  const desc = document.querySelector('.product-desc .description');
+  const colorsContainer = document.querySelector('.colors-container');
   const sizesContainer = document.querySelector('.sizes-container');
   const charContainer = document.querySelector('.product-charact');
-  const recomendWrapper = document.querySelector('#swiper2 .swiper-wrapper');
+  const recomendWrapper = document.getElementById('random-swiper');
   const starsContainer = document.getElementById('stars-container');
   const ratingAverage = document.querySelector('.rating-average');
   const reviewsList = document.querySelector('.reviews-list ul');
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     colors.forEach((name, id) => {
       colorsContainer.insertAdjacentHTML('beforeend', `
         <li>
-          <label for="color-${id}">
+          <label class="checkbox" for="color-${id}">
             <input type="radio" name="color-item" id="color-${id}" value="${id}">
             ${name}
           </label>
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     sizes.forEach((name, id) => {
       sizesContainer.insertAdjacentHTML('beforeend', `
         <li>
-          <label for="size-${id}">
+          <label class="checkbox" for="size-${id}">
             <input type="radio" name="size-item" id="size-${id}" value="${id}">
             ${name}
           </label>
@@ -113,7 +113,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 7. Рекомендовані товари
     recomendWrapper.innerHTML = '';
     similar.forEach(p => {
-      recomendWrapper.insertAdjacentHTML('beforeend', Mustache.render(productTmpl, p));
+        const html = Mustache.render(productTmpl, p);
+          const slide = document.createElement('div');
+          slide.className = 'swiper-slide';          
+          slide.innerHTML = html; 
+        recomendWrapper.appendChild(slide);
     });
 
      const userId = getUserId();
@@ -136,10 +140,10 @@ if (reviews.length === 0) {
       const fillPercentage = Math.max(0, Math.min(100, (average - i + 1) * 100));
       const star = document.createElement('div');
       star.className = 'star';
-      star.style.background = `linear-gradient(90deg, #407948 ${fillPercentage}%, #ADB9AE ${100 - fillPercentage}%)`;
+      star.style.background = `linear-gradient(90deg, #fbd300 ${fillPercentage}%, #DFE1E6 ${fillPercentage}%)`;
       starsContainer.appendChild(star);
     }
-    ratingAverage.textContent = average.toFixed(1);
+    ratingAverage.textContent = average;
     reviewCountEl.textContent = `Відгуки (${reviews.length})`;
 
     reviewsList.innerHTML = '';

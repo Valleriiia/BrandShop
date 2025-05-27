@@ -1,10 +1,11 @@
 main {
-    padding-top: 63px;
+    padding-top: 59px;
 }
 .product-container {
     background-color: black;
     padding-top: 33px;
     padding-bottom: 34px;
+    margin-bottom: 50px;
 }
 
 .product-flex {
@@ -21,16 +22,16 @@ main {
 }
 
 .breadcrambs a {
-    font-family: "Avenir Next";
+    font-family: 'Exo2';
     font-weight: 500;
     font-size: 18px;
     line-height: 100%;
-    color: #ababab;
+    color: #DFE1E6;
     transition: var(--trans);
 }
 
 .breadcrambs a:hover {
-    color: var(--color_dark) !important;
+    color: #28315C !important;
 }
 
 .breadcrambs a:last-of-type {
@@ -88,57 +89,86 @@ main {
 .product-info-container {
     width: 457px;
     background-color: white;
-    max-height: fit-content;
+    height: fit-content;
+    min-height: 473px;
 }
 
-.product-info {
+.product-desc {
     padding: 17px 29px 26px 22px;
+    display: flex;
+    flex-direction: column;
+    min-height: 473px;
 }
 
 h3 {
-    font-family: "Nyght Serif";
+    font-family: 'Kyiv Type Serif';
     font-weight: 400;
     font-size: 32px;
     line-height: 100%;
-    color: var(--color_dark);
+    color: #28315C;
 }
 
-.product-info h3 {
-    margin-bottom: 6px;
+.product-desc > h3 {
+    margin-bottom: 15px;
 }
 
-.product-info p {
-    font-family: "Avenir Next";
+.product-desc .description {
+    font-family: 'Exo2';
     font-weight: 500;
-    font-size: 16px;
-    line-height: 17px;
-    color: var(--small-text);
+    font-size: 18px;
+    line-height: 19px;
+    color: black;
 }
 
 .product-price {
-    font-family: "Avenir Next";
-    font-weight: 500;
-    font-size: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    width: fit-content;
+    margin-top: auto;
+}
+
+.product-price .cross {
+    text-decoration: line-through;
+    color: #DFE1E6;
+    font-weight: 400;
+    font-size: 28px;
     line-height: 100%;
-    color: var(--color_dark);
-    margin-bottom: 6px;
+    font-family: 'Exo2';
+}
+
+.product-price h3 {
+    color: black;
+    font-family: 'Exo2';
+}
+
+.product-price .discount {
+    background-color: #6F0E19;
+    padding: 2px 8px;
+    color: #fff;
+    position: absolute;
+    top: -14px;
+    left: 100%;
+    border-radius: 99px;
+    font-family: 'Exo2';
 }
 
 .quantity-controls {
-    border-top: 1px solid var(--color_dark);
-    border-bottom: 1px solid var(--color_dark);
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     padding: 5px 29px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 30px;
     margin-bottom: 30px;
 }
     
 .quantity, .quantity-controls button {
-    font-family: "Nyght Serif";
+    font-family: 'Kyiv Type Serif';
     font-weight: 400;
-    font-size: 20px;
+    font-size: 24px;
     line-height: 28px;
     text-align: center
 }
@@ -152,7 +182,6 @@ h3 {
     gap: 11px;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 18px;
 }
 
 .buy-like button {
@@ -171,11 +200,11 @@ h3 {
 }
 
 .buy-like span path {
-    stroke: var(--color_dark);
+    stroke: #28315C;
 }
 
 .buy-like span.like.active svg path {
-    fill: var(--color_dark) !important;
+    fill: #28315C !important;
 }
 
 .one-click {
@@ -231,18 +260,18 @@ h3 {
 .swiper-pagination-bullet {
   width: 10px !important;
   height: 10px !important;
-  border: 2px solid var(--color_lite) !important;
+  border: 2px solid #DFE1E6 !important;
   opacity: 1 !important;
   background-color: transparent !important;
   transition: var(--trans);
 }
 
 .swiper-pagination-bullet:hover {
-    border: 2px solid var(--color_dark) !important;
+    border: 2px solid #28315C !important;
 }
   
 .swiper-pagination-bullet-active {
-  background-color: var(--color_lite) !important;
+  background-color: #DFE1E6 !important;
 }
   
 .swiper-pagination {
@@ -278,45 +307,57 @@ h3 {
 }
 
 .swiper-button-prev:hover path, .swiper-button-next:hover path {
-    fill: var(--color_dark);
+    fill: #28315C;
 }
   
-.product-fillters {
-    margin-top: 50px;
-    padding-bottom: 40px;
-    border-bottom: 2px solid var(--color_dark);
+.product-colors {
     margin-bottom: 25px;
 }
 
-.product-fillters p {
-    font-family: "Avenir Next";
+.product-sizes {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #DFE1E6;
+}
+
+.product-colors h4, .product-sizes h4 {
+    font-family: 'Exo2';
     font-weight: 500;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 100%;
-    color: var(--small-text);
+    color: black;
     margin-bottom: 10px;
 }
 
-.fillters-container {
+.colors-container, .sizes-container {
     display: flex;
     gap: 24px;
     flex-wrap: wrap;
 }
 
-.fillter-tab {
-    background-color: var(--color_lite);
-    color: var(--small-text);
-    padding: 12px 16px 10px 20px;
-    width: fit-content;
-    font-family: "Nyght Serif";
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 100%;
+.product-colors label, .product-sizes label {
+    padding: 10px 18px;
+    background-color: #DFE1E6;
     text-align: center;
+    cursor: pointer;
+}
+
+.product-colors label:has(input[type="radio"]:disabled),
+.product-sizes label:has(input[type="radio"]:disabled) {
+    color: #0000004d;
+    background-color: #DFE1E64D;
+}
+
+.product-colors label:has(input[type="radio"]:checked),
+.product-colors label:hover,
+.product-sizes label:has(input[type="radio"]:checked),
+.product-sizes label:hover {
+    background-color: #6F0E19;
+    color: #DFE1E6;
 }
 
 .product-charact {
-    margin-bottom: 84.5px;
+    margin-bottom: 50px;
 }
 
 .product-charact h3 {
@@ -324,164 +365,168 @@ h3 {
 }
 
 .product-charact p {
-    font-family: "Avenir Next";
+    font-family: 'Exo2';
     font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    color: var(--small-text);
+    font-size: 20px;
+    line-height: 24px;
+    color: black;
     max-width: 628px;
 }
 
-.add-to-cart {
-    margin-bottom: 50px;
-    position: relative;
+#stars-container, .rating {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
 }
 
-.add-to-cart::before {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    height: 100%;
-    width: 100%;
-    max-width: 200px;
-    content: "";
-    background: -webkit-gradient(linear, right top, left top, color-stop(14%, rgba(255, 255, 255, 0)), to(rgb(255, 255, 255)));
-    background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 14%, rgb(255, 255, 255) 100%);
-    z-index: 2;
-  }
-  .add-to-cart::after {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    height: 100%;
-    width: 100%;
-    max-width: 200px;
-    content: "";
-    background: -webkit-gradient(linear, left top, right top, color-stop(14%, rgba(255, 255, 255, 0)), to(rgb(255, 255, 255)));
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 14%, rgb(255, 255, 255) 100%);
-    z-index: 2;
-  }
+.star {
+  width: 26px;
+  height: 24px;
+  -webkit-mask: url('/assets/img/Star.svg') no-repeat center;
+  mask: url('/assets/img/Star.svg') no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  background: #ADB9AE;
+}
 
-.add-to-cart-header {
-    margin-bottom: 51px;
-    position: relative;
-    z-index: 3;
+.add-review h3 {
+  margin-bottom: 20px;
 }
-  
-span.like.active svg path,
-span.shop.active svg path {
-  fill: #e8e0d3 !important;
-  transition: fill 0.3s ease;
+
+.add-review .star {
+  height: 32px;
 }
-  
-.add-to-cart #swiper2 {
-  height: 420px;
-  z-index: unset;
+
+.add-review .rating p {
+  font-size: 22px;
+  line-height: 28px;
+  color: black;
+  font-family: 'Exo2';
 }
-.add-to-cart #swiper2 .slide_link {
-  height: 100%;
-  display: block;
+
+.review-form {
+  display: flex;
+  background-color: #F5F5F5;
+  padding: 30px;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
-.add-to-cart #swiper2 .slide_link:hover .btn {
-  opacity: 1;
-}
-.add-to-cart #swiper2 .slide_img {
-  background-color: #000;
-  position: relative;
-  height: 277px;
+
+.add {
   width: 100%;
 }
 
-.add-to-cart #swiper2 .swiper-wrapper {
-  width: 100%;
-  height: 100%;
+.add label {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 28px;
+  margin-bottom: 10px;
+  font-family: 'Exo2';
 }
 
-.add-to-cart #swiper2 .btn {
-  position: absolute;
-  z-index: 3;
-  transform: translateX(-50%);
-  left: 50%;
-  bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  opacity: 0;
-  transition: var(--trans);
-}
-.add-to-cart #swiper2 .btn span {
-  width: 32px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  transition: var(--trans);
-  cursor: pointer;
-}
-.add-to-cart #swiper2 .btn span svg path {
-  transition: var(--trans);
-}
-.add-to-cart #swiper2 .btn span:hover {
-  background-color: rgba(232, 224, 211, 0.3);
-}
-.add-to-cart #swiper2 .swiper-slide {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 296px !important;
-  height: 385px !important;
-}
-.add-to-cart #swiper2 .swiper-slide img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  margin-right: auto;
-  margin-left: auto;
-}
-.add-to-cart #swiper2 .swiper-slide .slide_info {
-  width: 100%;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 17px;
-}
-.add-to-cart #swiper2 .swiper-slide .slide_info h3 {
-  color: var(--small-text, #2b221b);
-  text-align: center;
-  font-family: "Avenir Next";
+.add label span {
   font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: #939393;
+  padding-bottom: 4px;
 }
-.add-to-cart #swiper2 .swiper-slide .slide_info h4 {
-  margin-top: 8px;
-  color: var(--small-text, #2b221b);
-  font-family: "Avenir Next";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+
+.enter-star {
+  font-size: 48px;
+  line-height: 48px;
+  color: #DFE1E6;
+  cursor: pointer;
+  transition: var(--trans);
 }
-.add-to-cart #swiper2 .swiper-slide .slide_info h4 span {
-  text-decoration-line: line-through;
+
+.enter-star.selected,
+.enter-star.hover {
+  color: #fbd300;
 }
-.add-to-cart #swiper2 .slide_link {
+
+.enter-rating {
+  margin-bottom: 40px;
+}
+
+.comment {
+  font-family: 'Exo2', Arial;
   width: 100%;
+  resize: vertical;
+  min-height: 100px;
+  border: 1px solid #6F6F6F4D;
+  border-radius: 5px;
+  height: 152px;
+  padding: 25px;
+  margin-top: 4px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  margin-bottom: 40px;
 }
-.add-to-cart #swiper2 span.like.active svg path,
-.add-to-cart #swiper2 span.shop.active svg path {
-  fill: #e8e0d3 !important;
-  transition: fill 0.3s ease;
+
+.comment::placeholder {
+  color: #DFE1E6;
 }
-.add-to-cart #swiper2 span.like svg path,
-.add-to-cart #swiper2 span.shop svg path {
-  transition: fill 0.3s ease;
+
+.add-review .lite_btn {
+    justify-self: end;
+}
+
+.reviews-list {
+  border-top: 2px solid #6F6F6F4D;
+  margin-bottom: 20px;
+}
+
+.review-container {
+  border-bottom: 1px solid #6F6F6F4D;
+  padding: 30px 0;
+  display: flex;
+}
+
+.review {
+  padding-top: 7px;
+}
+
+.user-name {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  margin-bottom: 8px;
+  font-family: 'Exo2';
+}
+
+.review .star {
+  width: 25px;
+}
+
+.review-date {
+  margin-left: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #939393;
+  font-family: 'Exo2';
+}
+
+.review .rating {
+  margin-bottom: 20px;
+}
+
+.review-text {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  color: black;
+  font-family: 'Exo2';
+}
+
+#no-reviews {
+  text-align: center;
+  margin: 60px;
+  font-size: 30px;
+  font-family: 'Kyiv Type Serif';
+  color: #28315C;
 }
 
 @media (max-width: 1019px) {
@@ -659,7 +704,7 @@ padding: 10px;
 }
     
 .item-title {
-    font-family: "Avenir Next";
+    font-family: 'Exo2';
     font-weight: 500;
     font-size: 16px;
     line-height: 21.86px;
@@ -667,7 +712,7 @@ padding: 10px;
 }
     
 .item-desc {
-    font-family: "Avenir Next";
+    font-family: 'Exo2';
     font-weight: 500;
     font-size: 16px;
     line-height: 21.86px;
@@ -676,7 +721,7 @@ padding: 10px;
 }
     
 .item-price {
-    font-family: "Avenir Next";
+    font-family: 'Exo2';
     font-weight: 500;
     font-size: 20px;
     line-height: 27.32px;
@@ -713,7 +758,7 @@ padding: 10px;
 text-align: center;
 
 /* Body base */
-font-family: "Avenir Next";
+font-family: 'Exo2';
 font-size: 16px;
 font-style: normal;
 font-weight: 500;
@@ -727,7 +772,7 @@ line-height: normal;
     transform: rotate(45deg);
     background-color: transparent;
     color: var(--color_dark);
-    font-family: "Nyght Serif";
+    font-family: 'Kyiv Type Serif';
     font-weight: 500;
     font-size: 29px;
     line-height: 29px;
@@ -768,16 +813,4 @@ line-height: normal;
         min-height: 200px;
         height: fit-content;
     }
-}
-
-.enter-star {
-  font-size: 48px;
-  line-height: 48px;
-  color: #ADB9AE;
-  cursor: pointer;
-}
-
-.enter-star.selected,
-.enter-star.hover {
-  color: #407948;
 }

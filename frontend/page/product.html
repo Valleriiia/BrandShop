@@ -27,11 +27,11 @@
                 <div class="breadcrambs">
                     <a href="/">Головна</a>
                     <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 -3.11854e-07L12 0L12 10L12 20L8 20L-9.90966e-07 10L8 -3.11854e-07Z" fill="#ECE5DB"/>
+                        <path d="M8 -3.11854e-07L12 0L12 10L12 20L8 20L-9.90966e-07 10L8 -3.11854e-07Z" fill="#DFE1E6"/>
                     </svg>
                     <a href="/catalog/ipze">ІПЗЕ</a>
                     <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 -3.11854e-07L12 0L12 10L12 20L8 20L-9.90966e-07 10L8 -3.11854e-07Z" fill="#ECE5DB"/>
+                        <path d="M8 -3.11854e-07L12 0L12 10L12 20L8 20L-9.90966e-07 10L8 -3.11854e-07Z" fill="#DFE1E6"/>
                     </svg>
                     <a href="#">Футболка ІПЗЕ</a>
                 </div>
@@ -41,9 +41,9 @@
                             <img id="mainImg" src="/assets/img/ipze/product1/img1.png" alt="Футболка ІПЗЕ">
                         </div>
                         <div class="thumbnails">
-                            <img src="/assets/img/ipze/product1/img1.png" alt="thumb1" onclick="changeImage('../assets/img/ipze/product1/img1.png')">
-                            <img src="/assets/img/ipze/product1/img2.png" alt="thumb2" onclick="changeImage('../assets/img/ipze/product1/img2.png')">
-                            <img src="/assets/img/ipze/product1/img3.png" alt="thumb3" onclick="changeImage('../assets/img/ipze/product1/img3.png')">
+                            <img src="/assets/img/ipze/product1/img1.png" alt="thumb1" onclick="changeImage('/assets/img/ipze/product1/img1.png')">
+                            <img src="/assets/img/ipze/product1/img2.png" alt="thumb2" onclick="changeImage('/assets/img/ipze/product1/img2.png')">
+                            <img src="/assets/img/ipze/product1/img3.png" alt="thumb3" onclick="changeImage('/assets/img/ipze/product1/img3.png')">
                         </div>
                     </div>
                     <div class="slider">
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="product-info-container">
-                        <div class="product-info">
+                        <div class="product-desc">
                             <h3>Футболка ІПЗЕ</h3>
                             <p class="description">Опис</p>
                             <div class="product-price">
@@ -104,20 +104,20 @@
             </div>
         </div>
         <div class="container">
-            <div class="product-colers">
-                <p>Доступні кольори:</p>
-                <ul class="colers-container">
-                    <li><label for="color-red"><input type="radio" name="color-item" id="color-red" value="red">Червоний</label></li>
-                    <li><label for="color-black"><input type="radio" name="color-item" id="color-black" value="black">Чорний</label></li>
-                    <li><label for="color-white"><input type="radio" name="color-item" id="color-white" value="white">Білий</label></li>
+            <div class="product-colors">
+                <h4>Доступні кольори:</h4>
+                <ul class="colors-container">
+                    <li><label class="checkbox" for="color-red"><input type="radio" name="color-item" id="color-red" value="red">Червоний</label></li>
+                    <li><label class="checkbox" for="color-black"><input type="radio" name="color-item" id="color-black" value="black">Чорний</label></li>
+                    <li><label class="checkbox" for="color-white"><input type="radio" name="color-item" id="color-white" value="white">Білий</label></li>
                 </ul>
             </div>
             <div class="product-sizes">
-                <p>Доступні розміри:</p>
+                <h4>Доступні розміри:</h4>
                 <ul class="sizes-container">
-                    <li><label for="size-m"><input type="radio" name="size-item" id="size-m" value="m">M</label></li>
-                    <li><label for="size-l"><input type="radio" name="size-item" id="size-l" value="l">L</label></li>
-                    <li><label for="size-xl"><input type="radio" name="size-item" id="size-xl" value="xl">XL</label></li>
+                    <li><label class="checkbox" for="size-m"><input type="radio" name="size-item" id="size-m" value="m">M</label></li>
+                    <li><label class="checkbox" for="size-l"><input type="radio" name="size-item" id="size-l" value="l">L</label></li>
+                    <li><label class="checkbox" for="size-xl"><input type="radio" name="size-item" id="size-xl" value="xl">XL</label></li>
                 </ul>
             </div>
             <div class="product-charact">
@@ -132,7 +132,7 @@
             </div>
                 
             <div class="swiper" id="swiper2">
-                <div class="swiper-wrapper">
+                <div class="swiper-wrapper" id="random-swiper">
                     <div class="swiper-slide">
                         <a href="/page/product.html" class="slide_link">
                             <div class="slide_img">
@@ -182,11 +182,10 @@
             <div class="add-review">
                 <h3 class="reviews-number">Відгуки (4)</h3>
                 <div class="rating">
-                    <div class="stars-container"></div>
+                    <div id="stars-container"></div>
                     <p class="rating-average"></p>
                 </div>
                 <form id="review-form" class="review-form">
-                    <img src="/assets/img/users/img1.png" alt="profile_photo">
                     <div class="add">
                         <label for="rating">Ваша оцінка:<span>(обов'язково)</span></label>
                         <div class="enter-rating">
@@ -199,10 +198,10 @@
                         <input type="hidden" name="rating" id="enter-rating" value="0" required>
 
                         <label for="comment">Ваш відгук:<span>(необов'язково)</span></label> <br/>
-                        <textarea class="comment" name="comment" placeholder="Поділіться своєю любов'ю! Розкажіть нам, що ви думаєте про рецепт, у короткому відгуку."></textarea>
-                        <div class="button-block">
-                            <button type="submit" class="add-review-button">Додати відгук</button>
-                        </div>
+                        <textarea class="comment" name="comment" placeholder="Розкажіть нам, що ви думаєте про продукт"></textarea>
+
+                            <button type="submit" class="lite_btn">Додати відгук</button>
+
                     </div>
                 </form>
                 <div id="review-message" style="display: none;"></div>
@@ -210,7 +209,6 @@
             <div class="reviews-list">
                     <ul>
                             <li class="review-container">
-                                <img src="/assets/img/user/img2.png" alt="profile_photo">
                                 <div class="review">
                                     <p class="user-name">Іван</p>
                                     <div class="rating">
@@ -239,14 +237,14 @@
     <script defer src="/assets/js/swiper-bundle.min.js"></script>
     <script defer src="/assets/js/components/like.js"></script>
     <script defer src="/assets/js/components/quantity.js"></script>
-    <script defer src="/assets/js/components/swiper4.js"></script>
     <script defer src="/assets/js/components/swiper2.js"></script>
+    <script defer src="/assets/js/components/swiper4.js"></script>
     <script defer src="/assets/js/components/imagethumb.js"></script>
     <script defer src="/assets/js/components/stars.js"></script>
     <script src="https://unpkg.com/mustache@latest/mustache.min.js"></script>
-    <script src="/assets/js/api/product.js"></script>
     <script src="/assets/js/api/review.js"></script>
     <script src="/assets/js/api/search.js"></script>
+    <script src="/assets/js/api/product.js"></script>
 
 </body>
 

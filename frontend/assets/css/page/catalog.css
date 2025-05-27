@@ -91,7 +91,7 @@ h1 {
 }
 
 .filters h3 {
-    font-family: 'Kyiv Nype Serif';
+    font-family: 'Kyiv Type Serif';
     font-weight: 400;
     font-size: 32px;
     line-height: 100%;
@@ -370,11 +370,12 @@ label.btn-for-filters {
 
 .product-img {
     position: relative;
-    max-height: 380px;
+    height: 380px;
 }
 
 .product-img img {
-    max-height: 380px;
+    /* max-height: 380px; */
+    height: 100%;
     object-fit: cover;
     margin-right: auto;
     margin-left: auto;
@@ -385,221 +386,8 @@ label.btn-for-filters {
     margin-top: 23px;
 }
 
-.recomend {
-    margin-bottom: 50px;
-    position: relative;
-}
-
-.recomend::before {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    height: 100%;
-    width: 100%;
-    max-width: 200px;
-    content: "";
-    background: -webkit-gradient(linear, right top, left top, color-stop(14%, rgba(255, 255, 255, 0)), to(rgb(255, 255, 255)));
-    background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 14%, rgb(255, 255, 255) 100%);
-    z-index: 2;
-}
-
-.recomend::after {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    height: 100%;
-    width: 100%;
-    max-width: 200px;
-    content: "";
-    background: -webkit-gradient(linear, left top, right top, color-stop(14%, rgba(255, 255, 255, 0)), to(rgb(255, 255, 255)));
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 14%, rgb(255, 255, 255) 100%);
-    z-index: 2;
-}
-
-.recomend-header {
-    margin-bottom: 80px;
-    position: relative;
-    z-index: 3;
-    font-family: 'Kyiv Type Serif';
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 100%;
-    color: #28315C;
-}
-  
-span.like.active svg path,
-span.shop.active svg path {
-  fill: #DFE1E6 !important;
-  transition: fill 0.3s ease;
-}
-  
-.recomend #swiper2 {
-  height: 450px;
-  z-index: unset;
-  transform: translateY(0px) !important;
-}
-.recomend #swiper2 .slide_link {
-  height: 100%;
-  display: block;
-}
-.recomend #swiper2 .product-content:hover .btn,
-.product-gallery .product-content:hover .btn {
-  opacity: 1;
-}
-.recomend #swiper2 .slide_img {
-  background-color: #000;
-  position: relative;
-  height: 277px;
-  width: 100%;
-}
 .filters-content .lite_btn{
     white-space: nowrap;
-}
-
-.recomend #swiper2 .swiper-wrapper {
-  width: 100%;
-  height: 100%;
-}
-
-.recomend #swiper2 .btn,
-.product-gallery .btn {
-  position: absolute;
-  z-index: 3;
-  transform: translateX(-50%);
-  left: 50%;
-  bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  opacity: 0;
-  transition: var(--trans);
-}
-
-.recomend #swiper2 .btn span,
-.product-gallery .btn span {
-  width: 32px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  transition: var(--trans);
-  cursor: pointer;
-}
-
-.recomend #swiper2 .btn span svg path,
-.product-gallery .btn span svg path {
-  transition: var(--trans);
-}
-
-.recomend #swiper2 .btn span:hover,
-.product-gallery .btn span:hover {
-  background-color: #DFE1E64d;
-}
-
-.recomend #swiper2 .swiper-slide {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 296px !important;
-  height: 385px !important;
-}
-
-.recomend #swiper2 .swiper-slide img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.recomend #swiper2 .swiper-slide .product-info {
-  width: 100%;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 17px;
-}
-
-.recomend #swiper2 .swiper-slide .product-info h3,
-.product-gallery .product-card .product-info h3 {
-  color: black;
-  text-align: center;
-  font-family: 'Exo2';
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
-.recomend #swiper2 .swiper-slide .product-info h4,
-.product-gallery .product-card .product-info h4 {
-  margin-top: 8px;
-  color: black;
-  font-family: 'Exo2';
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
-.recomend #swiper2 .swiper-slide .product-info h4 span,
-.product-gallery .product-card .product-info h4 span {
-  text-decoration-line: line-through;
-}
-
-.recomend #swiper2 .product-content {
-  width: 100%;
-}
-
-.recomend #swiper2 span.like.active svg path,
-.recomend #swiper2 span.shop.active svg path,
-.product-gallery span.like.active svg path,
-.product-gallery span.shop.active svg path {
-  fill: #DFE1E6 !important;
-  transition: fill 0.3s ease;
-}
-.recomend #swiper2 span.like svg path,
-.recomend #swiper2 span.shop svg path,
-.product-gallery span.like svg path,
-.product-gallery span.shop svg path {
-  transition: fill 0.3s ease;
-}
-
-.swiper-button-prev, .swiper-button-next {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: auto !important;
-    bottom: 21px !important;
-    margin-top: 0 !important;
-    width: 20px;
-    height: 31px;
-    z-index: 11;
-}
-
-.swiper-button-prev svg {
-    transform: scaleX(-1);
-}
-
-.swiper-button-prev svg, .swiper-button-next svg {
-    pointer-events: none;
-}
-
-.swiper-button-prev::after, .swiper-button-next::after {
-    display: none;
-}
-
-.swiper-button-prev path, .swiper-button-next path {
-    transition: var(--trans);
-}
-
-.swiper-button-prev:hover path, .swiper-button-next:hover path {
-    fill: var(--color_dark);
 }
   
 @media (max-width: 1019px) {
