@@ -27,15 +27,15 @@ const footerComponent = `
                 </li>
                 <li class="col3">
                     <div class="row">
-                        <a href="https://kpi.ua/"><h5>
+                        <a target="_blank" href="https://kpi.ua/"><h5>
                             Національний технічний університет України “Київський політехнічний інститут імені Ігоря Сікорського”                        </h5></a>
-                        <a href="https://kpi.ua/" class="col-3 col-md-pull-3"><img class="kpi-log" src="https://ipze.kpi.ua/wp-content/themes/ipze_new-master/assets/img/kpi_logo.svg" alt="КПІ"></a>
+                        <a target="_blank" href="https://kpi.ua/" class="col-3 col-md-pull-3"><img class="kpi-log" src="https://ipze.kpi.ua/wp-content/themes/ipze_new-master/assets/img/kpi_logo.svg" alt="КПІ"></a>
                     </div>
                     <div class="row">
-                        <a href="https://iate.kpi.ua/"><h5>
+                        <a target="_blank" href="https://iate.kpi.ua/"><h5>
                             Навчально-науковий Інститут атомної та теплової енергетики    
                         </h5></a>
-                        <a href="https://iate.kpi.ua/"><img src="/assets/img/iate_logo.png" alt="ІАТЕ"></a>
+                        <a target="_blank" href="https://iate.kpi.ua/"><img src="/assets/img/iate_logo.png" alt="ІАТЕ"></a>
                     </div>
                 </li>
             </ul>

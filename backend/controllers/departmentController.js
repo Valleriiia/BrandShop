@@ -2,7 +2,7 @@ const db = require('../models/db');
 
 exports.getAllDepartments = (req, res) => {
   const sql = `
-    SELECT id, name, description, photo
+    SELECT id, name, description, photo, slug
     FROM academic_department
   `;
 

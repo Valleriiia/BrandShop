@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  const deptContainer = document.querySelector('.departments-lis');
+  const deptContainer = document.querySelector('.departments-list');
   const discountSwiper = document.querySelector('.discount-swiper .swiper-wrapper');
+  const randomSlider = document.getElementById('random-swiper');
 
   const deptTemplate = await loadTemplate('/assets/js/templates/department-template.mustache');
   const discountTemplate = await loadTemplate('/assets/js/templates/discount-template.mustache');
@@ -17,8 +18,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     // Завантаження товарів зі знижкою
-    const discounts = await fetch('/api/products/discounts').then(r => r.json());
+    const discounts = await fetch('/api/products/discounted').then(r => r.json());
 
+    discountSwiper.innerHTML = '';
     for (const p of discounts) {
       const photoFolder = p.name_of_product_photo;
       const images = await fetch(`/api/photos/${photoFolder}`).then(r => r.json());

@@ -1,14 +1,15 @@
 <div class="swiper-slide">
-  <a href="/product/{{id}}">
-    <div class="slide_img">
+  <a href="/product/{{id}}" class="slide-link">
+    <div class="slide-img">
       <img src="/assets/img/{{name_of_product_photo}}/{{image}}" alt="{{name}}">
     </div>
-    <div class="slide_info">
+    <div class="slide-info">
       <h3>{{name}}</h3>
       <h4>
         <span>{{price}} ₴</span>
         {{current_price}} ₴
       </h4>
     </div>
+    <p class="discount">-{{discount}}%</p>
   </a>
 </div>
