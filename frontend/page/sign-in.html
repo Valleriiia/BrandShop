@@ -36,10 +36,10 @@
                         <div class="inputs-container">
                         <div class="inputs">
                             <div class="input">
-                                <input type="text" name="name" id="name" placeholder="Ім’я*">
+                                <input type="text" name="first_name" id="name" placeholder="Ім’я*">
                             </div>
                             <div class="input">
-                                <input type="text" name="surname" id="surname" placeholder="Прізвище*">
+                                <input type="text" name="last_name" id="surname" placeholder="Прізвище*">
                             </div>
                         </div>
                         <div class="inputs">
@@ -54,27 +54,16 @@
                             <div class="input">
                                 <input type="email" name="email" id="email" placeholder="Email*">
                             </div>
-                            <div class="input">
-                                <label class="checkbox">
-                                    <input type="checkbox" name="news" id="news">
-                                    <span class="checkmark">
-                                        <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 6.75L3 8.75L10.5 0.750001" stroke="#54483D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </span>
-                                    Отримувати новини
-                                </label>
-                            </div>
+                            
                         </div>
                         <div class="inputs">
                             <div class="input">
                                 <input type="password" name="password" id="password" placeholder="Пароль*">
                             </div>
                             <div class="input">
-                                <input type="password" name="repeat-password" id="repeat-password" placeholder="Повторити пароль*">
+                                <input type="password" name="repeatPassword" id="repeat-password" placeholder="Повторити пароль*">
                             </div>
                         </div>
-                        <div class="input for-checkbox"></div>
                     </div>
                         <button type="submit" class="lite_btn">Зареєструватись</button>
                     </form>
@@ -84,10 +73,10 @@
                     <form class="log-in">
                         <div class="inputs">
                             <div class="input">
-                                <input type="text" name="client-name" id="client-name" placeholder="Ім’я*">
+                                <input type="email" name="email" id="client-email" placeholder="Ім’я*">
                             </div>
                             <div class="input">
-                                <input type="password" name="client-password" id="client-password" placeholder="Пароль*">
+                                <input type="password" name="password" id="client-password" placeholder="Пароль*">
                             </div>
                         </div>
                         <button type="submit" class="lite_btn">Увійти</button>
@@ -102,11 +91,12 @@
 
     <script src="/assets/js/header.js"></script>
     <script src="/assets/js/footer.js"></script>
-    <script defer src="/assets/js/script.js"></script>
+    <script defer src="/assets/js/script.js"  type="module"></script>
     <script defer src="/assets/js/components/like.js"></script>
     <script defer src="/assets/js/components/quantity.js"></script>
     <script defer src="/assets/js/components/remove-btn.js"></script>
     <script defer src="/assets/js/components/selector.js"></script>
+    <script defer src="/assets/js/api/auth.js" type="module"></script>
 </body>
 
 </html>

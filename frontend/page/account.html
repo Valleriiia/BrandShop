@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap" rel="stylesheet">
     <!-- fav-icon -->
     <link rel="icon" href="/assets/img/fav.svg" type="image/x-icon">
-    <title>Шоколадний бутік</title>
+    <title>Brand Shop</title>
 </head>
 
 <body>
@@ -39,7 +39,7 @@
                 <input type="radio" name="tab" id="tab4">
                 <label for="tab4" class="tab-label">Видалити акаунт</label>
                 <input type="radio" name="tab" id="tab5">
-                <label for="tab5" class="tab-label">Вийти</label>
+                <label for="tab5" class="tab-label" id="logout-tab">Вийти</label>
             </div>
             <div class="tab-content info" id="content1">
                 <form>
@@ -98,18 +98,18 @@
                 </form>
             </div>
             <div class="tab-content orders-box" id="content2">
-                <div class="orders">
-                    <table>
+                <div class="orders orders-table-container">
+                    <table class="orders-table">
                         <thead>
                             <tr>
                                 <th class="order-num">Замовлення</th>
                                 <th>Дата</th>
                                 <th>Статус</th>
                                 <th  class="order-all">Всього</th>
-                                <th>Дії</th>
+                                <th>Кількість товару</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="ordersListBody">
                             <tr>
                                 <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
                                 <td class="order-date">02.02.2024</td>
@@ -208,84 +208,40 @@
                         </tbody>
                     </table>
                 </div>
-                
+                <p id="noOrdersMessage" class="hidden no-orders-text">У вас поки що немає замовлень.</p> 
             </div>
             <div class="tab-content addresses" id="content3">
-                <div class="flex-container">
-                    <div class="delivery-options">
-                        <h4>Адреса</h4>
-                        <label class="delivery-option">
-                            <input type="radio" name="delivery" value="address1" checked>
-                            <div class="option-content">
-                                <p class="name">Андрій Чубенко</p>
-                                <p class="street">вул. Шевченка, 4</p>
-                                <p class="address">12345, Львів, Львівська обл., Львівський район</p>
-                                <p class="phone">тел. (066) 123 45 56</p>
-                                <button class="redo">редагувати</button>
-                            </div>
-                        </label>
-                    
-                        <label class="delivery-option">
-                            <input type="radio" name="delivery" value="address2">
-                            <div class="option-content">
-                                <p class="name">Андрій Чубенко</p>
-                                <p class="street">вул. Шевченка, 4</p>
-                                <p class="address">12345, Львів, Львівська обл., Львівський район</p>
-                                <p class="phone">тел. (066) 123 45 56</p>
-                                <button class="redo">редагувати</button>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="add-address">
-                        <form>
-                            <h4>Додати нову адресу</h4>
-                            <div class="input">
-                                <label for="name1">Ім’я</label>
-                                <input type="text " id="name1" name="name" placeholder="Ім’я">
-                            </div>
-                            <div class="input">
-                                <label for="surname1">Прізвище</label>
-                                <input type="text" id="surname1" name="surname" placeholder="Прізвище">
-                            </div>
-                            <div class="input">
-                                <label for="street">Вулиця</label>
-                                <input type="text" id="street" name="street" placeholder="Вулиця">
-                            </div>
-                            <div class="input">
-                                <label for="phone1">Номер телефону</label>
-                                <input type="tel" id="phone1" name="phone" placeholder="Номер телефону">
-                            </div>
-                            <div class="inputs">
-                                <div class="input">
-                                    <label for="bilding">Будинок</label>
-                                    <input type="text" id="bilding" name="bilding" placeholder="Будинок">
-                                </div>
-                                <div class="input">
-                                    <label for="apartment">Квартира</label>
-                                    <input type="text" id="apartment" name="apartment" placeholder="Квартира">
-                                </div>
-                                <div class="input">
-                                    <label for="index">Індекс</label>
-                                    <input type="text" id="index" name="index" placeholder="Індекс">
-                                </div>
-                            </div>
-                            <button class="lite_btn" type="submit">Зберегти</button>
-                        </form>
-                    </div>
-                </div>
+                <form id="card-form">
+                    <fieldset>
+                        <legend>Моя банківська картка</legend>
+                        <div class="input">
+                            <label for="card-number">Номер картки:</label>
+                            <input type="text" id="card-number" name="card_number" placeholder="XXXX XXXX XXXX XXXX" required pattern="[0-9]{13,16}">
+                        </div>
+                        <div class="input">
+                            <label for="expiry-date">Термін дії (MM/YYYY):</label>
+                            <input type="text" id="expiry-date" name="expiry_date" placeholder="MM/YYYY" required pattern="(0[1-9]|1[0-2])\/\d{4}">
+                        </div>
+                        <div class="input">
+                            <label for="cvv">CVV:</label>
+                            <input type="password" id="cvv" name="cvv" placeholder="XXX" maxlength="4" required pattern="[0-9]{3,4}">
+                        </div>
+                    </fieldset>
+                    <button type="submit" id="card-submit-button" class="lite_btn">Додати картку</button>
+                </form>
             </div>
             <div class="tab-content delete" id="content4">
                 <h3>Видалити акаунт?</h3>
                 <div class="buttons">
-                    <button class="lite_btn">Ні</button>
-                    <button class="lite_btn">Так</button>
+                    <button class="lite_btn" id="cancel-delete-btn">Ні</button>
+                    <button class="lite_btn" id="confirm-delete-btn">Так</button>
                 </div>
             </div>
             <div class="tab-content exit" id="content5">
                 <h3>Вийти з акаунту?</h3>
                 <div class="buttons">
-                    <button class="lite_btn">Ні</button>
-                    <button class="lite_btn">Так</button>
+                    <button class="lite_btn" id="cancel-logout-btn">Ні</button>
+                    <button class="lite_btn" id="confirm-logout-btn">Так</button>
                 </div>
             </div>
             <hr class="line">
@@ -296,7 +252,9 @@
 
     <script src="/assets/js/header.js"></script>
     <script src="/assets/js/footer.js"></script>
-    <script defer src="/assets/js/script.js"></script>
+    <script defer src="/assets/js/api/auth.js" type="module"></script>
+    <script defer src="/assets/js/script.js" type="module"></script>
+    <script defer src="/assets/js/api/account.js" type="module"></script>
     <script defer src="/assets/js/components/like.js"></script>
     <script defer src="/assets/js/components/quantity.js"></script>
     <script defer src="/assets/js/components/remove-btn.js"></script>

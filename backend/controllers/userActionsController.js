@@ -1,4 +1,4 @@
-const db = require('../models/db');
+const pool = require('../models/db');
 
 // ==== FAVORITES ====
 
@@ -6,7 +6,7 @@ exports.addToFavorites = async (req, res) => {
     const { user_id, product_id } = req.body;
     const sql = `INSERT IGNORE INTO favourites (user_id, product_id) VALUES (?, ?)`;
     try {
-        await db.query(sql, [user_id, product_id]);
+        await pool.query(sql, [user_id, product_id]);
         res.json({ message: 'Додано в улюблені' });
     } catch (error) {
         console.error('Помилка при додаванні в улюблені:', error);
@@ -18,7 +18,7 @@ exports.removeFromFavorites = async (req, res) => {
     const { user_id, product_id } = req.body;
     const sql = `DELETE FROM favourites WHERE user_id = ? AND product_id = ?`;
     try {
-        await db.query(sql, [user_id, product_id]);
+        await pool.query(sql, [user_id, product_id]);
         res.json({ message: 'Видалено з улюблених' });
     } catch (error) {
         console.error('Помилка при видаленні з улюблених:', error);
@@ -35,7 +35,7 @@ exports.getFavorites = async (req, res) => {
         WHERE f.user_id = ?
     `;
     try {
-        const [results] = await db.query(sql, [user_id]);
+        const [results] = await pool.query(sql, [user_id]);
         res.json(results);
     } catch (error) {
         console.error('Помилка при отриманні улюблених:', error);

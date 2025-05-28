@@ -14,8 +14,9 @@ exports.getAllProducts = async (req, res) => {
     } = req.query;
 
     let sql = `
-        SELECT p.*
+       SELECT DISTINCT p.*
         FROM product p
+        JOIN attributes_product ap ON ap.product_id = p.id
         WHERE p.is_active = 1
     `;
 
@@ -31,22 +32,18 @@ exports.getAllProducts = async (req, res) => {
         params.push(category_id);
     }
     if (color_id) {
-        sql += ` INNER JOIN attributes_product ap ON p.id = ap.product_id`;
         conditions.push(`ap.color_id = ?`);
         params.push(color_id);
     }
     if (size_id) {
-        sql += ` INNER JOIN attributes_product ap ON p.id = ap.product_id`;
         conditions.push(`ap.size_id = ?`);
         params.push(size_id);
     }
     if (composition_id) {
-        sql += ` INNER JOIN attributes_product ap ON p.id = ap.product_id`;
         conditions.push(`ap.composition_id = ?`);
         params.push(composition_id);
     }
     if (country_id) {
-        sql += ` INNER JOIN attributes_product ap ON p.id = ap.product_id`;
         conditions.push(`ap.country_id = ?`);
         params.push(country_id);
     }
