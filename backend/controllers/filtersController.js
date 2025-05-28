@@ -1,33 +1,27 @@
 const db = require('../models/db');
 
-exports.getAllFilters = (req, res) => {
-  const result = {};
+exports.getAllFilters = async (req, res) => {
+    try {
+        const queries = {
+            colors: 'SELECT id, color AS name FROM color',
+            sizes: 'SELECT id, size AS name FROM size',
+            compositions: 'SELECT id, composition AS name FROM composition',
+            countries: 'SELECT id, country AS name FROM country_of_manufacture',
+            categories: 'SELECT id, name FROM categories'
+        };
 
-  const queries = {
-    colors: 'SELECT id, color AS name FROM color',
-    sizes: 'SELECT id, size AS name FROM size',
-    compositions: 'SELECT id, composition AS name FROM composition',
-    countries: 'SELECT id, country AS name FROM country_of_manufacture',
-    categories: 'SELECT id, name FROM categories',
-    departments: 'SELECT id, name FROM academic_department'
-  };
+        const promises = Object.entries(queries).map(async ([key, sql]) => {
+            const [rows] = await db.query(sql);
+            return [key, rows];
+        });
 
-  let completed = 0;
-  const total = Object.keys(queries).length;
+        const resultsArray = await Promise.all(promises);
+        const result = Object.fromEntries(resultsArray);
 
-  for (const key in queries) {
-    db.query(queries[key], (err, rows) => {
-      if (err) {
-        console.error(`Помилка при запиті до ${key}:`, err);
-        return res.status(500).json({ error: `Помилка при отриманні ${key}` });
-      }
-
-      result[key] = rows;
-      completed++;
-
-      if (completed === total) {
         res.json(result);
-      }
-    });
-  }
+
+    } catch (error) {
+        console.error('Помилка при отриманні фільтрів:', error);
+        res.status(500).json({ error: 'Не вдалося отримати фільтри' });
+    }
 };

@@ -1,107 +1,89 @@
 const db = require('../models/db');
 
 // POST /api/reviews
-exports.addReview = (req, res) => {
-  const { user_id, product_id, rating, comment } = req.body;
+exports.addReview = async (req, res) => {
+    const { user_id, product_id, rating, comment } = req.body;
 
-  if (!user_id || !product_id || !rating) {
-    return res.status(400).json({ error: 'Необхідні поля відсутні' });
-  }
-
-  const insertSql = `
-    INSERT INTO product_reviews (user_id, product_id, rating, comment)
-    VALUES (?, ?, ?, ?)
-  `;
-
-  db.query(insertSql, [user_id, product_id, rating, comment || null], (err) => {
-    if (err) {
-      console.error('❌ Помилка при додаванні відгуку:', err);
-      return res.status(500).json({ error: 'Не вдалося додати відгук' });
+    if (!user_id || !product_id || !rating) {
+        return res.status(400).json({ error: 'Необхідні поля відсутні' });
     }
 
-    // Після вставки — перерахунок середнього рейтингу
-    const avgSql = `
-      SELECT ROUND(AVG(rating), 0) AS avg_rating
-      FROM product_reviews
-      WHERE product_id = ?
-    `;
+    try {
+        await db.query(`
+            INSERT INTO product_reviews (user_id, product_id, rating, comment)
+            VALUES (?, ?, ?, ?)
+        `, [user_id, product_id, rating, comment || null]);
 
-    db.query(avgSql, [product_id], (err, result) => {
-      if (err) {
-        console.error('❌ Помилка при обчисленні середнього рейтингу:', err);
-        return res.status(500).json({ error: 'Відгук додано, але не оновлено рейтинг' });
-      }
+        // Після вставки — перерахунок середнього рейтингу
+        const [avgResult] = await db.query(`
+            SELECT ROUND(AVG(rating), 0) AS avg_rating
+            FROM product_reviews
+            WHERE product_id = ?
+        `, [product_id]);
 
-      const avgRating = result[0].avg_rating || 0;
+        const avgRating = avgResult[0]?.avg_rating || 0;
 
-      const updateSql = `
-        UPDATE product SET rating = ? WHERE id = ?
-      `;
-
-      db.query(updateSql, [avgRating, product_id], (err) => {
-        if (err) {
-          console.error('❌ Помилка при оновленні рейтингу товару:', err);
-          return res.status(500).json({ error: 'Відгук додано, рейтинг не оновлено' });
-        }
+        await db.query(`
+            UPDATE product SET rating = ? WHERE id = ?
+        `, [avgRating, product_id]);
 
         res.json({ message: 'Відгук додано та рейтинг оновлено', avg_rating: avgRating });
-      });
-    });
-  });
+
+    } catch (error) {
+        console.error('❌ Помилка при додаванні відгуку:', error);
+        res.status(500).json({ error: 'Не вдалося додати відгук' });
+    }
 };
 
 
 // GET /api/reviews/:product_id
-exports.getReviewsByProduct = (req, res) => {
-  const product_id = req.params.product_id;
+exports.getReviewsByProduct = async (req, res) => {
+    const product_id = req.params.product_id;
 
-  const sqlReviews = `
-    SELECT 
-  r.rating, 
-  r.comment, 
-  DATE_FORMAT(r.date, '%Y/%m/%d') AS date, 
-  CONCAT(u.first_name, ' ', u.last_name) AS user_name 
-FROM rating r
-JOIN user u ON r.user_id = u.id
-WHERE r.product_id = ?
-ORDER BY r.date DESC
-  `;
+    try {
+        const [reviewResults] = await db.query(`
+            SELECT
+                r.rating,
+                r.comment,
+                DATE_FORMAT(r.date, '%Y/%m/%d') AS date,
+                CONCAT(u.first_name, ' ', u.last_name) AS user_name
+            FROM rating r
+            JOIN user u ON r.user_id = u.id
+            WHERE r.product_id = ?
+            ORDER BY r.date DESC
+        `, [product_id]);
 
-  const sqlAverage = `SELECT rating FROM product WHERE id = ?`;
+        // додаємо поле stars
+        const reviewsWithStars = reviewResults.map(r => {
+            const stars = [];
+            for (let i = 1; i <= 5; i++) {
+                stars.push(i <= r.rating ? '#fbd300' : '#DFE1E6');
+            }
+            return {
+                user: r.user_name,
+                rating: r.rating,
+                comment: r.comment,
+                date: r.date,
+                stars
+            };
+        });
 
-  db.query(sqlReviews, [product_id], (err, reviewResults) => {
-    if (err) {
-      console.error('❌ Помилка при отриманні відгуків:', err);
-      return res.status(500).json({ error: 'Не вдалося отримати відгуки' });
+        // отримаємо середній рейтинг
+        const [avgResult] = await db.query(`
+            SELECT rating
+            FROM product
+            WHERE id = ?
+        `, [product_id]);
+
+        const average = avgResult[0]?.rating || 0;
+
+        res.json({
+            reviews: reviewsWithStars,
+            average
+        });
+
+    } catch (error) {
+        console.error('❌ Помилка при отриманні відгуків:', error);
+        res.status(500).json({ error: 'Не вдалося отримати відгуки' });
     }
-
-    // додаємо поле stars
-    const reviewsWithStars = reviewResults.map(r => {
-      const stars = [];
-      for (let i = 1; i <= 5; i++) {
-        stars.push(i <= r.rating ? '#fbd300' : '#DFE1E6');
-      }
-      return {
-        user: r.user_name,
-        rating: r.rating,
-        comment: r.comment,
-        date: r.date,
-        stars
-      };
-    });
-
-    // отримаємо середній рейтинг
-    db.query(sqlAverage, [product_id], (err, avgResult) => {
-      if (err) {
-        console.error('❌ Помилка при отриманні рейтингу товару:', err);
-        return res.status(500).json({ error: 'Не вдалося отримати рейтинг' });
-      }
-      const average = avgResult[0].rating || 0;
-
-      res.json({
-        reviews: reviewsWithStars,
-        average
-      });
-    });
-  });
 };
