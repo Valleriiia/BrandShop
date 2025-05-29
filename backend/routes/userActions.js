@@ -143,7 +143,7 @@ router.post('/card', isAuthenticated, async (req, res) => {
 });
 
 // Улюблені
-router.post('/favorites/add', userActions.addToFavorites);
+router.post('/favorites/add/', isAuthenticated, userActions.addToFavorites);
 router.delete('/favorites/remove/:productId', isAuthenticated, userActions.removeFromFavorites);
 router.get('/favorites', isAuthenticated, userActions.getFavorites);
 

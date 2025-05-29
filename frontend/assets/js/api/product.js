@@ -1,255 +1,198 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  const productId = window.location.pathname.split('/').pop(); // /product/12 → 12
-  const mainImg = document.getElementById('mainImg');
-  const thumbnails = document.querySelector('.thumbnails');
-  const swiperWrapper = document.querySelector('#swiper4 .swiper-wrapper');
-  const breadLink = document.querySelector('.breadcrambs a[href^="/catalog"]');
-  const breadText = document.querySelector('.breadcrambs a[href="#"]');
-  const cross = document.querySelector('.product-price .cross');
-  const currentPrice = document.querySelector('.product-price .current-price');
-  const discountEl = document.querySelector('.product-price .discount');
-  const desc = document.querySelector('.product-desc .description');
-  const colorsContainer = document.querySelector('.colors-container');
-  const sizesContainer = document.querySelector('.sizes-container');
-  const charContainer = document.querySelector('.product-charact');
-  const recomendWrapper = document.getElementById('random-swiper');
-  const starsContainer = document.getElementById('stars-container');
-  const ratingAverage = document.querySelector('.rating-average');
-  const reviewsList = document.querySelector('.reviews-list ul');
-  const reviewCountEl = document.querySelector('h3.reviews-number');
-  const noReviewsEl = document.getElementById('no-reviews');
+  const productId = window.location.pathname.split('/').pop();
+  const elements = {
+    mainImg: document.getElementById('mainImg'),
+    thumbnails: document.querySelector('.thumbnails'),
+    swiperWrapper: document.querySelector('#swiper4 .swiper-wrapper'),
+    breadLink: document.querySelector('.breadcrambs a[href^="/catalog"]'),
+    breadText: document.querySelector('.breadcrambs a[href="#"]'),
+    cross: document.querySelector('.product-price .cross'),
+    currentPrice: document.querySelector('.product-price .current-price'),
+    discountEl: document.querySelector('.product-price .discount'),
+    desc: document.querySelector('.product-desc .description'),
+    colorsContainer: document.querySelector('.colors-container'),
+    sizesContainer: document.querySelector('.sizes-container'),
+    charContainer: document.querySelector('.product-charact'),
+    recomendWrapper: document.getElementById('random-swiper'),
+    likeBtn: document.querySelector('.buy-like .like'),
+    addToCartButton: document.querySelector('.buy-like .lite_btn'),
+  };
 
-  const reviewTempl = await loadTemplate('/assets/js/templates/review-template.mustache');
   const productTmpl = await loadTemplate('/assets/js/templates/product-template.mustache');
 
   try {
     const res = await fetch(`/api/products/${productId}`);
     const { product, attributes, similar } = await res.json();
 
-    // 1. Хлібні крихти
-    breadLink.href = `/catalog/${product.department_slug}`;
-    breadLink.textContent = product.department_name;
-    breadText.textContent = product.name;
+    // 🥖 Хлібні крихти
+    elements.breadLink.href = `/catalog/${product.department_slug}`;
+    elements.breadLink.textContent = product.department_name;
+    elements.breadText.textContent = product.name;
 
-    // 2. Фото (main + thumbnails + swiper4)
+    // 🖼 Фото товару
     const photoFolder = product.name_of_product_photo;
     const photoPath = `/assets/img/${photoFolder}`;
     const images = await fetchPhotos(photoFolder);
 
     if (images.length > 0) {
-      mainImg.src = `${photoPath}/${images[0]}`;
+      elements.mainImg.src = `${photoPath}/${images[0]}`;
     }
 
-    thumbnails.innerHTML = '';
-    swiperWrapper.innerHTML = '';
+    elements.thumbnails.innerHTML = '';
+    elements.swiperWrapper.innerHTML = '';
     images.forEach((img, i) => {
-      const thumb = `<img src="${photoPath}/${img}" alt="thumb${i}" onclick="changeImage('${photoPath}/${img}')">`;
-      const slide = `<div class="swiper-slide"><img src="${photoPath}/${img}" alt="Фото ${i}"></div>`;
-      thumbnails.insertAdjacentHTML('beforeend', thumb);
-      swiperWrapper.insertAdjacentHTML('beforeend', slide);
+      elements.thumbnails.insertAdjacentHTML('beforeend', `
+        <img src="${photoPath}/${img}" alt="thumb${i}" onclick="changeImage('${photoPath}/${img}')">
+      `);
+      elements.swiperWrapper.insertAdjacentHTML('beforeend', `
+        <div class="swiper-slide"><img src="${photoPath}/${img}" alt="Фото ${i}"></div>
+      `);
     });
 
-    // 3. Ціна / знижка
+    // 💸 Ціни та знижки
     if (product.discount > 0) {
-      cross.textContent = product.price + '₴';
-      currentPrice.textContent = product.current_price + '₴';
-      discountEl.textContent = `-${product.discount}%`;
+      elements.cross.textContent = `${product.price}₴`;
+      elements.currentPrice.textContent = `${product.current_price}₴`;
+      elements.discountEl.textContent = `-${product.discount}%`;
     } else {
-      cross.style.display = 'none';
-      discountEl.style.display = 'none';
-      currentPrice.textContent = product.price + '₴';
+      elements.cross.style.display = 'none';
+      elements.discountEl.style.display = 'none';
+      elements.currentPrice.textContent = `${product.price}₴`;
     }
 
-    // 4. Опис
-    desc.textContent = product.description || 'Немає опису';
+    elements.likeBtn.dataset.id = productId;
 
-    // 5. Кольори та розміри
+    // 📝 Опис
+    elements.desc.textContent = product.description || 'Немає опису';
 
-    const colors = new Map();
-    const sizes = new Map();
-
-    attributes.forEach(a => {
-      if (!colors.has(a.color_id)) {
-        colors.set(a.color_id, a.color);
-      }
-      if (!sizes.has(a.size_id)) {
-        sizes.set(a.size_id, a.size);
-      }
-    });
-
-    colorsContainer.innerHTML = '';
-    colors.forEach((name, id) => {
-      colorsContainer.insertAdjacentHTML('beforeend', `
-        <li>
-          <label class="checkbox" for="color-${id}">
-            <input type="radio" name="color-item" id="color-${id}" value="${id}">
-            ${name}
-          </label>
-        </li>
-      `);
-    });
-
-    sizesContainer.innerHTML = '';
-    sizes.forEach((name, id) => {
-      sizesContainer.insertAdjacentHTML('beforeend', `
-        <li>
-          <label class="checkbox" for="size-${id}">
-            <input type="radio" name="size-item" id="size-${id}" value="${id}">
-            ${name}
-          </label>
-        </li>
-      `);
-    });
-
+    // 🎨 Кольори і розміри
+    renderOptions(attributes, elements.colorsContainer, 'color');
+    renderOptions(attributes, elements.sizesContainer, 'size');
     setupVariantDependency(attributes);
 
-    // 6. Характеристики
-    charContainer.innerHTML = `
+    // 🧾 Характеристики
+    elements.charContainer.innerHTML = `
       <h3>Характеристика</h3>
       <p>Матеріал: ${product.composition}</p>
       <p>Виробник: ${product.country}</p>
     `;
 
-    // 7. Рекомендовані товари
-    recomendWrapper.innerHTML = '';
+    // 🔁 Схожі товари
+    elements.recomendWrapper.innerHTML = '';
     similar.forEach(p => {
-        const html = Mustache.render(productTmpl, p);
-          const slide = document.createElement('div');
-          slide.className = 'swiper-slide';          
-          slide.innerHTML = html; 
-        recomendWrapper.appendChild(slide);
+      const html = Mustache.render(productTmpl, p);
+      const slide = document.createElement('div');
+      slide.className = 'swiper-slide';
+      slide.innerHTML = html;
+      elements.recomendWrapper.appendChild(slide);
     });
 
-     const userId = getUserId();
-if (userId) {
-  markLikedProducts(userId);
-}
+    // ❤️ Улюблені
+    const token = getToken();
+    if (token) {
+      markLikedProducts(token);
+    }
 
-    // 8. Відгуки
-//     const { reviews, average } = await fetch(`/api/reviews/${productId}`).then(r => r.json());
+    // 🛒 Додавання до кошика
+    if (elements.addToCartButton) {
+      elements.addToCartButton.addEventListener('click', async () => {
+        const quantity = parseInt(document.querySelector('#product-quantity')?.textContent || '1', 10);
 
+        if (!token) {
+          alert('Будь ласка, увійдіть, щоб додати товар до кошика.');
+          return window.location.href = '/login';
+        }
 
-// if (reviews.length === 0) {
-//   noReviewsEl.style.display = 'block';
-//   reviewsList.innerHTML = '';
-//   reviewCountEl.textContent = `Відгуки (0)`
-// } else {
-//   noReviewsEl.style.display = 'none';
-//   starsContainer.innerHTML = '';
-//     for (let i = 1; i <= 5; i++) {
-//       const fillPercentage = Math.max(0, Math.min(100, (average - i + 1) * 100));
-//       const star = document.createElement('div');
-//       star.className = 'star';
-//       star.style.background = `linear-gradient(90deg, #fbd300 ${fillPercentage}%, #DFE1E6 ${fillPercentage}%)`;
-//       starsContainer.appendChild(star);
-//     }
-//     ratingAverage.textContent = average;
-//     reviewCountEl.textContent = `Відгуки (${reviews.length})`;
+        if (!product.id || !quantity || quantity <= 0) {
+          return alert('Некоректні дані для додавання в кошик.');
+        }
 
-//     reviewsList.innerHTML = '';
-//     reviews.forEach(r => {
-//       reviewsList.insertAdjacentHTML('beforeend', Mustache.render(reviewTempl, r));
-//     });
-// }
+        const data = {
+          productId: product.id,
+          quantity,
+          price: product.current_price,
+        };
 
+        try {
+          const response = await fetch('/api/user/cart/add', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
+          });
 
-    const addToCartButton = document.querySelector('.buy-like .lite_btn');
-
-    if (addToCartButton) {
-        addToCartButton.addEventListener('click', async () => {
-            const token = localStorage.getItem('token');
-
-            if (!token) {
-                alert('Будь ласка, увійдіть, щоб додати товар до кошика.');
-                window.location.href = '/login';
-                return;
-            }
-            const finalProductId = product.id;
-            const finalProductPrice = product.current_price;
-            const quantity = parseInt(document.querySelector('#product-quantity').textContent, 10);
-
-            if (!finalProductId || isNaN(finalProductPrice) || isNaN(quantity) || quantity <= 0) {
-                console.error('Неповна інформація про товар для додавання в кошик. Деталі:', {
-                    productId: finalProductId,
-                    price: finalProductPrice,
-                    quantity: quantity
-                });
-                alert('Виникла помилка при додаванні товару до кошика. Перевірте дані.');
-                return;
-            }
-
-            const productData = {
-                productId: finalProductId,
-                quantity: quantity,
-                price: finalProductPrice
-            };
-
-            console.log('Дані для відправки в кошик на бекенд:', productData);
-
-            try {
-                const response = await fetch('/api/user/cart/add', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(productData),
-                });
-
-                const responseData = await response.json();
-
-                if (response.ok) {
-                    alert(responseData.message || 'Товар успішно додано до кошика!');
-                } else {
-                    alert(responseData.message || 'Помилка при додаванні товару до кошика.');
-                    console.error('Помилка від бекенду:', responseData);
-                }
-
-            } catch (error) {
-                console.error('Мережева помилка або помилка запиту:', error);
-                alert('Сталася помилка при з\'єднанні з сервером. Спробуйте пізніше.');
-            }
-        });
-    } else {
-        console.warn('Кнопка "Придбати" (.buy-like .lite_btn) не знайдена.');
+          const result = await response.json();
+          alert(result.message || (response.ok
+            ? 'Товар додано до кошика!'
+            : 'Помилка при додаванні.'));
+        } catch (err) {
+          console.error('Помилка з\'єднання:', err);
+          alert('Сервер недоступний. Спробуйте пізніше.');
+        }
+      });
     }
 
   } catch (err) {
-    console.error('❌ ПОМИЛКА:', err);
+    console.error('❌ Помилка завантаження товару:', err);
   }
 });
 
-// Завантаження фото з папки (імітація — замінити на свій API якщо потрібно)
-async function fetchPhotos(folder) {
-  // Наприклад, API: GET /api/photos/:folder → [img1.png, img2.png...]
-  const res = await fetch(`/api/photos/${folder}`);
-  return await res.json();
+// Рендер кольорів або розмірів
+function renderOptions(attributes, container, type) {
+  const map = new Map();
+  const idKey = `${type}_id`;
+  const nameKey = type;
+
+  attributes.forEach(attr => {
+    if (!map.has(attr[idKey])) {
+      map.set(attr[idKey], attr[nameKey]);
+    }
+  });
+
+  container.innerHTML = '';
+  map.forEach((label, id) => {
+    container.insertAdjacentHTML('beforeend', `
+      <li>
+        <label class="checkbox" for="${type}-${id}">
+          <input type="radio" name="${type}-item" id="${type}-${id}" value="${id}">
+          ${label}
+        </label>
+      </li>
+    `);
+  });
 }
 
-// Взаємозалежність кольору/розміру
+// Залежність кольорів і розмірів
 function setupVariantDependency(variants) {
-  const colorInputs = document.querySelectorAll('input[name="color-item"]');
-  const sizeInputs = document.querySelectorAll('input[name="size-item"]');
+  const colors = document.querySelectorAll('input[name="color-item"]');
+  const sizes = document.querySelectorAll('input[name="size-item"]');
 
-  colorInputs.forEach(color => {
+  colors.forEach(color => {
     color.addEventListener('change', () => {
-      const selectedColor = color.value;
-      sizeInputs.forEach(size => {
-        const match = variants.find(v => v.color_id == selectedColor && v.size_id == size.value);
-        size.disabled = !match;
+      sizes.forEach(size => {
+        size.disabled = !variants.some(v =>
+          v.color_id == color.value && v.size_id == size.value
+        );
       });
     });
   });
 
-  sizeInputs.forEach(size => {
+  sizes.forEach(size => {
     size.addEventListener('change', () => {
-      const selectedSize = size.value;
-      colorInputs.forEach(color => {
-        const match = variants.find(v => v.size_id == selectedSize && v.color_id == color.value);
-        color.disabled = !match;
+      colors.forEach(color => {
+        color.disabled = !variants.some(v =>
+          v.size_id == size.value && v.color_id == color.value
+        );
       });
     });
   });
+}
+
+async function fetchPhotos(folder) {
+  const res = await fetch(`/api/photos/${folder}`);
+  return await res.json();
 }
 
 async function loadTemplate(url) {
@@ -257,15 +200,17 @@ async function loadTemplate(url) {
   return await res.text();
 }
 
-async function markLikedProducts(userId) {
+async function markLikedProducts(token) {
   try {
-    const res = await fetch(`/api/user/favorites/${userId}`);
-    const favorites = await res.json(); // масив продуктів
+    const res = await fetch('/api/user/favorites', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const { loveItems } = await res.json();
+    const likedIds = new Set(loveItems.map(p => String(p.id)));
 
-    const likedIds = new Set(favorites.map(p => String(p.id)));
     document.querySelectorAll('.like[data-id]').forEach(btn => {
       if (likedIds.has(btn.dataset.id)) {
-        btn.classList.add('liked');
+        btn.classList.add('active');
       }
     });
   } catch (err) {
@@ -273,7 +218,6 @@ async function markLikedProducts(userId) {
   }
 }
 
-function getUserId() {
-  // Поверни ID користувача — з localStorage, cookie або глобальної змінної
+function getToken() {
   return localStorage.getItem('token');
 }

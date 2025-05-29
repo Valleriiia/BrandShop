@@ -3,222 +3,191 @@ document.addEventListener('DOMContentLoaded', async () => {
   const randomSlider = document.getElementById('random-slider');
   const urlParams = new URLSearchParams(window.location.search);
 
-let deptId = null;
-let searchQuery = null;
-let tmpl = await loadTemplate('/assets/js/templates/product-template.mustache');
+  let deptId = null;
+  let searchQuery = null;
+  const template = await loadTemplate('/assets/js/templates/product-template.mustache');
 
-if (window.location.pathname.startsWith('/catalog/search')) {
-  searchQuery = urlParams.get('q');
-  document.getElementById('dept-title').textContent = `Результати пошуку: «${searchQuery}»`;
-  document.getElementById('dept-desc').style.display = 'none';
-  document.getElementById('dept-img').style.display = 'none';
-  loadProducts(false);
-} else {
-  loadDepartment();
-}
+  // === Ініціалізація сторінки ===
+  if (window.location.pathname.startsWith('/catalog/search')) {
+    searchQuery = urlParams.get('q');
+    document.getElementById('dept-title').textContent = `Результати пошуку: «${searchQuery}»`;
+    document.getElementById('dept-desc').style.display = 'none';
+    document.getElementById('dept-img').style.display = 'none';
+    loadProducts({ applyFilters: false });
+  } else {
+    loadDepartment();
+  }
+
   loadRandom();
-  loadFiltersFromBackend();
-  const userId = getUserId();
-if (userId) {
-  markLikedProducts(userId);
-}
+  loadFilters();
 
-  // Підписуємося на десктопну та мобільну форму
-  document.getElementById('filters-content')?.addEventListener('submit', e => {
-    e.preventDefault();
-    loadProducts(true);
-  });
-  document.getElementById('filters-mobile')?.addEventListener('submit', e => {
-    e.preventDefault();
-    loadProducts(true);
+  // === Обробники подій ===
+  ['filters-content', 'filters-mobile'].forEach(id => {
+    document.getElementById(id)?.addEventListener('submit', e => {
+      e.preventDefault();
+      loadProducts({ applyFilters: true });
+    });
   });
 
-  // Підписка на зміну сортування (десктоп)
-  document.querySelectorAll('#sort-desktop input[name="sort-item"]').forEach(r => {
-    r.addEventListener('change', () => loadProducts(true));
-  });
-  // мобільне сортування
-  document.querySelectorAll('#sort-mobile input[name="sort-item"]').forEach(r => {
-    r.addEventListener('change', () => loadProducts(true));
+  ['#sort-desktop', '#sort-mobile'].forEach(id => {
+    document.querySelectorAll(`${id} input[name="sort-item"]`)
+      .forEach(r => r.addEventListener('change', () => loadProducts({ applyFilters: true })));
   });
 
-  function getChecked(nameSelectors) {
-    // масив селекторів, наприклад ['input[name="category"]', 'input[name="category-side"]']
-    return nameSelectors.flatMap(sel =>
-      Array.from(document.querySelectorAll(sel + ':checked')).map(i => i.value)
-    );
+  // === Основні функції ===
+
+  async function loadTemplate(url) {
+    const res = await fetch(url);
+    return await res.text();
+  }
+
+  function getToken() {
+    return localStorage.getItem('token');
+  }
+
+  async function markLikedProducts(token) {
+    try {
+      const res = await fetch('/api/user/favorites', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const { loveItems } = await res.json();
+      const likedIds = new Set(loveItems.map(p => String(p.id)));
+
+      document.querySelectorAll('.like[data-id]').forEach(btn => {
+        if (likedIds.has(btn.dataset.id)) {
+          btn.classList.add('active');
+        }
+      });
+    } catch (err) {
+      console.error('❌ Не вдалося позначити улюблені:', err);
+    }
   }
 
   function loadRandom() {
     fetch('http://localhost:3000/api/products/random?limit=6')
-      .then(r => r.json())
-      .then(arr => {
+      .then(res => res.json())
+      .then(products => {
         randomSlider.innerHTML = '';
-        arr.forEach(p => {
-          const html = Mustache.render(tmpl, p);
+        products.forEach(p => {
+          const html = Mustache.render(template, p);
           const slide = document.createElement('div');
-          slide.className = 'swiper-slide';          
-          slide.innerHTML = html; 
-        randomSlider.appendChild(slide);
+          slide.className = 'swiper-slide';
+          slide.innerHTML = html;
+          randomSlider.appendChild(slide);
         });
+        const token = getToken();
+        if (token) markLikedProducts(token);
       })
       .catch(console.error);
   }
 
-  // Отримати й вставити дані кафедри
-function loadDepartment() {
-  const slug = window.location.pathname.split('/').pop();
+  function loadDepartment() {
+    const slug = window.location.pathname.split('/').pop();
 
-  fetch(`http://localhost:3000/api/departments/slug/${slug}`)
-    .then(res => res.json())
-    .then(dept => {
-      deptId = dept.id;
+    fetch(`http://localhost:3000/api/departments/slug/${slug}`)
+      .then(res => res.json())
+      .then(dept => {
+        deptId = dept.id;
+        loadProducts({ applyFilters: false });
 
-      loadProducts(false);
-      document.getElementById('dept-title').textContent = dept.name || '';
-      document.getElementById('dept-desc').textContent = dept.description || '';
-      if (dept.mascot_photo) {
-        document.getElementById('dept-img').src = '/assets/img/' + dept.mascot_photo;
-        document.getElementById('dept-img').alt = dept.name;
-      }
- // тепер тільки після отримання deptId
-    })
-    .catch(err => console.error('❌ Кафедра не знайдена:', err));
-}
-
-
-function loadFiltersFromBackend() {
-  fetch('http://localhost:3000/api/filters')
-    .then(res => res.json())
-    .then(data => {
-      insertFilterOptions(data.colors, 'color', 'Колір');
-      insertFilterOptions(data.colors, 'color-side', 'Колір');
-
-      insertFilterOptions(data.countries, 'country', 'Країна');
-      insertFilterOptions(data.countries, 'country-side', 'Країна');
-
-      insertFilterOptions(data.compositions, 'composition', 'Матеріал');
-      insertFilterOptions(data.compositions, 'composition-side', 'Матеріал');
-
-      insertFilterOptions(data.categories, 'category', 'Категорія');
-      insertFilterOptions(data.categories, 'category-side', 'Категорія');
-    })
-    .catch(err => console.error('❌ Помилка при завантаженні фільтрів:', err));
-}
-
-function insertFilterOptions(items, name, labelText) {
-  const selector = `input[name="${name}"]`;
-  const parent = document.querySelectorAll(`form.filters-content`);
-  parent.forEach(form => {
-    const field = form.querySelector(`fieldset:has(${selector})`);
-    if (!field) return;
-
-    field.innerHTML = `<legend>${labelText}</legend>`; // очищаємо та вставляємо заголовок
-
-    items.forEach(item => {
-      const id = `${name}-${item.id}`;
-      const label = document.createElement('label');
-      label.className = 'checkbox';
-      label.setAttribute('for', id);
-
-      label.innerHTML = `
-        <input type="checkbox" name="${name}" id="${id}" value="${item.id}">
-        <span class="checkmark">
-          <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 6.75L3 8.75L10.5 0.75" stroke="#54483D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        ${item.color || item.country || item.composition || item.name || '...'}
-      `;
-      field.appendChild(label);
-    });
-  });
-}
-
-  function loadProducts(apply) {
-    const url = searchQuery 
-  ? new URL('/api/products/search', window.location.origin)
-  : new URL('/api/products', window.location.origin);
-    const params = {};
-
-    if (searchQuery) {
-    params.search = searchQuery;
-  } else if (deptId) {
-    params.department_id = deptId;
+        document.getElementById('dept-title').textContent = dept.name || '';
+        document.getElementById('dept-desc').textContent = dept.description || '';
+        if (dept.mascot_photo) {
+          const img = document.getElementById('dept-img');
+          img.src = `/assets/img/${dept.mascot_photo}`;
+          img.alt = dept.name;
+        }
+      })
+      .catch(err => console.error('❌ Кафедра не знайдена:', err));
   }
 
-    if (apply) {
-      // категорія
-      const cat = getChecked(['input[name="category"]', 'input[name="category-side"]']);
-      if (cat.length) params.category_id = cat.join(',');
+  function loadFilters() {
+    fetch('http://localhost:3000/api/filters')
+      .then(res => res.json())
+      .then(data => {
+        const filters = [
+          { items: data.colors, name: 'color', label: 'Колір' },
+          { items: data.countries, name: 'country', label: 'Країна' },
+          { items: data.compositions, name: 'composition', label: 'Матеріал' },
+          { items: data.categories, name: 'category', label: 'Категорія' },
+        ];
+        filters.forEach(f => {
+          insertFilterOptions(f.items, f.name, f.label);
+          insertFilterOptions(f.items, `${f.name}-side`, f.label);
+        });
+      })
+      .catch(err => console.error('❌ Помилка при завантаженні фільтрів:', err));
+  }
 
-      // країна
-      const ctry = getChecked(['input[name="country"]', 'input[name="country-side"]']);
-      if (ctry.length) params.country_id = ctry.join(',');
+  function insertFilterOptions(items, name, label) {
+    const selector = `input[name="${name}"]`;
+    document.querySelectorAll(`form.filters-content`).forEach(form => {
+      const field = form.querySelector(`fieldset:has(${selector})`);
+      if (!field) return;
 
-      // колір
-      const clr = getChecked(['input[name="color"]', 'input[name="color-side"]']);
-      if (clr.length) params.color_id = clr.join(',');
+      field.innerHTML = `<legend>${label}</legend>`;
+      items.forEach(item => {
+        const id = `${name}-${item.id}`;
+        const value = item.color || item.country || item.composition || item.name || '...';
 
-      // склад
-      const comp = getChecked(['input[name="composition"]', 'input[name="composition-side"]']);
-      if (comp.length) params.composition_id = comp.join(',');
+        const labelEl = document.createElement('label');
+        labelEl.className = 'checkbox';
+        labelEl.setAttribute('for', id);
+        labelEl.innerHTML = `
+          <input type="checkbox" name="${name}" id="${id}" value="${item.id}">
+          <span class="checkmark">
+            <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 6.75L3 8.75L10.5 0.75" stroke="#54483D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          ${value}
+        `;
+        field.appendChild(labelEl);
+      });
+    });
+  }
 
-      // ціна — десктоп + мобільні
-      const minD = document.getElementById('min-input')?.value;
-      const maxD = document.getElementById('max-input')?.value;
-      const minM = document.getElementById('min-input-side')?.value;
-      const maxM = document.getElementById('max-input-side')?.value;
-      const mn = minD || minM;
-      const mx = maxD || maxM;
-      if (mn) params.price_min = mn;
-      if (mx) params.price_max = mx;
+  function getChecked(selectors) {
+    return selectors.flatMap(sel =>
+      Array.from(document.querySelectorAll(`${sel}:checked`)).map(i => i.value)
+    );
+  }
 
-      // сортування — десктоп чи мобільне
-      const sd = document.querySelector('#sort-desktop input[name="sort-item"]:checked');
-      const sm = document.querySelector('#sort-mobile input[name="sort-item"]:checked');
-      const sort = sd?.value || sm?.value;
+  function loadProducts({ applyFilters }) {
+    const isSearch = !!searchQuery;
+    const url = new URL(isSearch ? '/api/products/search' : '/api/products', window.location.origin);
+    const params = isSearch ? { search: searchQuery } : deptId ? { department_id: deptId } : {};
+
+    if (applyFilters) {
+      const filterFields = ['category', 'country', 'color', 'composition'];
+      filterFields.forEach(name => {
+        const values = getChecked([`input[name="${name}"]`, `input[name="${name}-side"]`]);
+        if (values.length) params[`${name}_id`] = values.join(',');
+      });
+
+      const priceMin = document.getElementById('min-input')?.value || document.getElementById('min-input-side')?.value;
+      const priceMax = document.getElementById('max-input')?.value || document.getElementById('max-input-side')?.value;
+      if (priceMin) params.price_min = priceMin;
+      if (priceMax) params.price_max = priceMax;
+
+      const sort = document.querySelector('#sort-desktop input[name="sort-item"]:checked')?.value ||
+                   document.querySelector('#sort-mobile input[name="sort-item"]:checked')?.value;
       if (sort) params.sort = sort;
     }
 
-    // збираємо в URL
-    Object.entries(params).forEach(([k,v]) => url.searchParams.append(k, v));
+    Object.entries(params).forEach(([key, value]) => url.searchParams.append(key, value));
 
     fetch(url)
-      .then(r => r.json())
-      .then(list => {
+      .then(res => res.json())
+      .then(products => {
         productList.innerHTML = '';
-        list.forEach(p => {
-          const html = Mustache.render(tmpl, p);
+        products.forEach(p => {
+          const html = Mustache.render(template, p);
           productList.insertAdjacentHTML('beforeend', html);
         });
+        const token = getToken();
+        if (token) markLikedProducts(token);
       })
       .catch(console.error);
   }
 });
-
-async function loadTemplate(url) {
-  const res = await fetch(url);
-  return await res.text();
-}
-
-async function markLikedProducts(userId) {
-  try {
-    const res = await fetch(`/api/user/favorites/${userId}`);
-    const favorites = await res.json(); // масив продуктів
-
-    const likedIds = new Set(favorites.map(p => String(p.id)));
-    document.querySelectorAll('.like[data-id]').forEach(btn => {
-      if (likedIds.has(btn.dataset.id)) {
-        btn.classList.add('liked');
-      }
-    });
-  } catch (err) {
-    console.error('❌ Не вдалося позначити улюблені:', err);
-  }
-}
-
-function getUserId() {
-  // Поверни ID користувача — з localStorage, cookie або глобальної змінної
-  return localStorage.getItem('user_id');
-}

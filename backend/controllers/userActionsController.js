@@ -3,7 +3,12 @@ const pool = require('../models/db');
 // ==== FAVORITES ====
 
 exports.addToFavorites = async (req, res) => {
-    const { user_id, product_id } = req.body;
+    const {product_id } = req.body;
+    const user_id = req.userId;
+    if (!user_id || !product_id) {
+        return res.status(400).json({ error: 'Необхідні поля відсутні' });
+    }
+
     const sql = `INSERT IGNORE INTO favourites (user_id, product_id) VALUES (?, ?)`;
     try {
         await pool.query(sql, [user_id, product_id]);
