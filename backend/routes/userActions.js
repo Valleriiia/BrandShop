@@ -150,8 +150,11 @@ router.get('/favorites/:userId', userActions.getFavorites);
 router.get('/account', isAuthenticated, userActions.getAccountData); // <--- ДОДАЙТЕ ЦЕЙ РЯДОК
 
 // ==== Роути для кошика ====
-router.post('/add', isAuthenticated, userActions.addToCart);
-router.delete('/cart/:product_id', isAuthenticated, userActions.removeItemFromCart);
+
+router.post('/cart/add', isAuthenticated, userActions.addToCart); 
+router.get('/cart', isAuthenticated, userActions.getCartItems); 
+router.put('/cart/update-quantity', isAuthenticated, userActions.updateCartItemQuantity); 
+router.delete('/cart/remove/:productId', isAuthenticated, userActions.removeCartItem); 
 router.post('/order', isAuthenticated, userActions.placeOrder);
 
 // ==== Історія замовлень ====

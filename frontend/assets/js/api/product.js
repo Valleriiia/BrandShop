@@ -152,6 +152,68 @@ if (reviews.length === 0) {
     });
 }
 
+
+    const addToCartButton = document.querySelector('.buy-like .lite_btn');
+
+    if (addToCartButton) {
+        addToCartButton.addEventListener('click', async () => {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                alert('Будь ласка, увійдіть, щоб додати товар до кошика.');
+                window.location.href = '/login';
+                return;
+            }
+            const finalProductId = product.id;
+            const finalProductPrice = product.current_price;
+            const quantity = parseInt(document.querySelector('#product-quantity').textContent, 10);
+
+            if (!finalProductId || isNaN(finalProductPrice) || isNaN(quantity) || quantity <= 0) {
+                console.error('Неповна інформація про товар для додавання в кошик. Деталі:', {
+                    productId: finalProductId,
+                    price: finalProductPrice,
+                    quantity: quantity
+                });
+                alert('Виникла помилка при додаванні товару до кошика. Перевірте дані.');
+                return;
+            }
+
+            const productData = {
+                productId: finalProductId,
+                quantity: quantity,
+                price: finalProductPrice
+            };
+
+            console.log('Дані для відправки в кошик на бекенд:', productData);
+
+            try {
+                const response = await fetch('/api/user/cart/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(productData),
+                });
+
+                const responseData = await response.json();
+
+                if (response.ok) {
+                    alert(responseData.message || 'Товар успішно додано до кошика!');
+                } else {
+                    alert(responseData.message || 'Помилка при додаванні товару до кошика.');
+                    console.error('Помилка від бекенду:', responseData);
+                }
+
+            } catch (error) {
+                console.error('Мережева помилка або помилка запиту:', error);
+                alert('Сталася помилка при з\'єднанні з сервером. Спробуйте пізніше.');
+            }
+        });
+    } else {
+        console.warn('Кнопка "Придбати" (.buy-like .lite_btn) не знайдена.');
+    }
+
   } catch (err) {
     console.error('❌ ПОМИЛКА:', err);
   }
@@ -213,5 +275,5 @@ async function markLikedProducts(userId) {
 
 function getUserId() {
   // Поверни ID користувача — з localStorage, cookie або глобальної змінної
-  return localStorage.getItem('user_id');
+  return localStorage.getItem('token');
 }

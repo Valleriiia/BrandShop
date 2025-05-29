@@ -30,7 +30,7 @@ function displayCartItems(items) {
         subtotal += itemTotalPrice;
 
         const imageUrl = item.name_of_product_photo
-            ? `/assets/img/candy/${item.name_of_product_photo}`
+            ? `/assets/img/${item.name_of_product_photo}img1.png`
             : '/assets/img/placeholder.png';
 
         const cartItemHTML = `
@@ -210,7 +210,7 @@ async function removeItem(productId) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/user/cart/${productId}`, {
+        const response = await fetch(`http://localhost:3000/api/user/cart/remove/${productId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

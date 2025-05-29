@@ -42,7 +42,7 @@ h2 {
     padding-top: 100px;
 }
 
-.tabs:has(#tab2:checked) ~ #content2,
+/* .tabs:has(#tab2:checked) ~ #content2,
 .tabs:has(#tab3:checked) ~ #content3,
 .tabs:has(#tab4:checked) ~ #content4,
 .tabs:has(#tab5:checked) ~ #content5,
@@ -52,6 +52,17 @@ h2 {
 
 .tabs:has(#tab1:checked) ~ #content1 {
     display: flex;
+} */
+
+#content1.active {
+    display: flex;
+}
+
+#content2.active,
+#content3.active,
+#content4.active,
+#content5.active {
+    display: block;
 }
 
 .line {

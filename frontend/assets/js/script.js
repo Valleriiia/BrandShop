@@ -178,11 +178,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (logoutTab) {
         logoutTab.addEventListener("click", () => {
             document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.style.display = 'none';
+                tab.classList.remove('active');
             });
             const exitContent = document.getElementById('content5');
             if (exitContent) {
-                exitContent.style.display = 'block';
+                exitContent.classList.toggle('active');
             }
         });
     }
@@ -198,9 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const infoContent = document.getElementById('content1');
             if (infoContent) {
                 document.querySelectorAll('.tab-content').forEach(tab => {
-                    tab.style.display = 'none';
+                    tab.classList.remove('active');
                 });
-                infoContent.style.display = 'flex';
+                infoContent.classList.toggle('active');
                 const tab1Radio = document.getElementById('tab1');
                 if (tab1Radio) {
                     tab1Radio.checked = true;
@@ -212,18 +212,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.tabs input[type="radio"]').forEach(radio => {
         radio.addEventListener('change', function() {
             document.querySelectorAll('.tab-content').forEach(content => {
-                content.style.display = 'none';
+                content.classList.remove('active');
             });
             const contentId = 'content' + this.id.slice(3);
             const targetContent = document.getElementById(contentId);
-            if (this.id == 1) {
-              if (targetContent) {
-                targetContent.style.display = 'flex';
-              }
-              return;
-            }
             if (targetContent) {
-                targetContent.style.display = 'block';
+                targetContent.classList.toggle('active');
             }
         });
     });
