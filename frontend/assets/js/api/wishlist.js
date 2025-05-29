@@ -1,12 +1,19 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  const userId = getUserId(); // ← реалізуй як тобі зручно
+  const token = getUserId(); // ← реалізуй як тобі зручно
   const box = document.querySelector('.wishlist-box');
   const template = await loadTemplate('/assets/js/templates/wishlist-product.mustache');
 
   try {
-    const res = await fetch(`/api/user/favorites/${userId}`);
-    const products = await res.json();
+    const res = await fetch(`/api/user/favorites`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
 
+    const data = await res.json();
+    const products = data.loveItems;
     box.innerHTML = '';
 
     for (const product of products) {
@@ -25,11 +32,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     const item = e.target.closest('.item');
 
     try {
-      await fetch('/api/user/favorites/remove', {
+      const response = await fetch(`/api/user/favorites/remove/${id}`, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: userId, product_id: id })
+        headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
       });
+            const errorData = await response.json();
+            console.log(errorData.message || 'Помилка при видаленні товару з кошика.');
+        
 
       item.classList.add('removing');
       setTimeout(() => {
@@ -55,7 +67,7 @@ async function loadTemplate(url) {
 
 function getUserId() {
   // Поверни ID користувача — з localStorage, cookie або глобальної змінної
-  return localStorage.getItem('user_id');
+  return localStorage.getItem('token');
 }
 
 function updateNoItemsVisibility() {

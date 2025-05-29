@@ -15,31 +15,51 @@ exports.addToFavorites = async (req, res) => {
 };
 
 exports.removeFromFavorites = async (req, res) => {
-    const { user_id, product_id } = req.body;
-    const sql = `DELETE FROM favourites WHERE user_id = ? AND product_id = ?`;
+    const userId = req.userId; 
+    const { productId } = req.params;
+    if (!productId) {
+        return res.status(400).json({ status: 'error', message: 'Необхідний productId для видалення.' });
+    }
     try {
-        await pool.query(sql, [user_id, product_id]);
-        res.json({ message: 'Видалено з улюблених' });
+    const sql = `DELETE FROM favourites WHERE user_id = ? AND product_id = ?`;
+    const [result] = await pool.execute(sql, [userId, productId]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ status: 'error', message: 'Товар не знайдено або не видалено.' });
+        }
+
+        return res.status(200).json({ status: 'success', message: 'Товар видалено.' });
     } catch (error) {
-        console.error('Помилка при видаленні з улюблених:', error);
-        res.status(500).json({ error: 'Помилка при видаленні з улюблених' });
+        console.error('❌ Помилка при видаленні товару:', error);
+        return res.status(500).json({ status: 'error', message: 'Помилка сервера при видаленні товару.' });
     }
 };
 
 exports.getFavorites = async (req, res) => {
-    const user_id = req.params.userId;
-    const sql = `
+    const userId = req.userId;
+    
+    if (!userId) {
+        return res.status(400).json({ message: 'ID користувача відсутній.' });
+    }
+    let connection;
+
+    try {
+        connection = await pool.getConnection();
+        const [loveItems] = await connection.execute( `
         SELECT p.*
         FROM product p
         JOIN favourites f ON f.product_id = p.id
         WHERE f.user_id = ?
-    `;
-    try {
-        const [results] = await pool.query(sql, [user_id]);
-        res.json(results);
+    `,
+            [userId]
+        );
+
+        res.status(200).json({ message: 'Улюблені товари успішно отримано.', loveItems: loveItems });
     } catch (error) {
-        console.error('Помилка при отриманні улюблених:', error);
-        res.status(500).json({ error: 'Помилка при отриманні улюблених' });
+        console.error('Помилка отримання улюблених товарів:', error);
+        res.status(500).json({ message: 'Помилка сервера при отриманні улюблених товарів.' });
+    } finally {
+        if (connection) connection.release();
     }
 };
 

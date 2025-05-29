@@ -142,9 +142,9 @@ router.post('/card', isAuthenticated, async (req, res) => {
 });
 
 // Улюблені
-router.post('/favorites', userActions.addToFavorites);
-router.delete('/favorites/remove', userActions.removeFromFavorites);
-router.get('/favorites/:userId', userActions.getFavorites);
+router.post('/favorites/add', userActions.addToFavorites);
+router.delete('/favorites/remove/:productId', isAuthenticated, userActions.removeFromFavorites);
+router.get('/favorites', isAuthenticated, userActions.getFavorites);
 
 // ==== Роут для отримання даних облікового запису ====
 router.get('/account', isAuthenticated, userActions.getAccountData); // <--- ДОДАЙТЕ ЦЕЙ РЯДОК
