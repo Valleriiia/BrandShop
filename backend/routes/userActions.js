@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const pool = require('../models/db');
 const jwt = require('jsonwebtoken');
 const cardController = require('../controllers/cardController');
+const reviewController = require('../controllers/reviewController');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-dev-key-please-change-in-prod';
 
@@ -160,6 +161,7 @@ router.post('/order', isAuthenticated, userActions.placeOrder);
 // ==== Історія замовлень ====
 router.get('/orders', isAuthenticated, userActions.getUserOrders);
 
+router.post('/review', isAuthenticated, reviewController.addReview);
 
 
 module.exports = {

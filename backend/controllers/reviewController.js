@@ -2,22 +2,34 @@ const db = require('../models/db');
 
 // POST /api/reviews
 exports.addReview = async (req, res) => {
-    const { user_id, product_id, rating, comment } = req.body;
+    const { product_id, rating, comment } = req.body;
+    const user_id = req.userId;
 
     if (!user_id || !product_id || !rating) {
         return res.status(400).json({ error: 'Необхідні поля відсутні' });
     }
 
     try {
+        // Перевірка: чи вже є відгук від цього користувача на цей товар
+        const [existing] = await db.query(
+            `SELECT * FROM rating WHERE user_id = ? AND product_id = ?`,
+            [user_id, product_id]
+        );
+
+        if (existing.length > 0) {
+            return res.status(409).json({ error: 'Ви вже залишили відгук на цей товар.' });
+        }
+
+        // Додавання нового відгуку
         await db.query(`
-            INSERT INTO product_reviews (user_id, product_id, rating, comment)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO rating (user_id, product_id, rating, comment, date)
+            VALUES (?, ?, ?, ?, NOW())
         `, [user_id, product_id, rating, comment || null]);
 
-        // Після вставки — перерахунок середнього рейтингу
+        // Оновлення середнього рейтингу
         const [avgResult] = await db.query(`
-            SELECT ROUND(AVG(rating), 0) AS avg_rating
-            FROM product_reviews
+            SELECT ROUND(AVG(rating), 2) AS avg_rating
+            FROM rating
             WHERE product_id = ?
         `, [product_id]);
 

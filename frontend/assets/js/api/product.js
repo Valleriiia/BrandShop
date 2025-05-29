@@ -126,31 +126,31 @@ if (userId) {
 }
 
     // 8. Відгуки
-    const { reviews, average } = await fetch(`/api/reviews/${productId}`).then(r => r.json());
+//     const { reviews, average } = await fetch(`/api/reviews/${productId}`).then(r => r.json());
 
 
-if (reviews.length === 0) {
-  noReviewsEl.style.display = 'block';
-  reviewsList.innerHTML = '';
-  reviewCountEl.textContent = `Відгуки (0)`
-} else {
-  noReviewsEl.style.display = 'none';
-  starsContainer.innerHTML = '';
-    for (let i = 1; i <= 5; i++) {
-      const fillPercentage = Math.max(0, Math.min(100, (average - i + 1) * 100));
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.background = `linear-gradient(90deg, #fbd300 ${fillPercentage}%, #DFE1E6 ${fillPercentage}%)`;
-      starsContainer.appendChild(star);
-    }
-    ratingAverage.textContent = average;
-    reviewCountEl.textContent = `Відгуки (${reviews.length})`;
+// if (reviews.length === 0) {
+//   noReviewsEl.style.display = 'block';
+//   reviewsList.innerHTML = '';
+//   reviewCountEl.textContent = `Відгуки (0)`
+// } else {
+//   noReviewsEl.style.display = 'none';
+//   starsContainer.innerHTML = '';
+//     for (let i = 1; i <= 5; i++) {
+//       const fillPercentage = Math.max(0, Math.min(100, (average - i + 1) * 100));
+//       const star = document.createElement('div');
+//       star.className = 'star';
+//       star.style.background = `linear-gradient(90deg, #fbd300 ${fillPercentage}%, #DFE1E6 ${fillPercentage}%)`;
+//       starsContainer.appendChild(star);
+//     }
+//     ratingAverage.textContent = average;
+//     reviewCountEl.textContent = `Відгуки (${reviews.length})`;
 
-    reviewsList.innerHTML = '';
-    reviews.forEach(r => {
-      reviewsList.insertAdjacentHTML('beforeend', Mustache.render(reviewTempl, r));
-    });
-}
+//     reviewsList.innerHTML = '';
+//     reviews.forEach(r => {
+//       reviewsList.insertAdjacentHTML('beforeend', Mustache.render(reviewTempl, r));
+//     });
+// }
 
 
     const addToCartButton = document.querySelector('.buy-like .lite_btn');
