@@ -1,5 +1,7 @@
 h2 {
     margin-bottom: 4px;
+    color: #6F0E19;
+    text-align: center;
 }
 
 .tabs input[type="radio"] {
@@ -8,17 +10,17 @@ h2 {
 
 .tabs {
     display: flex;
-    border-bottom: 2px solid var(--color_lite);
+    border-bottom: 2px solid #DFE1E6;
     align-items: flex-end;
     min-height: 76px;
 }
 
 .tab-label {
     padding: 10.5px 12px;
-    border-top: 2px solid var(--color_dark);
+    border-top: 2px solid #28315C;
     text-align: center;
     flex: 1;
-    color: var(--small_text);
+    color: #28315C;
     height: 49px;
 }
 
@@ -42,18 +44,6 @@ h2 {
     padding-top: 100px;
 }
 
-/* .tabs:has(#tab2:checked) ~ #content2,
-.tabs:has(#tab3:checked) ~ #content3,
-.tabs:has(#tab4:checked) ~ #content4,
-.tabs:has(#tab5:checked) ~ #content5,
-.tabs:has(#tab6:checked) ~ #content6 {
-    display: block;
-}
-
-.tabs:has(#tab1:checked) ~ #content1 {
-    display: flex;
-} */
-
 #content1.active {
     display: flex;
 }
@@ -68,7 +58,7 @@ h2 {
 .line {
     border: none;
     height: 2px;
-    background-color: var(--color_dark);
+    background-color: black;
     margin-bottom: 50px;
 }
 
@@ -80,7 +70,7 @@ h2 {
 
     .tabs {
         flex-direction: column;
-        border-bottom: 2px solid var(--color_dark);
+        border-bottom: 2px solid #28315C;
         align-items: stretch;
     }
 
@@ -114,8 +104,8 @@ h2 {
     margin-top: 0;
 }
 
-.info legend {
-    font-family: "Nyght Serif";
+legend {
+    font-family: 'Kyiv Type Serif';
     font-weight: 400;
     font-size: 20px;
     line-height: 100%;
@@ -126,14 +116,9 @@ h2 {
     width: 100%;
 }
 
-.info .checkbox {
-    margin-top: 7px;
-}
 
-.info .lite_btn {
+.info .dark_btn {
     justify-self: flex-end;
-    width: 216px;
-    padding: 0;
 }
 
 @media (max-width: 1019px) {
@@ -177,42 +162,28 @@ th, td {
 }
 
 th {
-    font-family: "Nyght Serif";
+    font-family: 'Kyiv Type Serif';
     font-weight: 400;
     font-size: 20px;
     line-height: 100%;
-    color: var(--color_dark);
+    color: #28315C;
     padding-bottom: 20px;
 }
 
-td, .actions button, td span {
-    font-family: "Avenir Next";
+td {
+    font-family: 'Exo2';
     font-weight: 500;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 100%;
-    color: var(--small_text);
+    color: black;
 }
 
 .order-all, .order-num {
     width: 20%;
 }
 
-.action-btns {
-    display: flex;
-    gap: 34px;
-}
 .flex-container{
     display: flex;
-}
-.actions button {
-    border: none;
-    cursor: pointer;
-    background: transparent;
-    transition: var(--trans);
-}
-
-.actions button:hover {
-    color: var(--color_lite);
 }
 
 @media (max-width: 1019px) {
@@ -241,12 +212,12 @@ td, .actions button, td span {
         background: #fff;
         padding: 20px 0;
         position: relative; 
-        border-bottom: 2px solid var(--color_lite);
+        border-bottom: 2px solid #DFE1E6;
         gap: 10px;
     }
 
     tr:last-of-type {
-        border-bottom-color: var(--color_dark);
+        border-bottom-color: black;
     }
 
     td {
@@ -259,11 +230,11 @@ td, .actions button, td span {
 
     td::before {
         content: attr(data-label);
-        font-family: "Avenir Next";
+        font-family: 'Exo2';
         font-weight: 500;
         font-size: 16px;
         line-height: 100%;
-        color: var(--color_lite);
+        color: #DFE1E6;
     }
 
     .order-date {
@@ -271,13 +242,7 @@ td, .actions button, td span {
         position: absolute;
         top: 20px;
         right: 15px;
-        color: var(--color_lite);
-    }
-
-    .action-btns {
-        flex-direction: column;
-
-        gap: 5px;
+        color: #DFE1E6;
     }
 
 
@@ -291,234 +256,47 @@ td, .actions button, td span {
     }
 
     .order-all span {
-        font-family: "Avenir Next";
+        font-family: 'Exo2';
     }
 }
 
-.addresses {
+.card {
     margin-top: 27px;
     margin-bottom: 50px;
 }
 
-.flex-container {
-    gap: 189px;
+.card form {
+    margin: 0 auto;
+    max-width: 700px;
 }
 
-h4 {
-    font-family: "Nyght Serif";
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 100%;
-    color: var(--color_dark);
-    margin-bottom: 27px;
-}
-
-.delivery-option {
-    display: flex;
-    flex-direction: row-reverse; 
-    gap: 237px;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    transition: var(--trans);
-    margin-bottom: 33px;
-}
-
-.delivery-option input {
-    appearance: none;
-    width: 15px;
-    height: 15px;
-    border: 1px solid black;
-    border-radius: 50%;
-    position: relative;
-    cursor: pointer;
-}
-
-.delivery-option input:checked::before {
-    content: "";
-    width: 9px;
-    height: 9px;
-    background: black; 
-    border-radius: 50%;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-}
-
-.option-content {
-    min-width: 362px;
-}
-
-.option-content .name {
-    margin-bottom: 13px;
-    font-family: "Avenir Next";
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 100%;
-    color: var(--small_text);
-}
-
-.street, .address, .phone {
-    font-family: "Avenir Next";
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 100%;
-    color: var(--small_text);
-    margin-bottom: 5px;
-}
-
-.redo {
-    font-family: "Avenir Next";
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 100%;
-    color: var(--color_lite);
-    margin-top: 5px;
-    background: transparent;
-    transition: var(--trans);
-}
-
-.redo:hover {
-    color: var(--small_text);
-}
-
-.addresses .input {
-    width: 100%;
+.card fieldset {
     margin-bottom: 20px;
 }
 
-.addresses .inputs {
-    margin-bottom: 5px;
+.card .lite_btn {
+    justify-self: end;
 }
 
-.addresses .inputs .input {
-    flex: 0 1 calc(33.33% - 8px);
-    min-width: 137px;
+.card .input {
+    width: 100%;
 }
 
 @media (max-width: 1019px) {
-    .addresses {
+    .card {
         margin-top: 31px;
         margin-bottom: 40px;
     }
-
-    .flex-container {
-        flex-direction: column;
-        gap: 0;
-    }
-
-    .delivery-option {
-        gap: 0;
-        justify-content: space-between;
-    }
-
-    .option-content {
-        min-width: 230px;
-        max-width: 255px;
-    }
-
-    .inputs {
-        flex-wrap: wrap;
-        gap: 0 69px;
-        flex-direction: row;
-    }
-
-    .addresses .inputs .input {
-        width: 41%;
-        min-width: 137px;
-    }
 }
 
-.wishlist {
-    margin-top: 61px;
-    margin-bottom: 55px;
-}
-
-.wishlist-box {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 78px 22px;
-    justify-content: center;
-}
-
-.item {
-    width: 405px;
-    text-align: center;
-    position: relative;
-}
-
-.item img {
-    width: 100%;
-    height: 380px;
-    object-fit: cover;
-}
-
-.item-desc {
-    font-family: "Avenir Next";
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 100%;
-    margin-top: 23px;
-    color: var(--small_text);
-}
-
-.item-price {
-    font-family: "Avenir Next";
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 100%;
-    margin-top: 8px;
-    color: var(--small_text);
-}
-
-.remove-btn {
-    position: absolute;
-    transform: rotate(-45deg);
-    font-family: "Nyght Serif";
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 37px;
-    color: var(--color_lite);
-    right: 14px;
-    top: 2px;
-    background-color: transparent;
-}
-
-.item {
-    transition: opacity 0.3s, transform 0.3s;
-}
-
-.item.removing {
-    opacity: 0;
-    transform: scale(0.9);
-}
-
-
-@media (max-width: 1019px) {
-    .wishlist {
-        margin-top: 40px;
-        margin-bottom: 52px;
-    }
-    
-    .wishlist-box {
-        gap: 26px;
-    }
-}
-
-@media (max-width: 969px) {
-    .item {
-        width: 100%;
-    }
-}
-
-.delete, .exit {
+.exit {
     margin-top: 40px;
     margin-bottom: 72px;
 }
 
-.delete h3, .exit h3 {
+.exit h3 {
     margin-bottom: 63px;
-    font-family: "Nyght Serif";
+    font-family: 'Kyiv Type Serif';
     font-weight: 400;
     font-size: 32px;
     line-height: 100%;
@@ -536,13 +314,13 @@ h4 {
 }
 
 @media (max-width: 1019px) {
-    .delete, .exit {
+    .exit {
         padding-bottom: 65px;
-        border-bottom: 2px solid var(--color_dark);
+        border-bottom: 2px solid black;
         margin-bottom: 40px;
     }
 
-    .delete h3, .exit h3 {
+    .exit h3 {
         margin-bottom: 40px;
     }
 
