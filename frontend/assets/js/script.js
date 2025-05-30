@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
-            const exitContent = document.getElementById('content5');
+            const exitContent = document.getElementById('content4');
             if (exitContent) {
                 exitContent.classList.toggle('active');
             }

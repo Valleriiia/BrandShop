@@ -247,13 +247,14 @@ document.addEventListener('DOMContentLoaded', () => {
             orders.forEach(order => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td class="order-num">${order.order_id}</td>
+                    <td data-label="Замовлення" class="order-num">${order.order_id}</td>
                     <td class="order-date">${new Date(order.order_date).toLocaleDateString()}</td>
-                    <td>${order.status}</td>
-                    <td class="order-all">${order.total_amount} ₴</td>
-                     <td class="order-amount">${order.total_items_amount}</td>
+                    <td data-label="Статус">${order.status}</td>
+                    <td data-label="Всього" class="order-all">${order.total_amount} ₴</td>
+                     <td data-label="Кількість" class="order-amount">${order.total_items_amount}</td>
                 `;
                 ordersListBody.appendChild(row);
+                noOrdersMessage.classList.toggle('hidden');
             });
         }
 

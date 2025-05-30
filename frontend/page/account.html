@@ -35,11 +35,9 @@
                 <input type="radio" name="tab" id="tab2">
                 <label for="tab2" class="tab-label">Замовлення</label>
                 <input type="radio" name="tab" id="tab3">
-                <label for="tab3" class="tab-label">Адресна книга</label>
+                <label for="tab3" class="tab-label">Картка</label>
                 <input type="radio" name="tab" id="tab4">
-                <label for="tab4" class="tab-label">Видалити акаунт</label>
-                <input type="radio" name="tab" id="tab5">
-                <label for="tab5" class="tab-label" id="logout-tab">Вийти</label>
+                <label for="tab4" class="tab-label" id="logout-tab">Вийти</label>
             </div>
             <div class="tab-content info active" id="content1">
                 <form>
@@ -64,19 +62,8 @@
                             <label for="birthday">Дата народження</label>
                             <input type="date" id="birthday" name="birthday" placeholder="DD-MM-YYYY">
                         </div>
-                        <div class="input">
-                            <label class="checkbox">
-                                <input type="checkbox" name="news" id="news">
-                                <span class="checkmark">
-                                    <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 6.75L3 8.75L10.5 0.750001" stroke="#54483D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </span>
-                                Отримувати новини
-                            </label>
-                        </div>
                     </fieldset>
-                    <button type="submit" class="lite_btn">Оновити інформацію</button>
+                    <button type="submit" class="dark_btn">Оновити інформацію</button>
                 </form>
                 <form>
                     <fieldset>
@@ -94,7 +81,7 @@
                             <input type="password" id="confirm-pass" name="confirm-pass">
                         </div>
                     </fieldset>
-                    <button type="submit" class="lite_btn">Оновити пароль</button>
+                    <button type="submit" class="dark_btn">Оновити пароль</button>
                 </form>
             </div>
             <div class="tab-content orders-box" id="content2">
@@ -110,107 +97,13 @@
                             </tr>
                         </thead>
                         <tbody id="ordersListBody">
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>Виконано</span></td>
-                                <td data-label="Всього" class="order-all"><span>123₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>Скасовано</span></td>
-                                <td data-label="Всього" class="order-all"><span>0₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                    <button class="pay">Оплатити</button>
-                                    <button class="cancel">Скасувати</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>В обробці</span></td>
-                                <td data-label="Всього" class="order-all"><span>123₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>Утримується</span></td>
-                                <td data-label="Всього" class="order-all"><span>123₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                    <button class="cancel">Скасувати</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>Виконано</span></td>
-                                <td data-label="Всього" class="order-all"><span>123₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>Скасовано</span></td>
-                                <td data-label="Всього" class="order-all"><span>0₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                    <button class="pay">Оплатити</button>
-                                    <button class="cancel">Скасувати</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>В обробці</span></td>
-                                <td data-label="Всього" class="order-all"><span>123₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Замовлення" class="order-num"><span>#0001</span></td>
-                                <td class="order-date">02.02.2024</td>
-                                <td data-label="Статус"><span>Утримується</span></td>
-                                <td data-label="Всього" class="order-all"><span>123₴ за 3 товари</span></td>
-                                <td data-label="Дії" class="actions">
-                                    <div class="action-btns">
-                                    <button class="view">Дивитись</button>
-                                    <button class="cancel">Скасувати</button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
+                            
                         </tbody>
                     </table>
                 </div>
                 <p id="noOrdersMessage" class="hidden no-orders-text">У вас поки що немає замовлень.</p> 
             </div>
-            <div class="tab-content addresses" id="content3">
+            <div class="tab-content card" id="content3">
                 <form id="card-form">
                     <fieldset>
                         <legend>Моя банківська картка</legend>
@@ -230,14 +123,7 @@
                     <button type="submit" id="card-submit-button" class="lite_btn">Додати картку</button>
                 </form>
             </div>
-            <div class="tab-content delete" id="content4">
-                <h3>Видалити акаунт?</h3>
-                <div class="buttons">
-                    <button class="lite_btn" id="cancel-delete-btn">Ні</button>
-                    <button class="lite_btn" id="confirm-delete-btn">Так</button>
-                </div>
-            </div>
-            <div class="tab-content exit" id="content5">
+            <div class="tab-content exit" id="content4">
                 <h3>Вийти з акаунту?</h3>
                 <div class="buttons">
                     <button class="lite_btn" id="cancel-logout-btn">Ні</button>
@@ -255,10 +141,6 @@
     <script defer src="/assets/js/api/auth.js" type="module"></script>
     <script defer src="/assets/js/script.js" type="module"></script>
     <script defer src="/assets/js/api/account.js" type="module"></script>
-    <script defer src="/assets/js/components/like.js"></script>
-    <script defer src="/assets/js/components/quantity.js"></script>
-    <script defer src="/assets/js/components/remove-btn.js"></script>
-    <script defer src="/assets/js/components/selector.js"></script>
 </body>
 
 </html>
