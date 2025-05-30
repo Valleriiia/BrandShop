@@ -23,43 +23,31 @@
     
     <main id="home">
         <div class="container">
-            <a href="/" class="breadcrmb">
-                <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 -3.11854e-07L12 0L12 10L12 20L8 20L-9.90966e-07 10L8 -3.11854e-07Z" fill="#ECE5DB"/>
-                </svg>
-                <p>Продовжити покупки</p>
-            </a>
             <h2>Оформлення замовлення</h2>
             <div class="flex-container">
                 <div class="left">
-                    <div class="tabs">
-                        <input type="radio" id="tab1" name="tab" checked>
-                        <label for="tab1" class="tab-label">Новий покупець</label>
-                        <input type="radio" id="tab2" name="tab">
-                        <label for="tab2" class="tab-label">Я постійний клієнт</label>
-                    </div>
-                    <div class="tab-content" id="content1">
+                    <div class="info-form">
                         <form> 
                             <fieldset>
                                 <legend>Особисті дані</legend>
                                 <div class="inputs">
                                     <div class="input">
                                         <label for="name">Ім'я</label>
-                                        <input type="text" name="name" id="name" placeholder="Ім'я">
+                                        <input type="text" name="name" id="name" placeholder="Ім'я" required>
                                     </div>
                                     <div class="input">
                                         <label for="surname">Прізвище</label>
-                                        <input type="text" name="surname" id="surname" placeholder="Прізвище">
+                                        <input type="text" name="surname" id="surname" placeholder="Прізвище" required>
                                     </div>
                                 </div>
                                 <div class="inputs">
                                     <div class="input">
                                         <label for="phone">Телефон</label>
-                                        <input type="tel" name="phone" id="phone" placeholder="Телефон">
+                                        <input type="tel" name="phone" id="phone" placeholder="Телефон" required>
                                     </div>
                                     <div class="input">
                                         <label for="email">Емейл</label>
-                                        <input type="email" name="email" id="email" placeholder="Емейл">
+                                        <input type="email" name="email" id="email" placeholder="Емейл" required>
                                     </div>
                                 </div>
                                 <div class="inputs">
@@ -74,10 +62,8 @@
                                 <div class="inputs">
                                     <div class="input">
                                         <label for="city">Місто</label>
-                                        <input type="text" name="city" id="city" placeholder="Місто">
+                                        <input type="text" name="city" id="city" placeholder="Місто" required>
                                     </div>
-                                </div>
-                                <div class="inputs">
                                     <div class="input">
                                         <label for="delivery">Спосіб доставки</label>
                                         <div class="selector" id="delivery">
@@ -96,12 +82,10 @@
                                                     </svg>
                                                 </div>
                                                 <ul class="dropdown-list">
-                                                    <li class="dropdown-item" data-value="Option 1">Option 1</li>
-                                                    <li class="dropdown-item" data-value="Option 2">Option 2</li>
-                                                    <li class="dropdown-item" data-value="Option 3">Option 3</li>
-                                                    <li class="dropdown-item" data-value="Option 4">Option 4</li>
-                                                    <li class="dropdown-item" data-value="Option 5">Option 5</li>
-                                                    <li class="dropdown-item" data-value="Option 6">Option 6</li>
+                                                    <li class="dropdown-item" data-value="Option 1">Нова пошта</li>
+                                                    <li class="dropdown-item" data-value="Option 2">Укрпошта</li>
+                                                    <li class="dropdown-item" data-value="Option 3">Meest пошта</li>
+                                                    <li class="dropdown-item" data-value="Option 4">Кур'єр</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -109,73 +93,11 @@
                                 </div>
                                 <div class="inputs">
                                     <div class="input">
-                                        <label for="branch">Виберіть відділення</label>
-                                        <div class="selector" id="branch">
-                                            <div class="input-selector select-wrapper">
-                                                <div class="select-box input_default" tabindex="0">
-                                                    <span class="selected">Виберіть відділення</span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="7" viewBox="0 0 12 7"
-                                                        fill="none">
-                                                        <mask id="mask0_2054_3218" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0"
-                                                            y="0" width="20" height="20">
-                                                            <rect width="20" height="20" fill="#D9D9D9" />
-                                                        </mask>
-                                                        <g mask="url(#mask0_2054_3218)">
-                                                            <path d="M1 1L6.29412 6L11 1" stroke="#2B221B"/>
-                                                        </g>
-                                                    </svg>
-                                                </div>
-                                                <ul class="dropdown-list">
-                                                    <li class="dropdown-item" data-value="Option 1">Option 1</li>
-                                                    <li class="dropdown-item" data-value="Option 2">Option 2</li>
-                                                    <li class="dropdown-item" data-value="Option 3">Option 3</li>
-                                                    <li class="dropdown-item" data-value="Option 4">Option 4</li>
-                                                    <li class="dropdown-item" data-value="Option 5">Option 5</li>
-                                                    <li class="dropdown-item" data-value="Option 6">Option 6</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input">
-                                        <label for="comment" style="visibility: hidden;">.</label>
-                                        <input type="text" name="comment" id="comment" placeholder="Додати коментар">
+                                        <label for="branch">Відділення</label>
+                                        <input type="text" name="branch" id="branch" placeholder="Відділення" required>
                                     </div>
                                 </div>
-                                <label class="checkbox">
-                                    <input type="checkbox" name="another-address" id="another-address">
-                                    <span class="checkmark">
-                                        <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 6.75L3 8.75L10.5 0.750001" stroke="#54483D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </span>
-                                    Доставити на іншу адресу
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" name="dont-call" id="dont-call">
-                                    <span class="checkmark">
-                                        <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 6.75L3 8.75L10.5 0.750001" stroke="#54483D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </span>
-                                    Мені можна не телефонувати для уточнення замовлення
-                                </label>
                             </fieldset>
-                            <div class="cupon-container">
-                                <label class="cupon-label" for="cupon-check">
-                                    <input type="checkbox" name="cupon-check" id="cupon-check">
-                                    + У мене є купон
-                                </label>
-                                <div class="cupon" id="cupon">
-                                    <p>Введіть у цьому полі код сертифіката або спеціальний промокод для отримання знижки або подарунка. Ви можете вказати декілька кодів через кому. Після введення коду натисніть кнопку „Застосувати промокод”.</p>
-                                    <div class="inputs">
-                                        <div class="input">
-                                        <input type="text" name="cupon" id="cupon-input" placeholder="Введіть промокод">
-                                        </div>
-                                        <button class="lite_btn" id="cupon-btn">Застосувати промокод</button>
-                                    </div>
-                                    
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -183,24 +105,7 @@
                     <div class="cart-container">
                         <h3 class="container-title">Ваше замовлення</h3>
                         <div class="cart-items">
-                            <div class="cart-item item">
                             
-                                <div class="item-top">
-                                    <img src="/assets/img/candy/img3.png" alt="Шоколадні цукерки">
-                                    <div class="item-text">
-                                        <p class="item-title">Шоколадні цукерки "Молочне серце"</p>
-                                        <p class="item-desc">Опис товару може займати трошки забагато місця, як от у даному прикладі, зазвичай тут можна описати товар</p>
-                                        <p class="item-price">45 ₴</p>
-                                    </div>
-                                    <button class="remove-btn">+</button>
-                                </div>
-                            
-                                <div class="quantity-controls">
-                                    <button class="minus">-</button>
-                                    <span class="quantity">1</span>
-                                    <button class="plus">+</button>
-                                </div>
-                            </div>
                         </div>
                         <div class="cart-summary">
                             <p class="summary-text">Підсумок <span class="cart-summary-price">4500 ₴</span></p>
@@ -208,7 +113,7 @@
                             <p class="cart-total">Всього <span class="cart-total-price">4545 ₴</span></p>
                         </div>
                     
-                        <button class="lite_btn order">Замовити</button>
+                        <button class="dark_btn order">Замовити</button>
                     </div>
                     
                 </div>
@@ -221,9 +126,7 @@
     <script src="/assets/js/header.js"></script>
     <script src="/assets/js/footer.js"></script>
     <script defer src="/assets/js/script.js"></script>
-    <script defer src="/assets/js/components/like.js"></script>
-    <script defer src="/assets/js/components/quantity.js"></script>
-    <script defer src="/assets/js/components/remove-btn.js"></script>
+    <script defer src="/assets/js/components/selector.js"></script>
     <script defer src="/assets/js/api/cart-page.js"></script>
 </body>
 

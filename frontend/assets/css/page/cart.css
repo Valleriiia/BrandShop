@@ -1,6 +1,12 @@
 #home{
   padding-top: 100px;
 }
+
+h2 {
+  color: #6F0E19;
+  text-align: center;
+}
+
 .flex-container{
   display: flex;
   justify-content: space-evenly;
@@ -8,115 +14,17 @@
 .left, .right {
   width: 48%;
 }
-.login-form {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.tabs {
-  margin-bottom: 46px;
-}
-
-.tabs input[type="radio"] {
-  display: none;
-}
-
-.tab-label {
-  color: var(--color_lite);
-  padding-top: 1px;
-  border-bottom: 2px solid transparent;
-}
-
-.tab-label:hover {
-  color: var(--color_dark);
-}
-  
-#tab1:checked + .tab-label,
-#tab2:checked + .tab-label {
-  color: var(--small-text);
-  border-bottom: 2px solid var(--small-text);
-}
-  
-.tab-label:first-of-type {
-  margin-right: 66px;
-}
-  
-.tab-content {
-  display: none;
-}
-  
-.tabs:has(#tab1:checked) ~ #content1,
-.tabs:has(#tab2:checked) ~ #content2 {
-  display: block;
-}
-
 .description {
   margin-bottom: 10px;
   max-width: 563px;
 }
   
 .description p {
-  font-family: "Avenir Next";
+  font-family: 'Exo2';
   font-weight: 500;
   font-size: 16px;
   line-height: 21.86px;
-  color: var(--small-text);
-}
-
-.cupon-container {
-  margin-top: 14px;
-}
- 
-#cupon-check {
-  display: none;
-}
- 
-.cupon-container {
-  margin-bottom: 33px;
-}
-
-.cupon-label {
-  font-family: "Avenir Next";
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 27.32px;
-  color: var(--color_dark);
-  transition: var(--trans);
-  cursor: pointer;
-}
-  
-.cupon-label:hover {
-  color: var(--color_lite);
-}
-  
-.cupon {
-  margin-top: 10px;
-  display: none;
-  transition: var(--trans);
-}
-  
-.cupon p {
-  font-family: "Avenir Next";
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 21.86px;
-  color: var(--color_dark);
-  margin-bottom: 12px;
-  max-width: 420px;
-}
-  
-.cupon .input {
-  display: flex;
-  align-items: flex-end;
-  width: 43%;
-}
-  
-#cupon-input::placeholder {
-  color: var(--color_lite);
-}
-  
-.cupon-label:has(#cupon-check:checked) ~ #cupon {
-  display: block;
+  color: black;
 }
 
 .container-title {
@@ -131,11 +39,11 @@
   
 .cart-item {
   padding: 19px 30px 24px 32px;
-  border-bottom: 2px solid var(--color_lite);
+  border-bottom: 2px solid #DFE1E6;
 }
   
 .cart-item:last-child {
-  border-bottom: 2px solid var(--color_dark);
+  border-bottom: 2px solid black;
 }
   
 .cart-item img {
@@ -144,7 +52,7 @@
   margin-top: 5px;
 }
   
-.item-top {
+.item-container {
   display: flex;
   align-items: center;
   margin-bottom: 16px;
@@ -158,33 +66,38 @@
 }
   
 .item-title {
-  font-family: "Avenir Next";
+  font-family: 'Exo2';
   font-weight: 500;
   font-size: 16px;
   line-height: 21.86px;
-  color: var(--small-text);
+  color: black;
 }
   
 .item-desc {
-  font-family: "Avenir Next";
+  font-family: 'Exo2';
   font-weight: 500;
   font-size: 16px;
   line-height: 21.86px;
-  color: #E4DFD5;
+  color: #DFE1E6;
   max-width: 332px;
+}
+
+.item-bottom {
+  display: flex;
+  justify-content: space-between;
 }
   
 .item-price {
-  font-family: "Avenir Next";
+  font-family: 'Exo2';
   font-weight: 500;
   font-size: 20px;
   line-height: 27.32px;
-  color: var(--small-text);
+  color: black;
   white-space: nowrap;
 }
   
 .remove-btn {
-  font-family: "Nyght Serif";
+  font-family: 'Kyiv Type Serif';
   font-weight: 400;
   font-size: 32px;
   line-height: 37px;
@@ -193,58 +106,41 @@
   margin-left: auto;
 }
   
-.quantity-controls {
-  border-top: 1px solid var(--color_dark);
-  border-bottom: 1px solid var(--color_dark);
-  padding: 5px 29px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
- margin-right: 0px;
- margin-left: auto;
- width: 100%;
- max-width: 475px;
-}
-  
-.quantity, .quantity-controls button {
-  font-family: "Nyght Serif";
+.quantity {
+  font-family: 'Exo2';
   font-weight: 400;
-  font-size: 20px;
+  font-size: 22px;
   line-height: 28px;
   text-align: center
-}
-  
-.quantity-controls button {
-  background-color: transparent;
 }
   
 .cart-summary {
   padding-top: 19px;
   padding-bottom: 13px;
-  border-bottom: 2px solid var(--color_dark);
+  border-bottom: 2px solid black;
   margin-bottom: 16px;
 }
 
 .summary-text  {
-  font-family: "Avenir Next";
+  font-family: 'Exo2';
   font-weight: 500;
   font-size: 16px;
   line-height: 21.86px;
   margin-bottom: 5px;
-  color: var(--small-text);
+  color: black;
 }
   
 .cart-total {
-  font-family: "Nyght Serif";
+  font-family: 'Kyiv Type Serif';
   font-weight: 400;
   font-size: 32px;
   line-height: 44.8px;
   margin-bottom: 0;
-  color: var(--color_dark);
+  color: #28315C;
 }
   
 .cart-total-price {
-  font-family: "Nyght Serif";
+  font-family: 'Kyiv Type Serif';
 }
   
 .cart-summary span {
@@ -288,11 +184,6 @@
     padding: 0;
   }
 
-  .tabs {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-
   .cart-items {
     max-height: calc(2 * 164px);
     padding-right: 5px;
@@ -326,11 +217,6 @@
     padding-top: 3px;
   }
 
-  .quantity-controls {
-    padding: 5px;
-    margin: 0;
-  }
-
   .cart-summary {
     border: none;
     margin-bottom: 7px;
@@ -343,15 +229,7 @@
     width: 98%;
   }
 
-  .tabs {
-    width: 100%;
-  }
-
   .left {
     margin: 0;
-  }
-
-  .tab-label:first-of-type {
-    margin-right: 8px;
   }
 }

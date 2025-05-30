@@ -35,17 +35,17 @@ function displayCartItems(items) {
 
         const cartItemHTML = `
             <div class="cart-item item" data-product-id="${item.product_id}" data-attribute-id="${item.attributes_id}">
-                <div class="item-top">
+                <div class="item-container">
                     <img src="${imageUrl}" alt="${item.name}">
                     <div class="item-text">
                         <p class="item-title">${item.name} - ${item.color} - ${item.size}</p>
                         <p class="item-desc">Ціна за одиницю: ${pricePerItem.toFixed(2)} ₴</p>
-                        <p class="item-price">${itemTotalPrice.toFixed(2)} ₴</p>
+                        <div class="item-bottom">
+                            <p class="item-price">${itemTotalPrice.toFixed(2)} ₴</p>
+                            <span class="quantity" data-product-id="${item.product_id}">${item.amount}</span>
+                        </div>                        
                     </div>
                     <button class="remove-btn" data-product-id="${item.product_id}" data-attribute-id="${item.attributes_id}">+</button>
-                </div>
-                <div class="quantity-controls">
-                    <span class="quantity" data-product-id="${item.product_id}">${item.amount}</span>
                 </div>
             </div>
         `;
