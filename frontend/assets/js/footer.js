@@ -14,15 +14,15 @@ const footerComponent = `
 
                                 <a href="/catalog/ipze" class="header__link">ІПЗЕ</a>
 
-                                <a href="/catalog/" class="header__link">ЦТЕ</a>
+                                <a href="/catalog/dte" class="header__link">ЦТЕ</a>
 
-                                <a href="/catalog/" class="header__link">ТАЕ</a>
+                                <a href="/catalog/tae" class="header__link">ТАЕ</a>
 
-                                <a href="/catalog/" class="header__link">АЕП</a>
+                                <a href="/catalog/atep" class="header__link">АЕП</a>
 
-                                <a href="/catalog/" class="header__link">АЕ</a>
+                                <a href="/catalog/ae" class="header__link">АЕ</a>
 
-                                <a href="/catalog/" class="header__link">СР</a>
+                                <a href="/catalog/sr" class="header__link">СР</a>
 
                 </li>
                 <li class="col3">

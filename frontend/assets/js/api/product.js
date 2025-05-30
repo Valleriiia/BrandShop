@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const selectedColor = document.querySelector('input[name="color-item"]:checked');
     const selectedSize = document.querySelector('input[name="size-item"]:checked');
     const quantity = parseInt(document.querySelector('#product-quantity')?.textContent || '1', 10);
+    const cartCount = document.querySelector('.cart-count');
 
     if (!selectedColor || !selectedSize) {
       alert('Оберіть колір і розмір товару перед додаванням у кошик.');
@@ -147,6 +148,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       alert(result.message || (response.ok
         ? 'Товар додано до кошика!'
         : 'Помилка при додаванні товару.'));
+      if (response.ok) {
+        cartCount.textContent = +cartCount.textContent + 1;
+      }
     } catch (err) {
       console.error('❌ Помилка з\'єднання з сервером:', err);
       alert('Сервер недоступний. Спробуйте пізніше.');

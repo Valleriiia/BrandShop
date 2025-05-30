@@ -182,6 +182,10 @@ td {
     width: 20%;
 }
 
+.hidden {
+    display: none;
+}
+
 .flex-container{
     display: flex;
 }

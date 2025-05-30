@@ -199,6 +199,7 @@ async function loadCartItems() {
 }
 
 async function removeItem(productId, attributeId) {
+    const cartCount = document.querySelector('.cart-count');
     const token = getToken();
     if (!token) {
         alert('Ви не авторизовані. Будь ласка, увійдіть.');
@@ -232,6 +233,7 @@ async function removeItem(productId, attributeId) {
         await loadUserProfile();
         await loadCardDetails();
         attachRemoveButtonListeners();
+        cartCount.textContent = +cartCount.textContent - 1;
 
     } catch (error) {
         console.error('Помилка видалення:', error);
