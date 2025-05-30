@@ -1,0 +1,132 @@
+.wishlist-section {
+    padding: 138px 0 80px;
+}
+
+.wishlist-section h1 {
+    margin-bottom: 38px;
+    color: #6F0E19;
+    font-family: 'Kyiv Type Serif';
+    font-weight: 400;
+    font-size: 42px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+.wishlist {
+    margin-top: 61px;
+    margin-bottom: 55px;
+}
+
+.wishlist-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 78px 22px;
+    justify-content: center;
+}
+
+.item {
+    width: 405px;
+    position: relative;
+}
+
+.item-link {
+    text-align: center;
+    width: 100%;
+}
+
+.item img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+}
+
+.item-desc {
+    font-family: 'Exo2';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    margin-top: 23px;
+    color: black;
+}
+
+.item-price {
+    font-family: 'Exo2';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    margin-top: 8px;
+    color: black;
+}
+
+.remove-btn {
+    position: absolute;
+    transform: rotate(-45deg);
+    font-family: 'Kyiv Type Serif';
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 37px;
+    color: #DFE1E6;
+    right: 14px;
+    top: 2px;
+    background-color: transparent;
+}
+
+.item {
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.item.removing {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.no-items {
+    margin-bottom: 196px;
+    margin-top: 138px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.no-items h3 {
+    margin-bottom: 38px;
+    -webkit-text-stroke: 0.26px #28315C;
+    font-size: 32px;
+    text-align: center;
+}
+
+.line {
+    border: none;
+    height: 2px;
+    background-color: black;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 1019px) {
+    .wishlist {
+        margin-top: 40px;
+        margin-bottom: 52px;
+    }
+    
+    .wishlist-box {
+        gap: 26px;
+    }
+
+    .no-items {
+        padding-bottom: 185px;
+        margin-top: 190px;
+        border-bottom: 2px solid var(--color_dark);
+        margin-bottom: -2px;
+    }
+
+    .no-items h3 {
+        margin-bottom: 33px;
+    }
+}
+
+@media (max-width: 969px) {
+    .item {
+        width: 100%;
+    }
+}

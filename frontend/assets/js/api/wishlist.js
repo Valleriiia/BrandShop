@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  const token = getUserId(); // ← реалізуй як тобі зручно
+  const token = getToken(); 
   const box = document.querySelector('.wishlist-box');
   const template = await loadTemplate('/assets/js/templates/wishlist-product.mustache');
 
@@ -24,12 +24,21 @@ document.addEventListener('DOMContentLoaded', async () => {
       const html = Mustache.render(template, { ...product, image });
       box.insertAdjacentHTML('beforeend', html);
     }
+    updateNoItemsVisibility();
 
-    // Обробник видалення
-    box.addEventListener('click', async (e) => {
+  } catch (err) {
+    console.error('❌ Не вдалося завантажити улюблені:', err);
+    box.innerHTML = '<p>Не вдалося завантажити улюблені товари.</p>';
+  }
+});
+
+document.querySelector('.wishlist-box').addEventListener('click', async (e) => {
   if (e.target.classList.contains('remove-btn')) {
+    e.preventDefault();
+    e.stopPropagation();
     const id = e.target.dataset.id;
     const item = e.target.closest('.item');
+    const token = getToken(); 
 
     try {
       const response = await fetch(`/api/user/favorites/remove/${id}`, {
@@ -54,19 +63,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
-  } catch (err) {
-    console.error('❌ Не вдалося завантажити улюблені:', err);
-    box.innerHTML = '<p>Не вдалося завантажити улюблені товари.</p>';
-  }
-});
-
 async function loadTemplate(url) {
   const res = await fetch(url);
   return await res.text();
 }
 
-function getUserId() {
-  // Поверни ID користувача — з localStorage, cookie або глобальної змінної
+function getToken() {
   return localStorage.getItem('token');
 }
 

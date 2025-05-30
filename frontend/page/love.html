@@ -7,7 +7,7 @@
 
     <!-- css -->
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/page/account.css">
+    <link rel="stylesheet" href="/assets/css/page/love.css">
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,16 +21,11 @@
     <div class="header_component"></div>
     
     <main id="home">
+        <section class="wishlist-section">
         <div class="container">
-            <a href="/" class="breadcrmb">
-                <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 -3.11854e-07L12 0L12 10L12 20L8 20L-9.90966e-07 10L8 -3.11854e-07Z" fill="#ECE5DB"/>
-                </svg>
-                <p>Продовжити покупки</p>
-            </a>
-            <h2 style="margin-bottom: 30px;">Список бажань</h2>
+            <h1 style="margin-bottom: 30px;">Список бажань</h1>
             <hr class="line">
-            <div class="tab-content wishlist" id="content4" style="display: block;">
+            <div class="tab-content wishlist" style="display: block;">
                 <div class="wishlist-box">
                     <div class="item">
                         <img src="/assets/img/candy/img1.png" alt="Шоколадні цукерки">
@@ -39,10 +34,17 @@
                         <button class="remove-btn">+</button>
                     </div>
                 </div>
+
+                <div class="no-items" style="display: none;">
+                    <h3>У вас поки немає вподобаних товарів</h3>
+                    <a href="/" class="lite_btn">На головну</a>
+                </div>
+
             </div>
             
             <hr class="line">
         </div>
+    </section>
     </main>
 
     <div class="footer_component"></div>
