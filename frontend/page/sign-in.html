@@ -22,12 +22,6 @@
     
     <main id="home">
         <div class="container">
-            <a href="/" class="breadcrmb">
-                <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 -3.11854e-07L12 0L12 10L12 20L8 20L-9.90966e-07 10L8 -3.11854e-07Z" fill="#ECE5DB"/>
-                </svg>
-                <p>Продовжити покупки</p>
-            </a>
             <h2>Відомості акаунту</h2>
             <div class="flex-container">
                 <div class="left">
@@ -36,15 +30,15 @@
                         <div class="inputs-container">
                         <div class="inputs">
                             <div class="input">
-                                <input type="text" name="first_name" id="name" placeholder="Ім’я*">
+                                <input type="text" name="first_name" id="name" placeholder="Ім’я*" required>
                             </div>
                             <div class="input">
-                                <input type="text" name="last_name" id="surname" placeholder="Прізвище*">
+                                <input type="text" name="last_name" id="surname" placeholder="Прізвище*" required>
                             </div>
                         </div>
                         <div class="inputs">
                             <div class="input">
-                                <input type="tel" name="phone" id="phone" placeholder="Телефон*">
+                                <input type="tel" name="phone" id="phone" placeholder="Телефон*" required>
                             </div>
                             <div class="input">
                                 <input type="text" name="birthday" id="birthday" placeholder="Дата народження" onfocus="(this.type='date')" onblur="(this.type='text')">
@@ -52,20 +46,20 @@
                         </div>
                         <div class="inputs">
                             <div class="input">
-                                <input type="email" name="email" id="email" placeholder="Email*">
+                                <input type="email" name="email" id="email" placeholder="Email*" required>
                             </div>
                             
                         </div>
                         <div class="inputs">
                             <div class="input">
-                                <input type="password" name="password" id="password" placeholder="Пароль*">
+                                <input type="password" name="password" id="password" placeholder="Пароль*" required>
                             </div>
                             <div class="input">
-                                <input type="password" name="repeatPassword" id="repeat-password" placeholder="Повторити пароль*">
+                                <input type="password" name="repeatPassword" id="repeat-password" placeholder="Повторити пароль*" required>
                             </div>
                         </div>
                     </div>
-                        <button type="submit" class="lite_btn">Зареєструватись</button>
+                        <button type="submit" class="dark_btn">Зареєструватись</button>
                     </form>
                 </div>
                 <div class="right">
@@ -73,14 +67,13 @@
                     <form class="log-in">
                         <div class="inputs">
                             <div class="input">
-                                <input type="email" name="email" id="client-email" placeholder="Ім’я*">
+                                <input type="email" name="email" id="client-email" placeholder="Email*" required>
                             </div>
                             <div class="input">
-                                <input type="password" name="password" id="client-password" placeholder="Пароль*">
+                                <input type="password" name="password" id="client-password" placeholder="Пароль*" required>
                             </div>
                         </div>
-                        <button type="submit" class="lite_btn">Увійти</button>
-                        <a href="/page/account.html" class="forgot-pass">Забули пароль?</a>
+                        <button type="submit" class="dark_btn">Увійти</button>
                     </form>
                 </div>
             </div>
