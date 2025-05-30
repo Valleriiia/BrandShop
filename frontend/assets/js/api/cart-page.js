@@ -34,15 +34,15 @@ function displayCartItems(items) {
             : '/assets/img/placeholder.png';
 
         const cartItemHTML = `
-            <div class="cart-item item" data-product-id="${item.product_id}">
+            <div class="cart-item item" data-product-id="${item.product_id}" data-attribute-id="${item.attributes_id}">
                 <div class="item-top">
                     <img src="${imageUrl}" alt="${item.name}">
                     <div class="item-text">
-                        <p class="item-title">${item.name}</p>
+                        <p class="item-title">${item.name} - ${item.color} - ${item.size}</p>
                         <p class="item-desc">Ціна за одиницю: ${pricePerItem.toFixed(2)} ₴</p>
                         <p class="item-price">${itemTotalPrice.toFixed(2)} ₴</p>
                     </div>
-                    <button class="remove-btn" data-product-id="${item.product_id}">+</button>
+                    <button class="remove-btn" data-product-id="${item.product_id}" data-attribute-id="${item.attributes_id}">+</button>
                 </div>
                 <div class="quantity-controls">
                     <span class="quantity" data-product-id="${item.product_id}">${item.amount}</span>
@@ -53,7 +53,7 @@ function displayCartItems(items) {
     });
 
     cartSummaryPriceElement.textContent = `${subtotal.toFixed(2)} ₴`;
-    cartTotalPriceElement.textContent = `${subtotal.toFixed(2)} ₴`;
+    cartTotalPriceElement.textContent = `${(subtotal + 45).toFixed(2)} ₴`;
 }
 
 function attachRemoveButtonListeners() {
@@ -62,8 +62,9 @@ function attachRemoveButtonListeners() {
         if (!button.dataset.listenerAttached) {
             button.addEventListener('click', (event) => {
                 const productId = event.target.dataset.productId;
-                if (productId) {
-                    removeItem(productId);
+                const attributeId = event.target.dataset.attributeId;
+                if (productId && attributeId) {
+                    removeItem(productId, attributeId);
                 }
             });
             button.dataset.listenerAttached = 'true';
@@ -197,7 +198,7 @@ async function loadCartItems() {
     }
 }
 
-async function removeItem(productId) {
+async function removeItem(productId, attributeId) {
     const token = getToken();
     if (!token) {
         alert('Ви не авторизовані. Будь ласка, увійдіть.');
@@ -210,12 +211,13 @@ async function removeItem(productId) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/user/cart/remove/${productId}`, {
+        const response = await fetch(`http://localhost:3000/api/user/cart/remove`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            body: JSON.stringify({productId, attributeId})
         });
 
         if (!response.ok) {

@@ -71,9 +71,9 @@ exports.getFavorites = async (req, res) => {
 // ==== CART ====
 exports.addToCart = async (req, res) => {
     const userId = req.userId; 
-    const { productId, quantity, price } = req.body; 
+    const { productId, attributeId, quantity, price } = req.body; 
 
-    if (!productId || !quantity || quantity <= 0) {
+    if (!productId || !attributeId || !quantity || quantity <= 0) {
         return res.status(400).json({ status: 'error', message: 'Необхідні productId та quantity (повинен бути > 0).' });
     }
     if (price === undefined || price <= 0) {
@@ -82,11 +82,11 @@ exports.addToCart = async (req, res) => {
 
     try {
         const sql = `
-            INSERT INTO shopping_cart (user_id, product_id, amount, price)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO shopping_cart (user_id, product_id, attributes_id, amount, price)
+            VALUES (?, ?, ?, ?, ?)
             ON DUPLICATE KEY UPDATE amount = amount + VALUES(amount), price = VALUES(price)
         `;
-        await pool.execute(sql, [userId, productId, quantity, price]);
+        await pool.execute(sql, [userId, productId, attributeId, quantity, price]);
 
         return res.status(201).json({ status: 'success', message: 'Товар додано/оновлено в кошику.' });
     } catch (error) {
@@ -107,18 +107,27 @@ exports.getCartItems = async (req, res) => {
         connection = await pool.getConnection();
         const [cartItems] = await connection.execute(
             `SELECT
-                sc.product_id,
-                sc.amount,
-                sc.price AS item_added_price, -- Даємо аліас, щоб не плутати з p.current_price
-                p.name,
-                p.current_price, -- Можливо, вам потрібна актуальна ціна товару
-                p.name_of_product_photo -- Правильна назва стовпця для фото
-            FROM
-                shopping_cart sc
-            JOIN
-                product p ON sc.product_id = p.id
-            WHERE
-                sc.user_id = ?`,
+    sc.product_id,
+    sc.attributes_id,
+    sc.amount,
+    sc.price AS item_added_price,
+    p.name,
+    p.current_price,
+    p.name_of_product_photo,
+    c.color,
+    s.size
+FROM
+    shopping_cart sc
+JOIN
+    product p ON sc.product_id = p.id
+JOIN
+    attributes_product ap ON p.id = ap.product_id AND sc.attributes_id = ap.id
+JOIN
+    color c ON ap.color_id = c.id
+JOIN
+    size s ON ap.size_id = s.id
+WHERE
+    sc.user_id = ?`,
             [userId]
         );
 
@@ -134,7 +143,7 @@ exports.getCartItems = async (req, res) => {
 
 exports.updateCartItemQuantity = async (req, res) => {
     const userId = req.userId; 
-    const { productId, quantity } = req.body;
+    const { productId, attributeId, quantity } = req.body;
 
     if (!productId || quantity === undefined || quantity < 0) {
         return res.status(400).json({ status: 'error', message: 'Необхідні productId та quantity (повинен бути >= 0).' });
@@ -142,8 +151,8 @@ exports.updateCartItemQuantity = async (req, res) => {
 
     try {
         if (quantity === 0) {
-            const sqlDelete = `DELETE FROM shopping_cart WHERE user_id = ? AND product_id = ?`;
-            const [resultDelete] = await pool.execute(sqlDelete, [userId, productId]);
+            const sqlDelete = `DELETE FROM shopping_cart WHERE user_id = ? AND product_id = ? AND attributes_id = ?`;
+            const [resultDelete] = await pool.execute(sqlDelete, [userId, productId, attributeId]);
             if (resultDelete.affectedRows === 0) {
                 return res.status(404).json({ status: 'error', message: 'Товар не знайдено в кошику для видалення.' });
             }
@@ -152,7 +161,7 @@ exports.updateCartItemQuantity = async (req, res) => {
             const sqlUpdate = `
                 UPDATE shopping_cart
                 SET amount = ?
-                WHERE user_id = ? AND product_id = ?
+                WHERE user_id = ? AND product_id = ? AND attributes_id = ?
             `;
             const [resultUpdate] = await pool.execute(sqlUpdate, [quantity, userId, productId]);
 
@@ -170,15 +179,15 @@ exports.updateCartItemQuantity = async (req, res) => {
 
 exports.removeCartItem = async (req, res) => {
     const userId = req.userId; 
-    const { productId } = req.params;
+    const { productId, attributeId} = req.body;
 
     if (!productId) {
         return res.status(400).json({ status: 'error', message: 'Необхідний productId для видалення.' });
     }
 
     try {
-        const sql = `DELETE FROM shopping_cart WHERE user_id = ? AND product_id = ?`;
-        const [result] = await pool.execute(sql, [userId, productId]);
+        const sql = `DELETE FROM shopping_cart WHERE user_id = ? AND product_id = ? AND attributes_id = ?`;
+        const [result] = await pool.execute(sql, [userId, productId, attributeId]);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ status: 'error', message: 'Товар не знайдено в кошику або не видалено.' });
@@ -299,7 +308,7 @@ exports.getUserOrders = async(req, res) =>{
                 user_id,
                 order_date,
                 status,
-                SUM(amount * price) AS total_amount,
+                SUM(amount * price) + 45 AS total_amount,
                 SUM(amount) AS total_items_amount -- <--- ЦЕЙ РЯДОК УЖЕ Є І ЦЕ ПРАВИЛЬНО
              FROM
                 order_history

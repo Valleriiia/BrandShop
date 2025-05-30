@@ -95,44 +95,68 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 🛒 Додавання до кошика
     if (elements.addToCartButton) {
-      elements.addToCartButton.addEventListener('click', async () => {
-        const quantity = parseInt(document.querySelector('#product-quantity')?.textContent || '1', 10);
-
-        if (!token) {
-          alert('Будь ласка, увійдіть, щоб додати товар до кошика.');
-          return window.location.href = '/login';
-        }
-
-        if (!product.id || !quantity || quantity <= 0) {
-          return alert('Некоректні дані для додавання в кошик.');
-        }
-
-        const data = {
-          productId: product.id,
-          quantity,
-          price: product.current_price,
-        };
-
-        try {
-          const response = await fetch('/api/user/cart/add', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify(data),
-          });
-
-          const result = await response.json();
-          alert(result.message || (response.ok
-            ? 'Товар додано до кошика!'
-            : 'Помилка при додаванні.'));
-        } catch (err) {
-          console.error('Помилка з\'єднання:', err);
-          alert('Сервер недоступний. Спробуйте пізніше.');
-        }
-      });
+  elements.addToCartButton.addEventListener('click', async () => {
+    const token = getToken();
+    if (!token) {
+      alert('Будь ласка, увійдіть, щоб додати товар до кошика.');
+      return window.location.href = '/login';
     }
+
+    const selectedColor = document.querySelector('input[name="color-item"]:checked');
+    const selectedSize = document.querySelector('input[name="size-item"]:checked');
+    const quantity = parseInt(document.querySelector('#product-quantity')?.textContent || '1', 10);
+
+    if (!selectedColor || !selectedSize) {
+      alert('Оберіть колір і розмір товару перед додаванням у кошик.');
+      return;
+    }
+
+    const colorId = selectedColor.value;
+    const sizeId = selectedSize.value;
+
+    // Знайти відповідний attribute.id
+    const matchedAttr = attributes.find(attr =>
+      String(attr.color_id) === colorId && String(attr.size_id) === sizeId
+    );
+
+    if (!matchedAttr) {
+      alert('Обрана комбінація колір + розмір недоступна.');
+      return;
+    }
+
+    if (!matchedAttr.id || isNaN(quantity) || quantity <= 0) {
+      alert('Некоректні дані для замовлення.');
+      return;
+    }
+
+    const data = {
+      productId: product.id,
+      attributeId: matchedAttr.id,
+      quantity,
+      price: product.current_price 
+    };
+
+    try {
+      const response = await fetch('/api/user/cart/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      alert(result.message || (response.ok
+        ? 'Товар додано до кошика!'
+        : 'Помилка при додаванні товару.'));
+    } catch (err) {
+      console.error('❌ Помилка з\'єднання з сервером:', err);
+      alert('Сервер недоступний. Спробуйте пізніше.');
+    }
+  });
+}
+
 
   } catch (err) {
     console.error('❌ Помилка завантаження товару:', err);

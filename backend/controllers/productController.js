@@ -114,7 +114,8 @@ exports.getProductById = async (req, res) => {
                 col.id AS color_id,
                 col.color,
                 sz.id AS size_id,
-                sz.size
+                sz.size,
+                ap.id
             FROM attributes_product ap
             LEFT JOIN color col ON ap.color_id = col.id
             LEFT JOIN size sz ON ap.size_id = sz.id

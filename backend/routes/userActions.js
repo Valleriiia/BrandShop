@@ -155,7 +155,7 @@ router.get('/account', isAuthenticated, userActions.getAccountData); // <--- Д�
 router.post('/cart/add', isAuthenticated, userActions.addToCart); 
 router.get('/cart', isAuthenticated, userActions.getCartItems); 
 router.put('/cart/update-quantity', isAuthenticated, userActions.updateCartItemQuantity); 
-router.delete('/cart/remove/:productId', isAuthenticated, userActions.removeCartItem); 
+router.delete('/cart/remove/', isAuthenticated, userActions.removeCartItem); 
 router.post('/order', isAuthenticated, userActions.placeOrder);
 
 // ==== Історія замовлень ====
