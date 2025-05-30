@@ -41,28 +41,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     return await res.text();
   }
 
-  function getToken() {
-    return localStorage.getItem('token');
-  }
-
-  async function markLikedProducts(token) {
-    try {
-      const res = await fetch('/api/user/favorites', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const { loveItems } = await res.json();
-      const likedIds = new Set(loveItems.map(p => String(p.id)));
-
-      document.querySelectorAll('.like[data-id]').forEach(btn => {
-        if (likedIds.has(btn.dataset.id)) {
-          btn.classList.add('active');
-        }
-      });
-    } catch (err) {
-      console.error('❌ Не вдалося позначити улюблені:', err);
-    }
-  }
-
   function loadRandom() {
     fetch('http://localhost:3000/api/products/random?limit=6')
       .then(res => res.json())
@@ -75,8 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           slide.innerHTML = html;
           randomSlider.appendChild(slide);
         });
-        const token = getToken();
-        if (token) markLikedProducts(token);
+        window.dispatchEvent(new CustomEvent('productsLoaded'));
       })
       .catch(console.error);
   }
@@ -185,8 +162,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           const html = Mustache.render(template, p);
           productList.insertAdjacentHTML('beforeend', html);
         });
-        const token = getToken();
-        if (token) markLikedProducts(token);
+        window.dispatchEvent(new CustomEvent('productsLoaded'));
       })
       .catch(console.error);
   }

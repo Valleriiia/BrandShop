@@ -88,10 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     // ❤️ Улюблені
-    const token = getToken();
-    if (token) {
-      markLikedProducts(token);
-    }
+    window.dispatchEvent(new CustomEvent('productsLoaded'));
 
     // 🛒 Додавання до кошика
     if (elements.addToCartButton) {
@@ -222,24 +219,6 @@ async function fetchPhotos(folder) {
 async function loadTemplate(url) {
   const res = await fetch(url);
   return await res.text();
-}
-
-async function markLikedProducts(token) {
-  try {
-    const res = await fetch('/api/user/favorites', {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-    const { loveItems } = await res.json();
-    const likedIds = new Set(loveItems.map(p => String(p.id)));
-
-    document.querySelectorAll('.like[data-id]').forEach(btn => {
-      if (likedIds.has(btn.dataset.id)) {
-        btn.classList.add('active');
-      }
-    });
-  } catch (err) {
-    console.error('❌ Не вдалося позначити улюблені:', err);
-  }
 }
 
 function getToken() {

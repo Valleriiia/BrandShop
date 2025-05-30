@@ -1,3 +1,10 @@
+window.addEventListener('productsLoaded', async () => {
+  const token = getToken();
+    if (token) {
+      markLikedProducts(token);
+    }
+});
+
 document.addEventListener('click', async (e) => {
   const likeBtn = e.target.closest('.like');
   if (!likeBtn) return;
@@ -34,6 +41,24 @@ document.addEventListener('click', async (e) => {
     console.error('❌ Помилка запиту:', err);
   }
 });
+
+async function markLikedProducts(token) {
+  try {
+    const res = await fetch('/api/user/favorites', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const { loveItems } = await res.json();
+    const likedIds = new Set(loveItems.map(p => String(p.id)));
+
+    document.querySelectorAll('.like[data-id]').forEach(btn => {
+      if (likedIds.has(btn.dataset.id)) {
+        btn.classList.add('active');
+      }
+    });
+  } catch (err) {
+    console.error('❌ Не вдалося позначити улюблені:', err);
+  }
+}
 
 function getToken() {
     return localStorage.getItem('token');
