@@ -7,16 +7,15 @@ document.addEventListener('DOMContentLoaded', function () {
         autoplay: {
             delay: 0,
             disableOnInteraction: false,
-            reverseDirection: true,
         },
     });
-    // const swiperEl = document.querySelector('#swiper1');
+    const swiperEl = document.querySelector('#swiper1');
 
-    // swiperEl.addEventListener('mouseover', () => {
-    //     swiper1.autoplay.stop(); 
-    // });
+    swiperEl.addEventListener('mouseover', () => {
+        swiper1.autoplay.stop(); 
+    });
 
-    // swiperEl.addEventListener('mouseleave', () => {
-    //     swiper1.autoplay.start(); 
-    // });
+    swiperEl.addEventListener('mouseleave', () => {
+        swiper1.autoplay.start(); 
+    });
 });

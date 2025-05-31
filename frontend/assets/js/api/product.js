@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const elements = {
     mainImg: document.getElementById('mainImg'),
     thumbnails: document.querySelector('.thumbnails'),
-    swiperWrapper: document.querySelector('#swiper4 .swiper-wrapper'),
+    swiperWrapper: document.querySelector('#swiper3 .swiper-wrapper'),
     breadLink: document.querySelector('.breadcrambs a[href^="/catalog"]'),
     breadText: document.querySelector('.breadcrambs a[href="#"]'),
     cross: document.querySelector('.product-price .cross'),

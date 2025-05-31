@@ -129,7 +129,7 @@ exports.getProductById = async (req, res) => {
                 department_id = ? OR category_id = ?
             )
             ORDER BY RAND()
-            LIMIT 5
+            LIMIT 10
         `, [productId, product.department_id, product.category_id]);
 
         res.json({
@@ -146,7 +146,7 @@ exports.getProductById = async (req, res) => {
 
 
 exports.getRandomProducts = async (req, res) => {
-    const limit = parseInt(req.query.limit) || 5;
+    const limit = parseInt(req.query.limit) || 10;
     try {
         const [rows] = await db.query(`
             SELECT *

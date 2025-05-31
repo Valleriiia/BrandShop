@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function loadRandom() {
-    fetch('http://localhost:3000/api/products/random?limit=6')
+    fetch('http://localhost:3000/api/products/random?limit=10')
       .then(r => r.json())
       .then(arr => {
         randomSlider.innerHTML = '';

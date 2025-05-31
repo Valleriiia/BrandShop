@@ -83,7 +83,8 @@ main {
     width: 136px;
     height: 98px;
     cursor: pointer;
-    border: 0.5px solid var(--color_lite);
+    object-fit: cover;
+    border: 0.5px solid #DFE1E6;
 }
 
 .product-info-container {

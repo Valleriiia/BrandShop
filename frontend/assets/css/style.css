@@ -1217,8 +1217,7 @@ footer .footer_bot p {
     color: #28315C;
 }
   
-span.like.active svg path,
-span.shop.active svg path {
+span.like.active svg path {
   fill: #DFE1E6 !important;
   transition: fill 0.3s ease;
 }
@@ -1226,7 +1225,6 @@ span.shop.active svg path {
 .recomend #swiper2 {
   height: 450px;
   z-index: unset;
-  transform: translateY(0px) !important;
 }
 .recomend #swiper2 .product-card {
   height: 100%;
@@ -1346,16 +1344,12 @@ span.shop.active svg path {
 }
 
 .recomend #swiper2 span.like.active svg path,
-.recomend #swiper2 span.shop.active svg path,
-.product-gallery span.like.active svg path,
-.product-gallery span.shop.active svg path {
+.product-gallery span.like.active svg path{
   fill: #DFE1E6 !important;
   transition: fill 0.3s ease;
 }
 .recomend #swiper2 span.like svg path,
-.recomend #swiper2 span.shop svg path,
-.product-gallery span.like svg path,
-.product-gallery span.shop svg path {
+.product-gallery span.like svg path {
   transition: fill 0.3s ease;
 }
 
@@ -1390,6 +1384,18 @@ span.shop.active svg path {
 .swiper-button-prev:hover path, .swiper-button-next:hover path {
     fill: #28315C;
 }
+
+#swiper2 .swiper-button-prev path,
+#swiper2 .swiper-button-next path {
+  fill: #DFE1E6;
+}
+
+#swiper2 .swiper-button-next {
+    right: 100px;
+  }
+  #swiper2 .swiper-button-prev {
+    left: 100px;
+  }
 
 @media (max-width: 1930px) {
   #swiper2 .swiper-button-next {
